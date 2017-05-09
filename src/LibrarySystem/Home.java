@@ -252,7 +252,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1044, 729));
+        setSize(new java.awt.Dimension(1061, 751));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

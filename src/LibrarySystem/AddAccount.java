@@ -67,6 +67,8 @@ public class AddAccount extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jTextFieldLName = new javax.swing.JTextField();
         jTextFieldAddL1 = new javax.swing.JTextField();
+        jTextFieldFunds = new javax.swing.JTextField();
+        jlabelfunds = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +112,8 @@ public class AddAccount extends javax.swing.JFrame {
             }
         });
 
+        jlabelfunds.setText("Funds:                      €");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -124,21 +128,26 @@ public class AddAccount extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2)
+                    .addComponent(jlabelfunds))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldFunds)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextFieldAccNum)
-                    .addComponent(jTextFieldFName)
-                    .addComponent(jTextFieldLName)
-                    .addComponent(jTextFieldAddL1)
-                    .addComponent(jTextFieldAddL2)
-                    .addComponent(jTextFieldDOB)
-                    .addComponent(jTextFieldIBAN)
-                    .addComponent(jTextFieldBIC, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldAccNum)
+                            .addComponent(jTextFieldFName)
+                            .addComponent(jTextFieldLName)
+                            .addComponent(jTextFieldAddL1)
+                            .addComponent(jTextFieldAddL2)
+                            .addComponent(jTextFieldDOB)
+                            .addComponent(jTextFieldIBAN)
+                            .addComponent(jTextFieldBIC, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -178,6 +187,10 @@ public class AddAccount extends javax.swing.JFrame {
                     .addComponent(jTextFieldBIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlabelfunds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldFunds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
                 .addContainerGap())
@@ -200,7 +213,7 @@ public class AddAccount extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(427, 457));
+        setSize(new java.awt.Dimension(449, 504));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -211,7 +224,7 @@ public class AddAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String insert = "INSERT into Account (AccountNum,FirstName,LastName,AddLine1,AddLine2,DOB,IBAN,BIC) values (?,?,?,?,?,?,?,?)";
+        String insert = "INSERT into Account (AccountNum,FirstName,LastName,AddLine1,AddLine2,DOB,IBAN,BIC,Funds) values (?,?,?,?,?,?,?,?,?)";
         try {
             pStatement = connection.prepareStatement(insert);
             pStatement.setString(1, jTextFieldAccNum.getText());
@@ -222,6 +235,7 @@ public class AddAccount extends javax.swing.JFrame {
             pStatement.setString(6, jTextFieldDOB.getText());
             pStatement.setString(7, jTextFieldIBAN.getText());
             pStatement.setString(8, jTextFieldBIC.getText());
+            pStatement.setString(9, jTextFieldFunds.getText());
             pStatement.execute();
             JOptionPane.showMessageDialog(null, "Account Added");
 
@@ -273,6 +287,7 @@ public class AddAccount extends javax.swing.JFrame {
         this.jTextFieldAddL1.setText("");
         this.jTextFieldAddL2.setText("");
         this.jTextFieldDOB.setText("");
+        this.jTextFieldFunds.setText("");
         generateRandom();
 
     }
@@ -295,7 +310,9 @@ public class AddAccount extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldBIC;
     private javax.swing.JTextField jTextFieldDOB;
     private javax.swing.JTextField jTextFieldFName;
+    private javax.swing.JTextField jTextFieldFunds;
     private javax.swing.JTextField jTextFieldIBAN;
     private javax.swing.JTextField jTextFieldLName;
+    private javax.swing.JLabel jlabelfunds;
     // End of variables declaration//GEN-END:variables
 }
