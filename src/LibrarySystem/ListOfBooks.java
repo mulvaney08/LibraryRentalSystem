@@ -1,11 +1,34 @@
 package LibrarySystem;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import javax.swing.JFrame;
+import net.sf.jasperreports.engine.JRException;
+
+import net.sf.jasperreports.engine.JasperCompileManager;
+
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.JasperReportsContext;
+import net.sf.jasperreports.engine.data.JRXmlDataSource;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JRViewer;
+import net.sf.jasperreports.view.JasperViewer;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author aaronm
@@ -47,7 +70,9 @@ public class ListOfBooks extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws JRException {
+        Connection connection;
+        connection = dbConnect.connectDb();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -77,6 +102,26 @@ public class ListOfBooks extends javax.swing.JFrame {
                 new ListOfBooks().setVisible(true);
             }
         });
+//        try {
+//            String report = "C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\reports\\Books.jrxml";
+//            JasperReport j = JasperCompileManager.compileReport(report);
+//            JasperPrint jasP = JasperFillManager.fillReport(j, null, connection);
+//            JasperViewer.viewReport(jasP);
+//        } catch (Exception ex) {
+//
+//        }
+
+        Map parameters = new HashMap();
+        parameters.put("id", 42);
+
+        JasperReport report = (JasperReport) JRLoader.loadObject("C:/Users/aaronm/Documents/AaronYear3Project/LibraryRentalSystem/reports/Books.jrxml");
+
+        JasperPrint jasperPrint = JasperFillManager.fillReport(report, null, connection);
+
+        JFrame frame = new JFrame("Report");
+        frame.getContentPane().add(new JRViewer(jasperPrint));
+        frame.pack();
+        frame.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

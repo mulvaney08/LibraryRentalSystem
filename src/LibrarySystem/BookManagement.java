@@ -312,14 +312,15 @@ public class BookManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jMenuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogoutActionPerformed
-
         setVisible(false);
         Login l = new Login();
         l.setVisible(true);
     }//GEN-LAST:event_jMenuItemLogoutActionPerformed
 
     private void jButtonDeleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteBookActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
+        DeleteBook delB = new DeleteBook();
+        delB.setVisible(true);
     }//GEN-LAST:event_jButtonDeleteBookActionPerformed
 
     /**
