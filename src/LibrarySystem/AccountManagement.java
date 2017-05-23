@@ -40,6 +40,7 @@ public class AccountManagement extends javax.swing.JFrame {
         jLabeldisplayUsername1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
+        jMenuItemHome = new javax.swing.JMenuItem();
         jMenuItemBookManagement = new javax.swing.JMenuItem();
         jMenuItemReports = new javax.swing.JMenuItem();
         jMenuItemAccManagement = new javax.swing.JMenuItem();
@@ -167,6 +168,15 @@ public class AccountManagement extends javax.swing.JFrame {
 
         jMenu.setText("Menu");
 
+        jMenuItemHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\home.png")); // NOI18N
+        jMenuItemHome.setText("Home");
+        jMenuItemHome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHomeActionPerformed(evt);
+            }
+        });
+        jMenu.add(jMenuItemHome);
+
         jMenuItemBookManagement.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jMenuItemBookManagement.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\smallBook.png")); // NOI18N
         jMenuItemBookManagement.setText("Book Management");
@@ -289,6 +299,13 @@ public class AccountManagement extends javax.swing.JFrame {
         dAcc.setVisible(true);
     }//GEN-LAST:event_jButtonDeleteAccountActionPerformed
 
+    private void jMenuItemHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHomeActionPerformed
+        setVisible(false);
+        Home h = new Home();
+        h.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItemHomeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -339,6 +356,7 @@ public class AccountManagement extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAccManagement;
     private javax.swing.JMenuItem jMenuItemBookManagement;
+    private javax.swing.JMenuItem jMenuItemHome;
     private javax.swing.JMenuItem jMenuItemLogout;
     private javax.swing.JMenuItem jMenuItemReports;
     private javax.swing.JPanel jPanel1;

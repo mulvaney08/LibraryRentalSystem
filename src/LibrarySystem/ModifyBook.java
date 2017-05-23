@@ -5,17 +5,28 @@
  */
 package LibrarySystem;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aaronm
  */
 public class ModifyBook extends javax.swing.JFrame {
 
+    Connection connection;
+    ResultSet result;
+    PreparedStatement pStatement;
+
     /**
      * Creates new form ModifyBook
      */
     public ModifyBook() {
         initComponents();
+        this.clearForm();
+        connection = dbConnect.connectDb();
     }
 
     /**
@@ -27,21 +38,309 @@ public class ModifyBook extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
+        jTextFieldPricePerWeek2 = new javax.swing.JTextField();
+        jLabelPages = new javax.swing.JLabel();
+        jLabelBookName = new javax.swing.JLabel();
+        jLabelPublisher = new javax.swing.JLabel();
+        jTextFieldBookName = new javax.swing.JTextField();
+        jButtonBack = new javax.swing.JButton();
+        jLabelPricePerWeek = new javax.swing.JLabel();
+        jTextFieldISBN = new javax.swing.JTextField();
+        jTextFieldPages = new javax.swing.JTextField();
+        jTextFieldPublisher = new javax.swing.JTextField();
+        jLabelISBN = new javax.swing.JLabel();
+        jButtonAddBook = new javax.swing.JButton();
+        jLabelEdition = new javax.swing.JLabel();
+        jComboBoxEdition = new javax.swing.JComboBox<>();
+        jTextFieldAuthor = new javax.swing.JTextField();
+        jLabelAuthor = new javax.swing.JLabel();
+        jButtonSearchBook = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Add Book", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
+
+        jTextFieldPricePerWeek2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldPricePerWeek2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPricePerWeek2ActionPerformed(evt);
+            }
+        });
+
+        jLabelPages.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelPages.setText("Pages:");
+
+        jLabelBookName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelBookName.setText("Name:");
+
+        jLabelPublisher.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelPublisher.setText("Publisher:");
+
+        jTextFieldBookName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldBookName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldBookNameActionPerformed(evt);
+            }
+        });
+
+        jButtonBack.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\exit.png")); // NOI18N
+        jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
+
+        jLabelPricePerWeek.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelPricePerWeek.setText("Price Per Week:");
+
+        jTextFieldISBN.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldISBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldISBNActionPerformed(evt);
+            }
+        });
+
+        jTextFieldPages.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldPages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPagesActionPerformed(evt);
+            }
+        });
+
+        jTextFieldPublisher.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldPublisher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPublisherActionPerformed(evt);
+            }
+        });
+
+        jLabelISBN.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelISBN.setText("Book ISBN:");
+
+        jButtonAddBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\tick.png")); // NOI18N
+        jButtonAddBook.setText("Modify");
+        jButtonAddBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAddBookActionPerformed(evt);
+            }
+        });
+
+        jLabelEdition.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelEdition.setText("Edition:");
+
+        jComboBoxEdition.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jComboBoxEdition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1st Edition", "2nd Edition", "3rd Edition", "4th Edition", "5th Edition", "6th Edition", "7th Edition" }));
+
+        jTextFieldAuthor.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAuthorActionPerformed(evt);
+            }
+        });
+
+        jLabelAuthor.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelAuthor.setText("Author:");
+
+        jButtonSearchBook.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jButtonSearchBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\search.png")); // NOI18N
+        jButtonSearchBook.setText("Search");
+        jButtonSearchBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchBookActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelPricePerWeek)
+                    .addComponent(jLabelPublisher)
+                    .addComponent(jLabelPages)
+                    .addComponent(jLabelEdition)
+                    .addComponent(jLabelBookName)
+                    .addComponent(jLabelISBN)
+                    .addComponent(jLabelAuthor))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(jButtonAddBook)
+                            .addGap(12, 12, 12)
+                            .addComponent(jButtonBack))
+                        .addComponent(jTextFieldISBN)
+                        .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextFieldPricePerWeek2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPages, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxEdition, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldBookName, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonAddBook, jButtonBack});
+
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelISBN)
+                    .addComponent(jTextFieldISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelBookName)
+                    .addComponent(jTextFieldBookName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEdition)
+                    .addComponent(jComboBoxEdition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPublisher)
+                    .addComponent(jTextFieldPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPages)
+                    .addComponent(jTextFieldPages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAuthor)
+                    .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPricePerWeek)
+                    .addComponent(jTextFieldPricePerWeek2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonSearchBook)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAddBook)
+                    .addComponent(jButtonBack))
+                .addContainerGap())
+        );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonAddBook, jButtonBack});
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBoxEdition, jTextFieldAuthor, jTextFieldBookName, jTextFieldISBN, jTextFieldPages, jTextFieldPricePerWeek2, jTextFieldPublisher});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(374, 470));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldPricePerWeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPricePerWeek2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPricePerWeek2ActionPerformed
+
+    private void jTextFieldBookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBookNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldBookNameActionPerformed
+
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        setVisible(false);
+        BookManagement b = new BookManagement();
+        b.setVisible(true);
+    }//GEN-LAST:event_jButtonBackActionPerformed
+
+    private void jTextFieldISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldISBNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldISBNActionPerformed
+
+    private void jTextFieldPagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPagesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPagesActionPerformed
+
+    private void jTextFieldPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPublisherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPublisherActionPerformed
+
+    private void jButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddBookActionPerformed
+
+        String update = "UPDATE Book SET Name=?, Edition=?, Publisher=?, Pages=? , Author=?, PricePerWeek=? WHERE  ISBN = ?";
+        try {
+            pStatement = connection.prepareStatement(update);
+
+            pStatement.setString(1, jTextFieldBookName.getText());
+            pStatement.setString(2, (String) jComboBoxEdition.getSelectedItem());
+            pStatement.setString(3, jTextFieldPublisher.getText());
+            pStatement.setString(4, jTextFieldPages.getText());
+            pStatement.setString(5, jTextFieldAuthor.getText());
+            pStatement.setString(6, jTextFieldPricePerWeek.getText());
+            pStatement.setString(7, jTextFieldISBN.getText());
+
+            pStatement.execute();
+            JOptionPane.showMessageDialog(null, "Book Modified");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
+        this.clearForm();
+    }//GEN-LAST:event_jButtonAddBookActionPerformed
+
+    private void jTextFieldAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAuthorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldAuthorActionPerformed
+
+    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        String query = "select * from Book Where ISBN = ?";
+        try {
+            pStatement = connection.prepareStatement(query);
+            pStatement.setString(1, jTextFieldISBN.getText());
+            result = pStatement.executeQuery();
+            if (result.next()) {
+                String s = result.getString("Name");
+                jTextFieldBookName.setText(s);
+                s = result.getString("Edition");
+                jComboBoxEdition.setSelectedItem(s);
+                s = result.getString("Publisher");
+                jTextFieldPublisher.setText(s);
+                s = result.getString("Pages");
+                jTextFieldPages.setText(s);
+                s = result.getString("Author");
+                jTextFieldAuthor.setText(s);
+                s = result.getString("PricePerWeek");
+                jTextFieldPricePerWeek.setText(s);
+
+                result.close();
+                pStatement.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Book not found");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                result.close();
+                pStatement.close();
+            } catch (Exception ex) {
+
+            }
+        }
+    }//GEN-LAST:event_jButtonSearchBookActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,6 +377,37 @@ public class ModifyBook extends javax.swing.JFrame {
         });
     }
 
+    private void clearForm() {
+        this.jTextFieldBookName.setText("");
+        this.jTextFieldPublisher.setText("");
+        this.jTextFieldPages.setText("");
+        this.jTextFieldAuthor.setText("");
+        this.jTextFieldPricePerWeek.setText("");
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAddBook;
+    private javax.swing.JButton jButtonBack;
+    private javax.swing.JButton jButtonSearchBook;
+    private javax.swing.JComboBox<String> jComboBoxEdition;
+    private javax.swing.JLabel jLabelAuthor;
+    private javax.swing.JLabel jLabelBookName;
+    private javax.swing.JLabel jLabelEdition;
+    private javax.swing.JLabel jLabelISBN;
+    private javax.swing.JLabel jLabelPages;
+    private javax.swing.JLabel jLabelPricePerWeek;
+    private javax.swing.JLabel jLabelPublisher;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTextFieldAuthor;
+    private javax.swing.JTextField jTextFieldBookName;
+    private javax.swing.JTextField jTextFieldISBN;
+    private javax.swing.JTextField jTextFieldPages;
+    private javax.swing.JTextField jTextFieldPricePerWeek;
+    private javax.swing.JTextField jTextFieldPricePerWeek1;
+    private javax.swing.JTextField jTextFieldPricePerWeek2;
+    private javax.swing.JTextField jTextFieldPublisher;
     // End of variables declaration//GEN-END:variables
 }

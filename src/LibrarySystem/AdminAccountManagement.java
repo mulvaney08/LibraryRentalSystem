@@ -39,6 +39,7 @@ public class AdminAccountManagement extends javax.swing.JFrame {
         jLabeldisplayUsername3 = new javax.swing.JLabel();
         jMenuBar3 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItemHome2 = new javax.swing.JMenuItem();
         jMenuItemBookManagement2 = new javax.swing.JMenuItem();
         jMenuItemReports = new javax.swing.JMenuItem();
         jMenuItemAccManagement = new javax.swing.JMenuItem();
@@ -146,6 +147,15 @@ public class AdminAccountManagement extends javax.swing.JFrame {
         );
 
         jMenu2.setText("Menu");
+
+        jMenuItemHome2.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\home.png")); // NOI18N
+        jMenuItemHome2.setText("Home");
+        jMenuItemHome2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemHome2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemHome2);
 
         jMenuItemBookManagement2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jMenuItemBookManagement2.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\smallBook.png")); // NOI18N
@@ -263,6 +273,12 @@ public class AdminAccountManagement extends javax.swing.JFrame {
         l.setVisible(true);
     }//GEN-LAST:event_jMenuItemLogoutActionPerformed
 
+    private void jMenuItemHome2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemHome2ActionPerformed
+        setVisible(false);
+        Home h = new Home();
+        h.setVisible(true);
+    }//GEN-LAST:event_jMenuItemHome2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -306,17 +322,14 @@ public class AdminAccountManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSelection;
     private javax.swing.JLabel jLabelUserAccounts;
     private javax.swing.JLabel jLabeldisplayUsername3;
-    private javax.swing.JMenu jMenu;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAccManagement;
-    private javax.swing.JMenuItem jMenuItemBookManagement;
-    private javax.swing.JMenuItem jMenuItemBookManagement1;
     private javax.swing.JMenuItem jMenuItemBookManagement2;
+    private javax.swing.JMenuItem jMenuItemHome;
+    private javax.swing.JMenuItem jMenuItemHome1;
+    private javax.swing.JMenuItem jMenuItemHome2;
     private javax.swing.JMenuItem jMenuItemLogout;
     private javax.swing.JMenuItem jMenuItemReports;
     private javax.swing.JPanel jPanel5;
