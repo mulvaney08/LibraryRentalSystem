@@ -255,7 +255,7 @@ public class AddBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldBookNameActionPerformed
 
     private void jButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddBookActionPerformed
-        this.clearForm();
+        
         String insert = "INSERT into Book (ISBN,Name,Edition,Publisher,Pages,Author,PricePerWeek) values (?,?,?,?,?,?,?)";
         try{
             pStatement=connection.prepareStatement(insert);
@@ -268,7 +268,7 @@ public class AddBook extends javax.swing.JFrame {
             pStatement.setString(7, jTextFieldPricePerWeek.getText());
             pStatement.execute();
             JOptionPane.showMessageDialog(null, "Book Added");
-            
+            this.clearForm();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex +", please try again");
             
@@ -321,8 +321,10 @@ public class AddBook extends javax.swing.JFrame {
     }
 
     private void clearForm() {
+        generateID();
         this.jTextFieldBookName.setText("");
         this.jTextFieldPublisher.setText("");
+        
         this.jTextFieldPages.setText("");
         this.jTextFieldAuthor.setText("");
         this.jTextFieldPricePerWeek.setText("");

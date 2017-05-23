@@ -5,17 +5,27 @@
  */
 package LibrarySystem;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aaronm
  */
 public class DeleteBook extends javax.swing.JFrame {
 
+    Connection connection;
+    ResultSet result;
+    PreparedStatement pStatement;
+
     /**
      * Creates new form DeleteBook
      */
     public DeleteBook() {
         initComponents();
+        connection = dbConnect.connectDb();
     }
 
     /**
@@ -27,21 +37,303 @@ public class DeleteBook extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jTextFieldPricePerWeek = new javax.swing.JTextField();
+        jLabelPages = new javax.swing.JLabel();
+        jLabelBookName = new javax.swing.JLabel();
+        jLabelPublisher = new javax.swing.JLabel();
+        jTextFieldBookName = new javax.swing.JTextField();
+        jButtonBack = new javax.swing.JButton();
+        jLabelPricePerWeek = new javax.swing.JLabel();
+        jTextFieldISBN = new javax.swing.JTextField();
+        jTextFieldPages = new javax.swing.JTextField();
+        jTextFieldPublisher = new javax.swing.JTextField();
+        jLabelISBN = new javax.swing.JLabel();
+        jButtonDeleteBook = new javax.swing.JButton();
+        jLabelEdition = new javax.swing.JLabel();
+        jTextFieldAuthor = new javax.swing.JTextField();
+        jLabelAuthor = new javax.swing.JLabel();
+        jButtonSearchBook = new javax.swing.JButton();
+        jTextFieldEdition = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Delete Book", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
+
+        jTextFieldPricePerWeek.setEditable(false);
+        jTextFieldPricePerWeek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPricePerWeekActionPerformed(evt);
+            }
+        });
+
+        jLabelPages.setText("Pages:");
+
+        jLabelBookName.setText("Name:");
+
+        jLabelPublisher.setText("Publisher:");
+
+        jTextFieldBookName.setEditable(false);
+        jTextFieldBookName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldBookNameActionPerformed(evt);
+            }
+        });
+
+        jButtonBack.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\exit.png")); // NOI18N
+        jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBackActionPerformed(evt);
+            }
+        });
+
+        jLabelPricePerWeek.setText("Price Per Week:");
+
+        jTextFieldISBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldISBNActionPerformed(evt);
+            }
+        });
+
+        jTextFieldPages.setEditable(false);
+        jTextFieldPages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPagesActionPerformed(evt);
+            }
+        });
+
+        jTextFieldPublisher.setEditable(false);
+        jTextFieldPublisher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPublisherActionPerformed(evt);
+            }
+        });
+
+        jLabelISBN.setText("Book ISBN:");
+
+        jButtonDeleteBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\delete.png")); // NOI18N
+        jButtonDeleteBook.setText("Delete");
+        jButtonDeleteBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteBookActionPerformed(evt);
+            }
+        });
+
+        jLabelEdition.setText("Edition:");
+
+        jTextFieldAuthor.setEditable(false);
+        jTextFieldAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAuthorActionPerformed(evt);
+            }
+        });
+
+        jLabelAuthor.setText("Author:");
+
+        jButtonSearchBook.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jButtonSearchBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\search.png")); // NOI18N
+        jButtonSearchBook.setText("Search");
+        jButtonSearchBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchBookActionPerformed(evt);
+            }
+        });
+
+        jTextFieldEdition.setEditable(false);
+        jTextFieldEdition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldEditionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelAuthor)
+                        .addGap(280, 280, 280))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelPublisher)
+                                    .addComponent(jLabelPages)
+                                    .addComponent(jLabelEdition)
+                                    .addComponent(jLabelBookName)
+                                    .addComponent(jLabelISBN))
+                                .addGap(41, 41, 41)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldISBN)
+                                    .addComponent(jTextFieldBookName)
+                                    .addComponent(jTextFieldPublisher)
+                                    .addComponent(jTextFieldPages)
+                                    .addComponent(jTextFieldEdition)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabelPricePerWeek)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButtonDeleteBook)
+                                        .addGap(14, 14, 14)
+                                        .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jTextFieldPricePerWeek)
+                                    .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldAuthor))))
+                        .addGap(22, 22, 22))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelISBN)
+                    .addComponent(jTextFieldISBN))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelBookName)
+                    .addComponent(jTextFieldBookName))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelEdition)
+                    .addComponent(jTextFieldEdition))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPublisher)
+                    .addComponent(jTextFieldPublisher))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPages)
+                    .addComponent(jTextFieldPages))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAuthor)
+                    .addComponent(jTextFieldAuthor))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPricePerWeek)
+                    .addComponent(jTextFieldPricePerWeek))
+                .addGap(25, 25, 25)
+                .addComponent(jButtonSearchBook)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDeleteBook)
+                    .addComponent(jButtonBack))
+                .addGap(19, 19, 19))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldPricePerWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPricePerWeekActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPricePerWeekActionPerformed
+
+    private void jTextFieldBookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBookNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldBookNameActionPerformed
+
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+        setVisible(false);
+        BookManagement b = new BookManagement();
+        b.setVisible(true);
+    }//GEN-LAST:event_jButtonBackActionPerformed
+
+    private void jTextFieldISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldISBNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldISBNActionPerformed
+
+    private void jTextFieldPagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPagesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPagesActionPerformed
+
+    private void jTextFieldPublisherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPublisherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPublisherActionPerformed
+
+    private void jButtonDeleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteBookActionPerformed
+
+        String deleteS = "DELETE FROM Book where ISBN = ?";
+        try {
+
+            pStatement = connection.prepareStatement(deleteS);
+            pStatement.setString(1, jTextFieldISBN.getText());
+            pStatement.execute();
+            JOptionPane.showMessageDialog(null, "Book Deleted");
+
+            this.clearForm();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
+    }//GEN-LAST:event_jButtonDeleteBookActionPerformed
+
+    private void jTextFieldAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAuthorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldAuthorActionPerformed
+
+    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        String query = "select * from Book Where ISBN = ?";
+        try {
+            pStatement = connection.prepareStatement(query);
+            pStatement.setString(1, jTextFieldISBN.getText());
+            result = pStatement.executeQuery();
+            if (result.next()) {
+                String s = result.getString("Name");
+                jTextFieldBookName.setText(s);
+                String s1 = result.getString("Edition");
+                jTextFieldEdition.setText(s1);
+                String s2 = result.getString("Publisher");
+                jTextFieldPublisher.setText(s2);
+                String s3 = result.getString("Pages");
+                jTextFieldPages.setText(s3);
+                String s4 = result.getString("Author");
+                jTextFieldAuthor.setText(s4);
+                String s5 = result.getString("PricePerWeek");
+                jTextFieldPricePerWeek.setText(s5);
+                result.close();
+                pStatement.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "ISBN not found");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                result.close();
+                pStatement.close();
+            } catch (Exception ex) {
+
+            }
+        }
+    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+
+    private void jTextFieldEditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEditionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEditionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,6 +370,35 @@ public class DeleteBook extends javax.swing.JFrame {
         });
     }
 
+    private void clearForm() {
+        this.jTextFieldISBN.setText("");
+        this.jTextFieldBookName.setText("");
+        this.jTextFieldPublisher.setText("");
+        this.jTextFieldEdition.setText("");
+        this.jTextFieldPages.setText("");
+        this.jTextFieldAuthor.setText("");
+        this.jTextFieldPricePerWeek.setText("");
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBack;
+    private javax.swing.JButton jButtonDeleteBook;
+    private javax.swing.JButton jButtonSearchBook;
+    private javax.swing.JLabel jLabelAuthor;
+    private javax.swing.JLabel jLabelBookName;
+    private javax.swing.JLabel jLabelEdition;
+    private javax.swing.JLabel jLabelISBN;
+    private javax.swing.JLabel jLabelPages;
+    private javax.swing.JLabel jLabelPricePerWeek;
+    private javax.swing.JLabel jLabelPublisher;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextFieldAuthor;
+    private javax.swing.JTextField jTextFieldBookName;
+    private javax.swing.JTextField jTextFieldEdition;
+    private javax.swing.JTextField jTextFieldISBN;
+    private javax.swing.JTextField jTextFieldPages;
+    private javax.swing.JTextField jTextFieldPricePerWeek;
+    private javax.swing.JTextField jTextFieldPublisher;
     // End of variables declaration//GEN-END:variables
 }

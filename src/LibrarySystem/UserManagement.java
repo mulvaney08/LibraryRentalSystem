@@ -5,7 +5,6 @@ package LibrarySystem;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author aaronm
@@ -300,7 +299,9 @@ public class UserManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemLogoutActionPerformed
 
     private void jButtonDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteUserActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
+        DeleteUser d = new DeleteUser();
+        d.setVisible(true);
     }//GEN-LAST:event_jButtonDeleteUserActionPerformed
 
     /**

@@ -1,40 +1,27 @@
-package LibrarySystem;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import javax.swing.JFrame;
-import net.sf.jasperreports.engine.JRException;
-
-import net.sf.jasperreports.engine.JasperCompileManager;
-
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.JasperReportsContext;
-import net.sf.jasperreports.engine.data.JRXmlDataSource;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JRViewer;
-import net.sf.jasperreports.view.JasperViewer;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package LibrarySystem;
+
+import static com.lowagie.text.pdf.PdfName.BG;
+import java.sql.Connection;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author aaronm
  */
 public class ListOfBooks extends javax.swing.JFrame {
 
+    Connection connection;
+    
+    
     /**
      * Creates new form ListOfBooks
      */
@@ -42,6 +29,18 @@ public class ListOfBooks extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void reportView(){
+        try{
+            connection = dbConnect.connectDb();
+            String Report = "C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\reports\\Books.jrxml";
+            JasperReport J_Rep = JasperCompileManager.compileReport(Report);
+            JasperPrint J_Print = JasperFillManager.fillReport(J_Rep,null,connection);
+            JasperViewer.viewReport(J_Print);
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,28 +50,49 @@ public class ListOfBooks extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BooksBtn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        BooksBtn.setText("jButton1");
+        BooksBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BooksBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(BooksBtn)
+                .addContainerGap(181, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(BooksBtn)
+                .addContainerGap(182, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    private void BooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BooksBtnActionPerformed
+        
+        reportView();
+        
+    }//GEN-LAST:event_BooksBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) throws JRException {
-        Connection connection;
-        connection = dbConnect.connectDb();
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -102,28 +122,9 @@ public class ListOfBooks extends javax.swing.JFrame {
                 new ListOfBooks().setVisible(true);
             }
         });
-//        try {
-//            String report = "C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\reports\\Books.jrxml";
-//            JasperReport j = JasperCompileManager.compileReport(report);
-//            JasperPrint jasP = JasperFillManager.fillReport(j, null, connection);
-//            JasperViewer.viewReport(jasP);
-//        } catch (Exception ex) {
-//
-//        }
-
-        Map parameters = new HashMap();
-        parameters.put("id", 42);
-
-        JasperReport report = (JasperReport) JRLoader.loadObject("C:/Users/aaronm/Documents/AaronYear3Project/LibraryRentalSystem/reports/Books.jrxml");
-
-        JasperPrint jasperPrint = JasperFillManager.fillReport(report, null, connection);
-
-        JFrame frame = new JFrame("Report");
-        frame.getContentPane().add(new JRViewer(jasperPrint));
-        frame.pack();
-        frame.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BooksBtn;
     // End of variables declaration//GEN-END:variables
 }
