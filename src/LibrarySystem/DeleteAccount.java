@@ -5,17 +5,28 @@
  */
 package LibrarySystem;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author aaronm
  */
 public class DeleteAccount extends javax.swing.JFrame {
 
+    Connection connection;
+    ResultSet result;
+    PreparedStatement pStatement;
+
     /**
      * Creates new form DeleteAccount
      */
     public DeleteAccount() {
         initComponents();
+        this.clearForm();
+        connection = dbConnect.connectDb();
     }
 
     /**
@@ -27,21 +38,317 @@ public class DeleteAccount extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldAccountNum = new javax.swing.JTextField();
+        jLabelAccNum = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFieldFName = new javax.swing.JTextField();
+        jTextFieldLName = new javax.swing.JTextField();
+        jButtonCancelDeleteUser = new javax.swing.JButton();
+        jLabelUserType = new javax.swing.JLabel();
+        jButtonDeleteUser = new javax.swing.JButton();
+        jTextFieldAddLine2 = new javax.swing.JTextField();
+        jTextFieldIBAN = new javax.swing.JTextField();
+        jButtonSearchBook = new javax.swing.JButton();
+        jLabelUserType1 = new javax.swing.JLabel();
+        jTextFieldBIC = new javax.swing.JTextField();
+        jTextFieldDOB = new javax.swing.JTextField();
+        jTextFieldAddLine1 = new javax.swing.JTextField();
+        jTextFieldFunds = new javax.swing.JTextField();
+        jLabelUserType2 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Delete Account", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel4.setText("Address Line 2");
+
+        jTextFieldAccountNum.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldAccountNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAccountNumActionPerformed(evt);
+            }
+        });
+
+        jLabelAccNum.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelAccNum.setText("Account Number");
+
+        jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel3.setText("Address Line 1");
+
+        jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel5.setText("DOB");
+
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel1.setText("First Name");
+
+        jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel6.setText("Last Name");
+
+        jTextFieldFName.setEditable(false);
+        jTextFieldFName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldFName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldFNameActionPerformed(evt);
+            }
+        });
+
+        jTextFieldLName.setEditable(false);
+        jTextFieldLName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jButtonCancelDeleteUser.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jButtonCancelDeleteUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\exit.png")); // NOI18N
+        jButtonCancelDeleteUser.setText("Back");
+        jButtonCancelDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelDeleteUserActionPerformed(evt);
+            }
+        });
+
+        jLabelUserType.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelUserType.setText("IBAN");
+
+        jButtonDeleteUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\delete.png")); // NOI18N
+        jButtonDeleteUser.setText("Delete");
+        jButtonDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteUserActionPerformed(evt);
+            }
+        });
+
+        jTextFieldAddLine2.setEditable(false);
+        jTextFieldAddLine2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jTextFieldIBAN.setEditable(false);
+        jTextFieldIBAN.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jButtonSearchBook.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jButtonSearchBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\search.png")); // NOI18N
+        jButtonSearchBook.setText("Search");
+        jButtonSearchBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSearchBookActionPerformed(evt);
+            }
+        });
+
+        jLabelUserType1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelUserType1.setText("BIC");
+
+        jTextFieldBIC.setEditable(false);
+        jTextFieldBIC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jTextFieldDOB.setEditable(false);
+
+        jTextFieldAddLine1.setEditable(false);
+        jTextFieldAddLine1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAddLine1ActionPerformed(evt);
+            }
+        });
+
+        jTextFieldFunds.setEditable(false);
+        jTextFieldFunds.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+
+        jLabelUserType2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelUserType2.setText("Funds");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabelAccNum)
+                            .addComponent(jLabel1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addComponent(jTextFieldDOB))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jButtonDeleteUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButtonCancelDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextFieldFName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldLName)
+                                    .addComponent(jTextFieldAccountNum)
+                                    .addComponent(jTextFieldAddLine2)
+                                    .addComponent(jTextFieldAddLine1)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelUserType)
+                            .addComponent(jLabelUserType1)
+                            .addComponent(jLabelUserType2))
+                        .addGap(123, 123, 123)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldFunds)
+                            .addComponent(jTextFieldBIC)
+                            .addComponent(jTextFieldIBAN)
+                            .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAccNum)
+                    .addComponent(jTextFieldAccountNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jTextFieldLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel3)
+                        .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldAddLine1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldAddLine2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextFieldDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUserType)
+                    .addComponent(jTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUserType1)
+                    .addComponent(jTextFieldBIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTextFieldFunds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelUserType2))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonSearchBook)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonCancelDeleteUser)
+                    .addComponent(jButtonDeleteUser))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFNameActionPerformed
+
+    private void jButtonCancelDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelDeleteUserActionPerformed
+        setVisible(false);
+        AccountManagement accM = new AccountManagement();
+        accM.setVisible(true);
+    }//GEN-LAST:event_jButtonCancelDeleteUserActionPerformed
+
+    private void jButtonDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteUserActionPerformed
+
+        String deleteS = "DELETE FROM Account where AccountNum = ?";
+        try {
+
+            pStatement = connection.prepareStatement(deleteS);
+            pStatement.setString(1, jTextFieldAccountNum.getText());
+            pStatement.execute();
+            JOptionPane.showMessageDialog(null, "Account Deleted");
+
+            this.clearForm();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
+    }//GEN-LAST:event_jButtonDeleteUserActionPerformed
+
+    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        String query = "select * from Account Where AccountNum = ?";
+        try {
+            pStatement = connection.prepareStatement(query);
+            pStatement.setString(1, jTextFieldAccountNum.getText());
+            result = pStatement.executeQuery();
+            if (result.next()) {
+                String s = result.getString("FirstName");
+                jTextFieldFName.setText(s);
+                s = result.getString("LastName");
+                jTextFieldLName.setText(s);
+                s = result.getString("AddLine1");
+                jTextFieldAddLine1.setText(s);
+                s = result.getString("AddLine2");
+                jTextFieldAddLine2.setText(s);
+                s = result.getString("DOB");
+                jTextFieldDOB.setText(s);
+                s = result.getString("IBAN");
+                jTextFieldIBAN.setText(s);
+                s = result.getString("BIC");
+                jTextFieldBIC.setText(s);
+                s = result.getString("Funds");
+                jTextFieldFunds.setText(s);
+
+                result.close();
+                pStatement.close();
+            } else {
+                JOptionPane.showMessageDialog(null, "Account not found");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        } finally {
+            try {
+                result.close();
+                pStatement.close();
+            } catch (Exception ex) {
+
+            }
+        }
+    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+
+    private void jTextFieldAccountNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAccountNumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldAccountNumActionPerformed
+
+    private void jTextFieldAddLine1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAddLine1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldAddLine1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,6 +385,41 @@ public class DeleteAccount extends javax.swing.JFrame {
         });
     }
 
+    private void clearForm() {
+        this.jTextFieldAccountNum.setText("");
+        this.jTextFieldFName.setText("");
+        this.jTextFieldLName.setText("");
+        this.jTextFieldAddLine1.setText("");
+        this.jTextFieldAddLine2.setText("");
+        this.jTextFieldDOB.setText("");
+        this.jTextFieldIBAN.setText("");
+        this.jTextFieldBIC.setText("");
+        this.jTextFieldFunds.setText("");
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancelDeleteUser;
+    private javax.swing.JButton jButtonDeleteUser;
+    private javax.swing.JButton jButtonSearchBook;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelAccNum;
+    private javax.swing.JLabel jLabelUserType;
+    private javax.swing.JLabel jLabelUserType1;
+    private javax.swing.JLabel jLabelUserType2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextFieldAccountNum;
+    private javax.swing.JTextField jTextFieldAddLine1;
+    private javax.swing.JTextField jTextFieldAddLine2;
+    private javax.swing.JTextField jTextFieldBIC;
+    private javax.swing.JTextField jTextFieldDOB;
+    private javax.swing.JTextField jTextFieldFName;
+    private javax.swing.JTextField jTextFieldFunds;
+    private javax.swing.JTextField jTextFieldIBAN;
+    private javax.swing.JTextField jTextFieldLName;
     // End of variables declaration//GEN-END:variables
 }

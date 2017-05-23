@@ -233,6 +233,9 @@
                   <Image iconType="2" name="C:\Users\aaronm\Documents\AaronYear3Project\LibraryRentalSystem\images\deleteUserIcon.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDeleteAccountActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonModifyAccount">
               <Properties>

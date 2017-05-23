@@ -250,7 +250,9 @@ public class UserManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonModifyUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyUserActionPerformed
-
+        setVisible(false);
+        ModifyUser mU = new ModifyUser();
+        mU.setVisible(true);
     }//GEN-LAST:event_jButtonModifyUserActionPerformed
 
     private void jButtonAddUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUserActionPerformed

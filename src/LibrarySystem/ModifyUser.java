@@ -14,16 +14,16 @@ import javax.swing.JOptionPane;
  *
  * @author aaronm
  */
-public class ModifyAccount extends javax.swing.JFrame {
+public class ModifyUser extends javax.swing.JFrame {
 
     Connection connection;
     ResultSet result;
     PreparedStatement pStatement;
 
     /**
-     * Creates new form ModifyAccount
+     * Creates new form ModifyUser
      */
-    public ModifyAccount() {
+    public ModifyUser() {
         initComponents();
         this.clearForm();
         connection = dbConnect.connectDb();
@@ -40,49 +40,40 @@ public class ModifyAccount extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextFieldAccountNum = new javax.swing.JTextField();
-        jLabelAccNum = new javax.swing.JLabel();
+        jTextFieldUsername = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jTextFieldFName = new javax.swing.JTextField();
         jTextFieldLName = new javax.swing.JTextField();
-        jButtonCancelDeleteUser = new javax.swing.JButton();
+        jButtonBack = new javax.swing.JButton();
         jLabelUserType = new javax.swing.JLabel();
-        jButtonModifyAccount = new javax.swing.JButton();
-        jTextFieldAddLine2 = new javax.swing.JTextField();
-        jTextFieldIBAN = new javax.swing.JTextField();
+        jButtonModifyUser = new javax.swing.JButton();
+        jTextFieldUserType = new javax.swing.JTextField();
+        jPasswordField1 = new javax.swing.JPasswordField();
         jButtonSearchBook = new javax.swing.JButton();
-        jLabelUserType1 = new javax.swing.JLabel();
-        jTextFieldBIC = new javax.swing.JTextField();
-        jTextFieldDOB = new javax.swing.JTextField();
-        jTextFieldAddLine1 = new javax.swing.JTextField();
-        jTextFieldFunds = new javax.swing.JTextField();
-        jLabelUserType2 = new javax.swing.JLabel();
+        jPasswordFieldAnswer = new javax.swing.JPasswordField();
+        jComboBoxSecQ = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modify Account", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modify User", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel4.setText("Address Line 2");
+        jLabel4.setText("Security Question");
 
-        jTextFieldAccountNum.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jTextFieldAccountNum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAccountNumActionPerformed(evt);
-            }
-        });
+        jTextFieldUsername.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
-        jLabelAccNum.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelAccNum.setText("Account Number");
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabel2.setText("Username");
 
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel3.setText("Address Line 1");
+        jLabel3.setText("Password");
 
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabel5.setText("DOB");
+        jLabel5.setText("Answer");
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel1.setText("First Name");
@@ -99,29 +90,39 @@ public class ModifyAccount extends javax.swing.JFrame {
 
         jTextFieldLName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
-        jButtonCancelDeleteUser.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jButtonCancelDeleteUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\exit.png")); // NOI18N
-        jButtonCancelDeleteUser.setText("Back");
-        jButtonCancelDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBack.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jButtonBack.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\exit.png")); // NOI18N
+        jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCancelDeleteUserActionPerformed(evt);
+                jButtonBackActionPerformed(evt);
             }
         });
 
         jLabelUserType.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelUserType.setText("IBAN");
+        jLabelUserType.setText("User Type");
 
-        jButtonModifyAccount.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\tick.png")); // NOI18N
-        jButtonModifyAccount.setText("Modify");
-        jButtonModifyAccount.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModifyUser.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\tick.png")); // NOI18N
+        jButtonModifyUser.setText("Modify");
+        jButtonModifyUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModifyAccountActionPerformed(evt);
+                jButtonModifyUserActionPerformed(evt);
             }
         });
 
-        jTextFieldAddLine2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldUserType.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldUserType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldUserTypeActionPerformed(evt);
+            }
+        });
 
-        jTextFieldIBAN.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jPasswordField1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPasswordField1ActionPerformed(evt);
+            }
+        });
 
         jButtonSearchBook.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButtonSearchBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\search.png")); // NOI18N
@@ -132,21 +133,15 @@ public class ModifyAccount extends javax.swing.JFrame {
             }
         });
 
-        jLabelUserType1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelUserType1.setText("BIC");
-
-        jTextFieldBIC.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jTextFieldAddLine1.addActionListener(new java.awt.event.ActionListener() {
+        jPasswordFieldAnswer.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jPasswordFieldAnswer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAddLine1ActionPerformed(evt);
+                jPasswordFieldAnswerActionPerformed(evt);
             }
         });
 
-        jTextFieldFunds.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jLabelUserType2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelUserType2.setText("Funds");
+        jComboBoxSecQ.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jComboBoxSecQ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose a Question", "What is your childhood Nickname?", "Where were you born?", "What is your pet's name?" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,44 +156,43 @@ public class ModifyAccount extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
-                            .addComponent(jLabelAccNum)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jTextFieldDOB))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButtonModifyAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButtonModifyUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButtonCancelDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jTextFieldFName)
-                                    .addComponent(jTextFieldLName)
-                                    .addComponent(jTextFieldAccountNum)
-                                    .addComponent(jTextFieldAddLine2)
-                                    .addComponent(jTextFieldAddLine1)))))
+                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextFieldLName, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBoxSecQ, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jPasswordFieldAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelUserType)
+                        .addGap(92, 92, 92)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelUserType)
-                            .addComponent(jLabelUserType1)
-                            .addComponent(jLabelUserType2))
-                        .addGap(116, 116, 116)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldFunds)
-                            .addComponent(jTextFieldBIC)
-                            .addComponent(jTextFieldIBAN)
-                            .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBoxSecQ, jPasswordField1, jPasswordFieldAnswer, jTextFieldFName, jTextFieldLName, jTextFieldUserType, jTextFieldUsername});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAccNum)
-                    .addComponent(jTextFieldAccountNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -207,42 +201,35 @@ public class ModifyAccount extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextFieldLName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel3)
-                        .addGap(21, 21, 21))
+                        .addComponent(jLabel4)
+                        .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldAddLine1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxSecQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldAddLine2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
-                    .addComponent(jTextFieldDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPasswordFieldAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUserType)
-                    .addComponent(jTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelUserType1)
-                    .addComponent(jTextFieldBIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldFunds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUserType2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                    .addComponent(jTextFieldUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jButtonSearchBook)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancelDeleteUser)
-                    .addComponent(jButtonModifyAccount))
+                    .addComponent(jButtonBack)
+                    .addComponent(jButtonModifyUser))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBoxSecQ, jPasswordField1, jPasswordFieldAnswer, jTextFieldFName, jTextFieldLName, jTextFieldUserType, jTextFieldUsername});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,78 +248,71 @@ public class ModifyAccount extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(416, 557));
+        setSize(new java.awt.Dimension(416, 498));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldAccountNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAccountNumActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldAccountNumActionPerformed
 
     private void jTextFieldFNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldFNameActionPerformed
 
-    private void jButtonCancelDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelDeleteUserActionPerformed
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         setVisible(false);
-        AccountManagement accM = new AccountManagement();
-        accM.setVisible(true);
-    }//GEN-LAST:event_jButtonCancelDeleteUserActionPerformed
+        UserManagement UaccM = new UserManagement();
+        UaccM.setVisible(true);
+    }//GEN-LAST:event_jButtonBackActionPerformed
 
-    private void jButtonModifyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyAccountActionPerformed
+    private void jButtonModifyUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyUserActionPerformed
 
-        String update = "UPDATE Account SET FirstName=?, LastName=?, AddLine1=?, AddLine2=? , DOB=?, IBAN=?, BIC=?, Funds=? WHERE  AccountNum = ?";
+       String update = "UPDATE User SET FirstName=?, LastName=?, Password=?, Security_Q=? , Answer=?, UserType=? WHERE  Username = ?";
         try {
             pStatement = connection.prepareStatement(update);
 
             pStatement.setString(1, jTextFieldFName.getText());
             pStatement.setString(2, jTextFieldLName.getText());
-            pStatement.setString(3, jTextFieldAddLine1.getText());
-            pStatement.setString(4, jTextFieldAddLine2.getText());
-            pStatement.setString(5, jTextFieldDOB.getText());
-            pStatement.setString(6, jTextFieldIBAN.getText());
-            pStatement.setString(7, jTextFieldBIC.getText());
-            pStatement.setString(8, jTextFieldFunds.getText());
-            pStatement.setString(9, jTextFieldAccountNum.getText());
+            pStatement.setString(3, jPasswordField1.getText());
+            pStatement.setString(4, (String)jComboBoxSecQ.getSelectedItem());
+            pStatement.setString(5, jPasswordFieldAnswer.getText());
+            pStatement.setString(6, jTextFieldUserType.getText());
+            pStatement.setString(7, jTextFieldUsername.getText());
 
             pStatement.execute();
-            JOptionPane.showMessageDialog(null, "Account Modified");
+            JOptionPane.showMessageDialog(null, "User Modified");
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex + ", please try again");
 
         }
         this.clearForm();
-    }//GEN-LAST:event_jButtonModifyAccountActionPerformed
+    }//GEN-LAST:event_jButtonModifyUserActionPerformed
+
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
-        String query = "select * from Account Where AccountNum = ?";
+        String query = "select * from User Where Username = ?";
         try {
             pStatement = connection.prepareStatement(query);
-            pStatement.setString(1, jTextFieldAccountNum.getText());
+            pStatement.setString(1, jTextFieldUsername.getText());
             result = pStatement.executeQuery();
             if (result.next()) {
                 String s = result.getString("FirstName");
                 jTextFieldFName.setText(s);
                 s = result.getString("LastName");
                 jTextFieldLName.setText(s);
-                s = result.getString("AddLine1");
-                jTextFieldAddLine1.setText(s);
-                s = result.getString("AddLine2");
-                jTextFieldAddLine2.setText(s);
-                s = result.getString("DOB");
-                jTextFieldDOB.setText(s);
-                s = result.getString("IBAN");
-                jTextFieldIBAN.setText(s);
-                s = result.getString("BIC");
-                jTextFieldBIC.setText(s);
-                s = result.getString("Funds");
-                jTextFieldFunds.setText(s);
-
+                s = result.getString("Password");
+                jPasswordField1.setText(s);
+                s = result.getString("Security_Q");
+                jComboBoxSecQ.setSelectedItem(s);
+                s = result.getString("Answer");
+                jPasswordFieldAnswer.setText(s);
+                s = result.getString("UserType");
+                jTextFieldUserType.setText(s);
                 result.close();
                 pStatement.close();
             } else {
-                JOptionPane.showMessageDialog(null, "Account not found");
+                JOptionPane.showMessageDialog(null, "User not found");
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
@@ -346,9 +326,13 @@ public class ModifyAccount extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSearchBookActionPerformed
 
-    private void jTextFieldAddLine1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAddLine1ActionPerformed
+    private void jPasswordFieldAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldAnswerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldAddLine1ActionPerformed
+    }//GEN-LAST:event_jPasswordFieldAnswerActionPerformed
+
+    private void jTextFieldUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldUserTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldUserTypeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -367,57 +351,53 @@ public class ModifyAccount extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModifyAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModifyAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModifyAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModifyAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ModifyUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModifyAccount().setVisible(true);
+                new ModifyUser().setVisible(true);
             }
         });
     }
 
     private void clearForm() {
-        this.jTextFieldAccountNum.setText("");
+        this.jTextFieldUsername.setText("");
+        this.jPasswordFieldAnswer.setText("");
         this.jTextFieldFName.setText("");
         this.jTextFieldLName.setText("");
-        this.jTextFieldAddLine1.setText("");
-        this.jTextFieldAddLine2.setText("");
-        this.jTextFieldDOB.setText("");
-        this.jTextFieldIBAN.setText("");
-        this.jTextFieldBIC.setText("");
-        this.jTextFieldFunds.setText("");
+        this.jPasswordField1.setText("");
+        this.jTextFieldUserType.setText("");
+        this.jPasswordField1.setText("");
+
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonCancelDeleteUser;
-    private javax.swing.JButton jButtonModifyAccount;
+    private javax.swing.JButton jButtonBack;
+    private javax.swing.JButton jButtonModifyUser;
     private javax.swing.JButton jButtonSearchBook;
+    private javax.swing.JComboBox<String> jComboBoxSecQ;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabelAccNum;
     private javax.swing.JLabel jLabelUserType;
-    private javax.swing.JLabel jLabelUserType1;
-    private javax.swing.JLabel jLabelUserType2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldAccountNum;
-    private javax.swing.JTextField jTextFieldAddLine1;
-    private javax.swing.JTextField jTextFieldAddLine2;
-    private javax.swing.JTextField jTextFieldBIC;
-    private javax.swing.JTextField jTextFieldDOB;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordFieldAnswer;
     private javax.swing.JTextField jTextFieldFName;
-    private javax.swing.JTextField jTextFieldFunds;
-    private javax.swing.JTextField jTextFieldIBAN;
     private javax.swing.JTextField jTextFieldLName;
+    private javax.swing.JTextField jTextFieldUserType;
+    private javax.swing.JTextField jTextFieldUsername;
     // End of variables declaration//GEN-END:variables
 }

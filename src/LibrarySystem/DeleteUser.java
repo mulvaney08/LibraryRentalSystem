@@ -81,6 +81,7 @@ public class DeleteUser extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabel6.setText("Last Name");
 
+        jTextFieldFName.setEditable(false);
         jTextFieldFName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextFieldFName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +89,7 @@ public class DeleteUser extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldLName.setEditable(false);
         jTextFieldLName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
         jButtonCancelDeleteUser.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -110,10 +112,13 @@ public class DeleteUser extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldSecQ.setEditable(false);
         jTextFieldSecQ.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
+        jTextFieldUserType.setEditable(false);
         jTextFieldUserType.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
 
+        jPasswordField1.setEditable(false);
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
@@ -129,6 +134,7 @@ public class DeleteUser extends javax.swing.JFrame {
             }
         });
 
+        jPasswordFieldAnswer.setEditable(false);
         jPasswordFieldAnswer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordFieldAnswerActionPerformed(evt);
@@ -342,7 +348,7 @@ public class DeleteUser extends javax.swing.JFrame {
         });
     }
 
-        private void clearForm() {
+    private void clearForm() {
         this.jTextFieldUsername.setText("");
         this.jPasswordFieldAnswer.setText("");
         this.jTextFieldFName.setText("");
@@ -353,7 +359,7 @@ public class DeleteUser extends javax.swing.JFrame {
         this.jPasswordField1.setText("");
 
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelDeleteUser;
     private javax.swing.JButton jButtonDeleteUser;

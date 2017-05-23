@@ -5,7 +5,6 @@ package LibrarySystem;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author aaronm
@@ -52,6 +51,11 @@ public class AccountManagement extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Account Management", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
 
         jButtonDeleteAccount.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\deleteUserIcon.png")); // NOI18N
+        jButtonDeleteAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteAccountActionPerformed(evt);
+            }
+        });
 
         jButtonModifyAccount.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\modifyUserIcon.png")); // NOI18N
         jButtonModifyAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -236,8 +240,8 @@ public class AccountManagement extends javax.swing.JFrame {
 
     private void jButtonModifyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyAccountActionPerformed
         setVisible(false);
-        AddAccount addA = new AddAccount();
-        addA.setVisible(true);
+        ModifyAccount modA = new ModifyAccount();
+        modA.setVisible(true);
     }//GEN-LAST:event_jButtonModifyAccountActionPerformed
 
     private void jButtonAddAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddAccountActionPerformed
@@ -273,11 +277,17 @@ public class AccountManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jMenuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogoutActionPerformed
-
+        
         setVisible(false);
         Login l = new Login();
         l.setVisible(true);
     }//GEN-LAST:event_jMenuItemLogoutActionPerformed
+
+    private void jButtonDeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteAccountActionPerformed
+        setVisible(false);
+        DeleteAccount dAcc = new DeleteAccount();
+        dAcc.setVisible(true);
+    }//GEN-LAST:event_jButtonDeleteAccountActionPerformed
 
     /**
      * @param args the command line arguments
