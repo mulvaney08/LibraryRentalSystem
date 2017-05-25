@@ -46,7 +46,7 @@ public class Home extends javax.swing.JFrame {
         jButtonAccountManagement = new javax.swing.JButton();
         jLabelBookManage = new javax.swing.JLabel();
         jLabelAccountManage = new javax.swing.JLabel();
-        jButtonAddBook = new javax.swing.JButton();
+        jButtonManageBooks = new javax.swing.JButton();
         jLabelReports = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
@@ -87,10 +87,10 @@ public class Home extends javax.swing.JFrame {
         jLabelAccountManage.setForeground(new java.awt.Color(102, 0, 0));
         jLabelAccountManage.setText("Account Management");
 
-        jButtonAddBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\bookManage.png")); // NOI18N
-        jButtonAddBook.addActionListener(new java.awt.event.ActionListener() {
+        jButtonManageBooks.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\bookManage.png")); // NOI18N
+        jButtonManageBooks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddBookActionPerformed(evt);
+                jButtonManageBooksActionPerformed(evt);
             }
         });
 
@@ -106,7 +106,7 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButtonAddBook, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                        .addComponent(jButtonManageBooks, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                         .addGap(45, 45, 45)
                         .addComponent(jButtonReports, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
                         .addGap(49, 49, 49)
@@ -126,7 +126,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAddBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonManageBooks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAccountManagement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -188,6 +188,9 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jMenuBar1.setBorder(null);
+
+        jMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu.setText("Menu");
 
         jMenuItemBookManagement.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -276,12 +279,12 @@ public class Home extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItemLogoutActionPerformed
 
-    private void jButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddBookActionPerformed
+    private void jButtonManageBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonManageBooksActionPerformed
         setVisible(false);
         BookManagement bM = new BookManagement();
         bM.setVisible(true);
 
-    }//GEN-LAST:event_jButtonAddBookActionPerformed
+    }//GEN-LAST:event_jButtonManageBooksActionPerformed
 
     private void jButtonAccountManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccountManagementActionPerformed
         if ("Admin".equals(Login.userType) || "admin".equals(Login.userType)) {
@@ -356,7 +359,7 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAccountManagement;
-    private javax.swing.JButton jButtonAddBook;
+    private javax.swing.JButton jButtonManageBooks;
     private javax.swing.JButton jButtonReports;
     private javax.swing.JLabel jLabelAccountManage;
     private javax.swing.JLabel jLabelBookManage;

@@ -1,6 +1,5 @@
 package LibrarySystem;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -244,6 +243,7 @@ public class AddAccount extends javax.swing.JFrame {
 
         }
         this.clearForm();
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

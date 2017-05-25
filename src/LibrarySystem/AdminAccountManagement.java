@@ -146,6 +146,7 @@ public class AdminAccountManagement extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jMenu2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu2.setText("Menu");
 
         jMenuItemHome2.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\home.png")); // NOI18N
@@ -327,8 +328,6 @@ public class AdminAccountManagement extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAccManagement;
     private javax.swing.JMenuItem jMenuItemBookManagement2;
-    private javax.swing.JMenuItem jMenuItemHome;
-    private javax.swing.JMenuItem jMenuItemHome1;
     private javax.swing.JMenuItem jMenuItemHome2;
     private javax.swing.JMenuItem jMenuItemLogout;
     private javax.swing.JMenuItem jMenuItemReports;

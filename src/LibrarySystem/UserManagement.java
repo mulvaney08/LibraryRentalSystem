@@ -166,6 +166,7 @@ public class UserManagement extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu.setText("Menu");
 
         jMenuItemHome.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N

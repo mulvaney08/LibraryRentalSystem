@@ -5,13 +5,15 @@
  */
 package LibrarySystem;
 
-import static com.lowagie.text.pdf.PdfName.BG;
 import java.sql.Connection;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -20,27 +22,40 @@ import net.sf.jasperreports.view.JasperViewer;
 public class ListOfBooks extends javax.swing.JFrame {
 
     Connection connection;
-    
-    
+    ResultSet result;
+    PreparedStatement pStatement;
+
+    DefaultTableModel d;
+
     /**
      * Creates new form ListOfBooks
      */
     public ListOfBooks() {
         initComponents();
+        connection = dbConnect.connectDb();
+        populateTable();
+        AutoSizeTable.sizeColumnsToFit(jTableBooks);
     }
 
-    public void reportView(){
-        try{
-            connection = dbConnect.connectDb();
-            String Report = "C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\reports\\Books.jrxml";
-            JasperReport J_Rep = JasperCompileManager.compileReport(Report);
-            JasperPrint J_Print = JasperFillManager.fillReport(J_Rep,null,connection);
-            JasperViewer.viewReport(J_Print);
-        }catch(Exception ex){
-            System.out.println(ex);
+    private void populateTable() {
+        String select = "select * from Book";
+        try {
+            pStatement = connection.prepareStatement(select);
+            result = pStatement.executeQuery();
+            jTableBooks.setModel(DbUtils.resultSetToTableModel(result));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
+    private void filterTable(String filter) {
+        TableRowSorter<DefaultTableModel> trs = new TableRowSorter<DefaultTableModel>(this.d);
+        jTableBooks.setRowSorter(trs);
+
+        trs.setRowFilter(RowFilter.regexFilter(filter));
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,14 +65,33 @@ public class ListOfBooks extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BooksBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableBooks = new javax.swing.JTable();
+        jTextFieldFilter = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        BooksBtn.setText("jButton1");
-        BooksBtn.addActionListener(new java.awt.event.ActionListener() {
+        jTableBooks.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTableBooks);
+
+        jTextFieldFilter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BooksBtnActionPerformed(evt);
+                jTextFieldFilterActionPerformed(evt);
+            }
+        });
+        jTextFieldFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldFilterKeyReleased(evt);
             }
         });
 
@@ -66,28 +100,37 @@ public class ListOfBooks extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addComponent(BooksBtn)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1158, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(324, 324, 324)
+                .addComponent(jTextFieldFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(BooksBtn)
-                .addContainerGap(182, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTextFieldFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1194, 673));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
-    private void BooksBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BooksBtnActionPerformed
-        
-        reportView();
-        
-    }//GEN-LAST:event_BooksBtnActionPerformed
+    private void jTextFieldFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldFilterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldFilterActionPerformed
+
+    private void jTextFieldFilterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldFilterKeyReleased
+        populateTable();
+        String s = jTextFieldFilter.getText().toLowerCase();
+        filterTable(s);
+    }//GEN-LAST:event_jTextFieldFilterKeyReleased
 
     /**
      * @param args the command line arguments
@@ -125,6 +168,8 @@ public class ListOfBooks extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BooksBtn;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableBooks;
+    private javax.swing.JTextField jTextFieldFilter;
     // End of variables declaration//GEN-END:variables
 }

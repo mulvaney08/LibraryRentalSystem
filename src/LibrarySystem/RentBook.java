@@ -371,6 +371,11 @@ public class RentBook extends javax.swing.JFrame {
 
         jButtonListAllBooks.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\smallBook.png")); // NOI18N
         jButtonListAllBooks.setText("List of Books");
+        jButtonListAllBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListAllBooksActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -721,6 +726,12 @@ public class RentBook extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_jButtonConfirmActionPerformed
+
+    private void jButtonListAllBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListAllBooksActionPerformed
+        //setVisible(false);
+        BooksSearch bs = new BooksSearch();
+        bs.setVisible(true);
+    }//GEN-LAST:event_jButtonListAllBooksActionPerformed
 
     /**
      * @param args the command line arguments

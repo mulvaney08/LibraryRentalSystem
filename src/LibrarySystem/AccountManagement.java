@@ -166,6 +166,7 @@ public class AccountManagement extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jMenu.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jMenu.setText("Menu");
 
         jMenuItemHome.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\home.png")); // NOI18N

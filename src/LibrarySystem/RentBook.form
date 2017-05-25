@@ -615,6 +615,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="List of Books"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListAllBooksActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

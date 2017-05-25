@@ -39,7 +39,7 @@ public class ModifyBook extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jTextFieldPricePerWeek2 = new javax.swing.JTextField();
+        jTextFieldPricePerWeek = new javax.swing.JTextField();
         jLabelPages = new javax.swing.JLabel();
         jLabelBookName = new javax.swing.JLabel();
         jLabelPublisher = new javax.swing.JLabel();
@@ -59,12 +59,12 @@ public class ModifyBook extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Add Book", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Modify Book", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
 
-        jTextFieldPricePerWeek2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jTextFieldPricePerWeek2.addActionListener(new java.awt.event.ActionListener() {
+        jTextFieldPricePerWeek.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextFieldPricePerWeek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPricePerWeek2ActionPerformed(evt);
+                jTextFieldPricePerWeekActionPerformed(evt);
             }
         });
 
@@ -175,7 +175,7 @@ public class ModifyBook extends javax.swing.JFrame {
                             .addComponent(jButtonBack))
                         .addComponent(jTextFieldISBN)
                         .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jTextFieldPricePerWeek2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldPages, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -185,6 +185,8 @@ public class ModifyBook extends javax.swing.JFrame {
         );
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonAddBook, jButtonBack});
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBoxEdition, jTextFieldAuthor, jTextFieldBookName, jTextFieldISBN, jTextFieldPages, jTextFieldPricePerWeek, jTextFieldPublisher});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +218,7 @@ public class ModifyBook extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPricePerWeek)
-                    .addComponent(jTextFieldPricePerWeek2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonSearchBook)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -228,7 +230,7 @@ public class ModifyBook extends javax.swing.JFrame {
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonAddBook, jButtonBack});
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBoxEdition, jTextFieldAuthor, jTextFieldBookName, jTextFieldISBN, jTextFieldPages, jTextFieldPricePerWeek2, jTextFieldPublisher});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBoxEdition, jTextFieldAuthor, jTextFieldBookName, jTextFieldISBN, jTextFieldPages, jTextFieldPricePerWeek, jTextFieldPublisher});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -251,9 +253,9 @@ public class ModifyBook extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldPricePerWeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPricePerWeek2ActionPerformed
+    private void jTextFieldPricePerWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPricePerWeekActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPricePerWeek2ActionPerformed
+    }//GEN-LAST:event_jTextFieldPricePerWeekActionPerformed
 
     private void jTextFieldBookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBookNameActionPerformed
         // TODO add your handling code here:
@@ -378,6 +380,7 @@ public class ModifyBook extends javax.swing.JFrame {
     }
 
     private void clearForm() {
+        this.jTextFieldISBN.setText("");
         this.jTextFieldBookName.setText("");
         this.jTextFieldPublisher.setText("");
         this.jTextFieldPages.setText("");
@@ -398,16 +401,12 @@ public class ModifyBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPages;
     private javax.swing.JLabel jLabelPricePerWeek;
     private javax.swing.JLabel jLabelPublisher;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextFieldAuthor;
     private javax.swing.JTextField jTextFieldBookName;
     private javax.swing.JTextField jTextFieldISBN;
     private javax.swing.JTextField jTextFieldPages;
     private javax.swing.JTextField jTextFieldPricePerWeek;
-    private javax.swing.JTextField jTextFieldPricePerWeek1;
-    private javax.swing.JTextField jTextFieldPricePerWeek2;
     private javax.swing.JTextField jTextFieldPublisher;
     // End of variables declaration//GEN-END:variables
 }
