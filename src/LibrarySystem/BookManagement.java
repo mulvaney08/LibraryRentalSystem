@@ -5,7 +5,6 @@ package LibrarySystem;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author aaronm
@@ -38,12 +37,14 @@ public class BookManagement extends javax.swing.JFrame {
         jLabelReturnBook = new javax.swing.JLabel();
         jButtonAddBook = new javax.swing.JButton();
         jLabelRentBook = new javax.swing.JLabel();
-        jLabeldisplayUsername = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        jButtonDeleteBook4 = new javax.swing.JButton();
+        jButtonLendBook1 = new javax.swing.JButton();
         jButtonModifyBook3 = new javax.swing.JButton();
         jLabelReturnBook4 = new javax.swing.JLabel();
-        jButtonDeleteBook4 = new javax.swing.JButton();
+        jLabelRentBook1 = new javax.swing.JLabel();
         jLabelDeleteBook4 = new javax.swing.JLabel();
+        jLabeldisplayUsername = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
@@ -97,46 +98,19 @@ public class BookManagement extends javax.swing.JFrame {
         jLabelRentBook.setForeground(new java.awt.Color(102, 0, 0));
         jLabelRentBook.setText("Rent Book");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jLabelAddBook)
-                        .addGap(240, 240, 240)
-                        .addComponent(jLabelRentBook)
-                        .addGap(246, 246, 246)
-                        .addComponent(jLabelReturnBook))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jButtonAddBook)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonLendBook)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonReturnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAddBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonLendBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonReturnBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAddBook)
-                    .addComponent(jLabelRentBook)
-                    .addComponent(jLabelReturnBook)))
-        );
+        jButtonDeleteBook4.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\bookIcon.png")); // NOI18N
+        jButtonDeleteBook4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteBook4jButtonDeleteBook1ActionPerformed(evt);
+            }
+        });
 
-        jLabeldisplayUsername.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
-        jLabeldisplayUsername.setForeground(new java.awt.Color(102, 0, 0));
-        jLabeldisplayUsername.setText("You are Logged in as: " + Login.username);
+        jButtonLendBook1.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\rentBookIcon.png")); // NOI18N
+        jButtonLendBook1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonLendBook1ActionPerformed(evt);
+            }
+        });
 
         jButtonModifyBook3.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\returnBookIcon.png")); // NOI18N
         jButtonModifyBook3.addActionListener(new java.awt.event.ActionListener() {
@@ -149,48 +123,101 @@ public class BookManagement extends javax.swing.JFrame {
         jLabelReturnBook4.setForeground(new java.awt.Color(102, 0, 0));
         jLabelReturnBook4.setText("Modify Book");
 
-        jButtonDeleteBook4.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\bookIcon.png")); // NOI18N
-        jButtonDeleteBook4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteBook4jButtonDeleteBook1ActionPerformed(evt);
-            }
-        });
+        jLabelRentBook1.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        jLabelRentBook1.setForeground(new java.awt.Color(102, 0, 0));
+        jLabelRentBook1.setText("List Books");
 
         jLabelDeleteBook4.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         jLabelDeleteBook4.setForeground(new java.awt.Color(102, 0, 0));
         jLabelDeleteBook4.setText("Delete Book");
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonAddBook)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonLendBook)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonReturnBook)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addComponent(jLabelAddBook)
+                .addGap(229, 229, 229)
+                .addComponent(jLabelRentBook)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelReturnBook)
+                .addGap(104, 104, 104))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonModifyBook3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonLendBook1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonDeleteBook4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(jLabelReturnBook4)
+                        .addGap(233, 233, 233)
+                        .addComponent(jLabelRentBook1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelDeleteBook4)
+                        .addGap(90, 90, 90)))
+                .addContainerGap())
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonAddBook, jButtonDeleteBook4, jButtonLendBook, jButtonLendBook1, jButtonModifyBook3, jButtonReturnBook});
+
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonAddBook)
+                    .addComponent(jButtonLendBook)
+                    .addComponent(jButtonReturnBook))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelRentBook)
+                    .addComponent(jLabelReturnBook)
+                    .addComponent(jLabelAddBook))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonDeleteBook4, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonLendBook1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonModifyBook3, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelDeleteBook4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabelRentBook1)
+                            .addComponent(jLabelReturnBook4))))
+                .addGap(18, 18, 18))
+        );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonAddBook, jButtonDeleteBook4, jButtonLendBook, jButtonLendBook1, jButtonModifyBook3, jButtonReturnBook});
+
+        jLabeldisplayUsername.setFont(new java.awt.Font("Trebuchet MS", 0, 18)); // NOI18N
+        jLabeldisplayUsername.setForeground(new java.awt.Color(102, 0, 0));
+        jLabeldisplayUsername.setText("You are Logged in as: " + Login.username);
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(207, 207, 207)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonModifyBook3, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jLabelReturnBook4)))
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonDeleteBook4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(406, 406, 406))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jLabelDeleteBook4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGap(0, 923, Short.MAX_VALUE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jButtonDeleteBook4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelDeleteBook4))
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jButtonModifyBook3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelReturnBook4))
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -199,21 +226,21 @@ public class BookManagement extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(jLabelSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabeldisplayUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelLogo)))
-                .addGap(250, 250, 250))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 978, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(154, 154, 154))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,9 +254,8 @@ public class BookManagement extends javax.swing.JFrame {
                     .addComponent(jLabelLogo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -324,12 +350,12 @@ public class BookManagement extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(342, 342, 342)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(1045, 1017));
+        setSize(new java.awt.Dimension(1047, 1034));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -400,6 +426,12 @@ public class BookManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonDeleteBook4jButtonDeleteBook1ActionPerformed
 
+    private void jButtonLendBook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLendBook1ActionPerformed
+        setVisible(false);
+        BooksSearch bs = new BooksSearch(this);
+        bs.setVisible(true);
+    }//GEN-LAST:event_jButtonLendBook1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -439,12 +471,14 @@ public class BookManagement extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAddBook;
     private javax.swing.JButton jButtonDeleteBook4;
     private javax.swing.JButton jButtonLendBook;
+    private javax.swing.JButton jButtonLendBook1;
     private javax.swing.JButton jButtonModifyBook3;
     private javax.swing.JButton jButtonReturnBook;
     private javax.swing.JLabel jLabelAddBook;
     private javax.swing.JLabel jLabelDeleteBook4;
     private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelRentBook;
+    private javax.swing.JLabel jLabelRentBook1;
     private javax.swing.JLabel jLabelReturnBook;
     private javax.swing.JLabel jLabelReturnBook4;
     private javax.swing.JLabel jLabelSelection;

@@ -306,7 +306,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jMenuItemReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportsActionPerformed
         setVisible(false);
-        ListOfBooks books = new ListOfBooks();
+        BooksSearch books = new BooksSearch();
         books.setVisible(true);
     }//GEN-LAST:event_jMenuItemReportsActionPerformed
 

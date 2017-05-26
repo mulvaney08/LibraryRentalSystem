@@ -18,7 +18,7 @@ import java.awt.FontMetrics;
 public class AutoSizeTable {
 
     public static void sizeColumnsToFit(JTable table) {
-        sizeColumnsToFit(table, 5);
+        sizeColumnsToFit(table, 10);
     }
 
     public static void sizeColumnsToFit(JTable table, int columnMargin) {

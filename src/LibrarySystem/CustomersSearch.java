@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aaronm
  */
-public class BooksSearch extends javax.swing.JFrame {
+public class CustomersSearch extends javax.swing.JFrame {
 
     Connection connection;
     ResultSet result;
@@ -24,63 +24,51 @@ public class BooksSearch extends javax.swing.JFrame {
     DefaultTableModel dm = new DefaultTableModel();
 
     private RentBook rb;
-    private boolean rbControl = false;
-    private BookManagement b;
-    private boolean bControl = false;
 
     /**
-     * Creates new form BooksSearch
+     * Creates new form CustomersSearch
      */
-    public BooksSearch() {
+    public CustomersSearch() {
         initComponents();
         connection = dbConnect.connectDb();
-        searchBooks();
-        AutoSizeTable.sizeColumnsToFit(jTableBooks);
-
+        searchCustomers();
+        AutoSizeTable.sizeColumnsToFit(jTableCustomers);
     }
 
-    public BooksSearch(RentBook rb) {
+    public CustomersSearch(RentBook rb) {
         initComponents();
         connection = dbConnect.connectDb();
-        searchBooks();
-        AutoSizeTable.sizeColumnsToFit(jTableBooks);
+        searchCustomers();
+        AutoSizeTable.sizeColumnsToFit(jTableCustomers);
         this.rb = rb;
-        rbControl = true;
     }
 
-    public BooksSearch(BookManagement b) {
-        initComponents();
-        connection = dbConnect.connectDb();
-        searchBooks();
-        AutoSizeTable.sizeColumnsToFit(jTableBooks);
-        this.b = b;
-        bControl = true;
-    }
-
-    public ArrayList<Book> ListBooksAll(String searchValue) {
-        ArrayList<Book> booksList = new ArrayList<Book>();
+    public ArrayList<Customer> ListCustomersAll(String searchValue) {
+        ArrayList<Customer> customers = new ArrayList<Customer>();
 
         try {
 
-            String query = "select * from Book where ISBN LIKE '%" + searchValue + "%' OR Name LIKE '%" + searchValue + "%' OR Edition LIKE '%" + searchValue + "%' OR Publisher LIKE '%" + searchValue + "%' OR Pages LIKE '%" + searchValue + "%' OR Author LIKE '%" + searchValue + "%' OR PricePerWeek LIKE '%" + searchValue + "%'";
+            String query = "select * from Account where AccountNum LIKE '%" + searchValue + "%' OR FirstName LIKE '%" + searchValue + "%' OR LastName LIKE '%" + searchValue + "%' OR AddLine1 LIKE '%" + searchValue + "%' OR AddLine2 LIKE '%" + searchValue + "%' OR DOB LIKE '%" + searchValue + "%' OR IBAN LIKE '%" + searchValue + "%' OR BIC LIKE '%" + searchValue + "%' OR Funds LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Book book;
+            Customer customer;
 
             while (result.next()) {
 
-                book = new Book(result.getInt("ISBN"),
-                        result.getString("Name"),
-                        result.getString("Edition"),
-                        result.getString("Publisher"),
-                        result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                customer = new Customer(result.getInt("AccountNum"),
+                        result.getString("FirstName"),
+                        result.getString("LastName"),
+                        result.getString("AddLine1"),
+                        result.getString("AddLine2"),
+                        result.getString("DOB"),
+                        result.getInt("IBAN"),
+                        result.getInt("BIC"),
+                        result.getInt("Funds"));
 
-                booksList.add(book);
+                customers.add(customer);
 
             }
 
@@ -88,33 +76,35 @@ public class BooksSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return booksList;
+        return customers;
     }
 
-    public ArrayList<Book> ListBooksName(String searchValue) {
-        ArrayList<Book> booksList = new ArrayList<Book>();
+    public ArrayList<Customer> ListCustomersFirstName(String searchValue) {
+        ArrayList<Customer> customers = new ArrayList<Customer>();
 
         try {
 
-            String query = "select * from Book where Name LIKE '%" + searchValue + "%'";
+            String query = "select * from Account where FirstName LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Book book;
+            Customer customer;
 
             while (result.next()) {
 
-                book = new Book(result.getInt("ISBN"),
-                        result.getString("Name"),
-                        result.getString("Edition"),
-                        result.getString("Publisher"),
-                        result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                customer = new Customer(result.getInt("AccountNum"),
+                        result.getString("FirstName"),
+                        result.getString("LastName"),
+                        result.getString("AddLine1"),
+                        result.getString("AddLine2"),
+                        result.getString("DOB"),
+                        result.getInt("IBAN"),
+                        result.getInt("BIC"),
+                        result.getInt("Funds"));
 
-                booksList.add(book);
+                customers.add(customer);
 
             }
 
@@ -122,33 +112,35 @@ public class BooksSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return booksList;
+        return customers;
     }
 
-    public ArrayList<Book> ListBooksEdition(String searchValue) {
-        ArrayList<Book> booksList = new ArrayList<Book>();
+    public ArrayList<Customer> ListCustomersLastName(String searchValue) {
+        ArrayList<Customer> customers = new ArrayList<Customer>();
 
         try {
 
-            String query = "select * from Book where Edition LIKE '%" + searchValue + "%'";
+            String query = "select * from Account where LastName LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Book book;
+            Customer customer;
 
             while (result.next()) {
 
-                book = new Book(result.getInt("ISBN"),
-                        result.getString("Name"),
-                        result.getString("Edition"),
-                        result.getString("Publisher"),
-                        result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                customer = new Customer(result.getInt("AccountNum"),
+                        result.getString("FirstName"),
+                        result.getString("LastName"),
+                        result.getString("AddLine1"),
+                        result.getString("AddLine2"),
+                        result.getString("DOB"),
+                        result.getInt("IBAN"),
+                        result.getInt("BIC"),
+                        result.getInt("Funds"));
 
-                booksList.add(book);
+                customers.add(customer);
 
             }
 
@@ -156,33 +148,35 @@ public class BooksSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return booksList;
+        return customers;
     }
 
-    public ArrayList<Book> ListBooksPublisher(String searchValue) {
-        ArrayList<Book> booksList = new ArrayList<Book>();
+    public ArrayList<Customer> ListCustomersAddLine(String searchValue) {
+        ArrayList<Customer> customers = new ArrayList<Customer>();
 
         try {
 
-            String query = "select * from Book where Publisher LIKE '%" + searchValue + "%'";
+            String query = "select * from Account where AddLine1 LIKE '%" + searchValue + "%' OR AddLine2 LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Book book;
+            Customer customer;
 
             while (result.next()) {
 
-                book = new Book(result.getInt("ISBN"),
-                        result.getString("Name"),
-                        result.getString("Edition"),
-                        result.getString("Publisher"),
-                        result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                customer = new Customer(result.getInt("AccountNum"),
+                        result.getString("FirstName"),
+                        result.getString("LastName"),
+                        result.getString("AddLine1"),
+                        result.getString("AddLine2"),
+                        result.getString("DOB"),
+                        result.getInt("IBAN"),
+                        result.getInt("BIC"),
+                        result.getInt("Funds"));
 
-                booksList.add(book);
+                customers.add(customer);
 
             }
 
@@ -190,33 +184,35 @@ public class BooksSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return booksList;
+        return customers;
     }
 
-    public ArrayList<Book> ListBooksPages(String searchValue) {
-        ArrayList<Book> booksList = new ArrayList<Book>();
+    public ArrayList<Customer> ListCustomersDOB(String searchValue) {
+        ArrayList<Customer> customers = new ArrayList<Customer>();
 
         try {
 
-            String query = "select * from Book where Pages LIKE '%" + searchValue + "%'";
+            String query = "select * from Account where DOB LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Book book;
+            Customer customer;
 
             while (result.next()) {
 
-                book = new Book(result.getInt("ISBN"),
-                        result.getString("Name"),
-                        result.getString("Edition"),
-                        result.getString("Publisher"),
-                        result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                customer = new Customer(result.getInt("AccountNum"),
+                        result.getString("FirstName"),
+                        result.getString("LastName"),
+                        result.getString("AddLine1"),
+                        result.getString("AddLine2"),
+                        result.getString("DOB"),
+                        result.getInt("IBAN"),
+                        result.getInt("BIC"),
+                        result.getInt("Funds"));
 
-                booksList.add(book);
+                customers.add(customer);
 
             }
 
@@ -224,125 +220,54 @@ public class BooksSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return booksList;
+        return customers;
     }
 
-    public ArrayList<Book> ListBooksAuthor(String searchValue) {
-        ArrayList<Book> booksList = new ArrayList<Book>();
-
-        try {
-
-            String query = "select * from Book where Author LIKE '%" + searchValue + "%'";
-
-            statement = connection.createStatement();
-
-            result = statement.executeQuery(query);
-
-            Book book;
-
-            while (result.next()) {
-
-                book = new Book(result.getInt("ISBN"),
-                        result.getString("Name"),
-                        result.getString("Edition"),
-                        result.getString("Publisher"),
-                        result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
-
-                booksList.add(book);
-
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-
-        return booksList;
-    }
-
-    public ArrayList<Book> ListBooksPricePerWeek(String searchValue) {
-        ArrayList<Book> booksList = new ArrayList<Book>();
-
-        try {
-
-            String query = "select * from Book where PricePerWeek LIKE '%" + searchValue + "%'";
-
-            statement = connection.createStatement();
-
-            result = statement.executeQuery(query);
-
-            Book book;
-
-            while (result.next()) {
-
-                book = new Book(result.getInt("ISBN"),
-                        result.getString("Name"),
-                        result.getString("Edition"),
-                        result.getString("Publisher"),
-                        result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
-
-                booksList.add(book);
-
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-
-        return booksList;
-    }
-
-    public void searchBooks() {
+    public void searchCustomers() {
         if (dm.getRowCount() > 0) {
             for (int i = dm.getRowCount() - 1; i > -1; i--) {
                 dm.removeRow(i);
             }
         }
-        ArrayList<Book> books = new ArrayList<Book>();
+        ArrayList<Customer> customers = new ArrayList<Customer>();
 
         switch (jComboBoxChoose.getSelectedItem().toString()) {
             case "All":
-                books = ListBooksAll(jTextFieldSearch.getText());
+                customers = ListCustomersAll(jTextFieldSearch.getText());
                 break;
-            case "Name":
-                books = ListBooksName(jTextFieldSearch.getText());
+            case "First Name":
+                customers = ListCustomersFirstName(jTextFieldSearch.getText());
                 break;
-            case "Edition":
-                books = ListBooksEdition(jTextFieldSearch.getText());
+            case "Last Name":
+                customers = ListCustomersLastName(jTextFieldSearch.getText());
                 break;
-            case "Publisher":
-                books = ListBooksPublisher(jTextFieldSearch.getText());
+            case "Address":
+                customers = ListCustomersAddLine(jTextFieldSearch.getText());
                 break;
-            case "Pages":
-                books = ListBooksPages(jTextFieldSearch.getText());
+            case "DOB":
+                customers = ListCustomersDOB(jTextFieldSearch.getText());
                 break;
-            case "Author":
-                books = ListBooksAuthor(jTextFieldSearch.getText());
-                break;
-            case "PricePerWeek":
-                books = ListBooksPricePerWeek(jTextFieldSearch.getText());
-                break;
+
         }
 
-        dm.setColumnIdentifiers(new Object[]{"ISBN", "Name", "Edition", "Publisher", "Pages", "Author", "PricePerWeek"});
-        Object[] row = new Object[7];
+        dm.setColumnIdentifiers(new Object[]{"AccountNum", "FirstName", "LastName", "AddLine1", "AddLine2", "DOB", "IBAN", "BIC", "Funds"});
+        Object[] row = new Object[9];
 
-        for (int i = 0; i < books.size(); i++) {
+        for (int i = 0; i < customers.size(); i++) {
 
-            row[0] = books.get(i).getISBN();
-            row[1] = books.get(i).getName();
-            row[2] = books.get(i).getEdition();
-            row[3] = books.get(i).getPublisher();
-            row[4] = books.get(i).getPages();
-            row[5] = books.get(i).getAuthor();
-            row[6] = books.get(i).getPricePerWeek();
+            row[0] = customers.get(i).getAccountNum();
+            row[1] = customers.get(i).getFirstName();
+            row[2] = customers.get(i).getLastName();
+            row[3] = customers.get(i).getAddLine1();
+            row[4] = customers.get(i).getAddLine2();
+            row[5] = customers.get(i).getDOB();
+            row[6] = customers.get(i).getIBAN();
+            row[7] = customers.get(i).getBIC();
+            row[8] = customers.get(i).getFunds();
             dm.addRow(row);
         }
 
-        jTableBooks.setModel(dm);
+        jTableCustomers.setModel(dm);
     }
 
     /**
@@ -358,7 +283,7 @@ public class BooksSearch extends javax.swing.JFrame {
         jTextFieldSearch = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableBooks = new javax.swing.JTable();
+        jTableCustomers = new javax.swing.JTable();
         jButtonBack = new javax.swing.JButton();
         jComboBoxChoose = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -366,7 +291,7 @@ public class BooksSearch extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Books", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 18), new java.awt.Color(102, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Customers", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 18), new java.awt.Color(102, 0, 0))); // NOI18N
 
         jTextFieldSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -381,7 +306,7 @@ public class BooksSearch extends javax.swing.JFrame {
             }
         });
 
-        jTableBooks.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCustomers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -392,7 +317,7 @@ public class BooksSearch extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableBooks);
+        jScrollPane1.setViewportView(jTableCustomers);
 
         jButtonBack.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButtonBack.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\exit.png")); // NOI18N
@@ -403,7 +328,7 @@ public class BooksSearch extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxChoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Name", "Edition", "Publisher", "Pages", "Author", "PricePerWeek" }));
+        jComboBoxChoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "First Name", "Last Name", "Address", "DOB" }));
 
         jLabel1.setText("Choose filter:");
 
@@ -416,7 +341,9 @@ public class BooksSearch extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -429,7 +356,7 @@ public class BooksSearch extends javax.swing.JFrame {
                         .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBack)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 250, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,7 +370,7 @@ public class BooksSearch extends javax.swing.JFrame {
                     .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBack))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -472,20 +399,12 @@ public class BooksSearch extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldSearchActionPerformed
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
-        searchBooks();
+        searchCustomers();
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         setVisible(false);
-        if(rbControl == true){
-            rb.setVisible(true);
-        }else if(bControl == true){
-            b.setVisible(true);
-        }
-        
-        rbControl = false;
-        bControl = false;
-        
+        rb.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
 
@@ -506,23 +425,20 @@ public class BooksSearch extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BooksSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomersSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BooksSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomersSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BooksSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomersSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BooksSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CustomersSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BooksSearch().setVisible(true);
+                new CustomersSearch().setVisible(true);
             }
         });
     }
@@ -535,8 +451,7 @@ public class BooksSearch extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableBooks;
+    private javax.swing.JTable jTableCustomers;
     private javax.swing.JTextField jTextFieldSearch;
     // End of variables declaration//GEN-END:variables
-
 }

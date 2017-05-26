@@ -1,6 +1,5 @@
 package LibrarySystem;
 
-
 import java.beans.PropertyChangeListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,7 +24,7 @@ public class RentBook extends javax.swing.JFrame {
     PreparedStatement pStatement;
 
     private int rentID;
-    
+
     /**
      * Creates new form RentBook
      */
@@ -36,10 +35,10 @@ public class RentBook extends javax.swing.JFrame {
     }
 
     public void generateRentID() {
-        
+
         Random r = new Random();
         rentID = r.nextInt(10000000 + 1);
-        
+
     }
 
     /**
@@ -201,6 +200,11 @@ public class RentBook extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\user.png")); // NOI18N
         jButton1.setText("List of Customers");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -728,10 +732,17 @@ public class RentBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonConfirmActionPerformed
 
     private void jButtonListAllBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListAllBooksActionPerformed
-        //setVisible(false);
-        BooksSearch bs = new BooksSearch();
+        setVisible(false);
+        BooksSearch bs = new BooksSearch(this);
         bs.setVisible(true);
+
     }//GEN-LAST:event_jButtonListAllBooksActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        setVisible(false);
+        CustomersSearch cs = new CustomersSearch(this);
+        cs.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
