@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,10 +24,17 @@ public class BooksSearch extends javax.swing.JFrame {
 
     DefaultTableModel dm = new DefaultTableModel();
 
+    private Book book;
     private RentBook rb;
     private boolean rbControl = false;
     private BookManagement b;
     private boolean bControl = false;
+    private AddBook a;
+    private boolean aControl = false;
+    private DeleteBook d;
+    private boolean dControl = false;
+    private ModifyBook m;
+    private boolean mControl = false;
 
     /**
      * Creates new form BooksSearch
@@ -46,6 +54,7 @@ public class BooksSearch extends javax.swing.JFrame {
         AutoSizeTable.sizeColumnsToFit(jTableBooks);
         this.rb = rb;
         rbControl = true;
+
     }
 
     public BooksSearch(BookManagement b) {
@@ -55,6 +64,33 @@ public class BooksSearch extends javax.swing.JFrame {
         AutoSizeTable.sizeColumnsToFit(jTableBooks);
         this.b = b;
         bControl = true;
+    }
+
+    public BooksSearch(AddBook a) {
+        initComponents();
+        connection = dbConnect.connectDb();
+        searchBooks();
+        AutoSizeTable.sizeColumnsToFit(jTableBooks);
+        this.a = a;
+        aControl = true;
+    }
+
+    public BooksSearch(DeleteBook d) {
+        initComponents();
+        connection = dbConnect.connectDb();
+        searchBooks();
+        AutoSizeTable.sizeColumnsToFit(jTableBooks);
+        this.d = d;
+        dControl = true;
+    }
+
+    public BooksSearch(ModifyBook m) {
+        initComponents();
+        connection = dbConnect.connectDb();
+        searchBooks();
+        AutoSizeTable.sizeColumnsToFit(jTableBooks);
+        this.m = m;
+        mControl = true;
     }
 
     public ArrayList<Book> ListBooksAll(String searchValue) {
@@ -345,6 +381,22 @@ public class BooksSearch extends javax.swing.JFrame {
         jTableBooks.setModel(dm);
     }
 
+    public void getBackWithBook(Book book) {
+        setVisible(false);
+        if (rbControl == true) {
+            System.out.println("Still Working in rbControl");
+            rb = new RentBook(book);
+            rb.setVisible(true);
+        } else if (bControl == true) {
+            b.setVisible(true);
+        }
+
+        rbControl = false;
+        bControl = false;
+
+        dispose();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -392,6 +444,14 @@ public class BooksSearch extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableBooks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableBooksMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTableBooksMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableBooks);
 
         jButtonBack.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -464,7 +524,8 @@ public class BooksSearch extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1045, 597));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSearchActionPerformed
@@ -473,21 +534,73 @@ public class BooksSearch extends javax.swing.JFrame {
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         searchBooks();
+        AutoSizeTable.sizeColumnsToFit(jTableBooks);
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
+
         setVisible(false);
-        if(rbControl == true){
+        if (rbControl == true) {
+            rb = new RentBook();
             rb.setVisible(true);
-        }else if(bControl == true){
+        } else if (bControl == true) {
+            b = new BookManagement();
             b.setVisible(true);
+        } else if (aControl == true) {
+            a = new AddBook();
+            a.setVisible(true);
+        } else if (dControl == true) {
+            d = new DeleteBook();
+            d.setVisible(true);
+        } else if (mControl == true) {
+            m = new ModifyBook();
+            m.setVisible(true);
         }
-        
+
         rbControl = false;
         bControl = false;
+        aControl = false;
+        dControl = false;
+        mControl = false;
         
         dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
+
+    private void jTableBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableBooksMouseClicked
+
+    }//GEN-LAST:event_jTableBooksMouseClicked
+
+    private void jTableBooksMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableBooksMouseReleased
+
+        String ISBN;
+        String Name, Edition, Publisher, Pages, Author, PricePerWeek;
+
+        ISBN = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 0).toString());
+        System.out.println(ISBN);
+        Name = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 1).toString());
+        System.out.println(Name);
+        Edition = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 2).toString());
+        System.out.println(Edition);
+        Publisher = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 3).toString());
+        System.out.println(Publisher);
+        Pages = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 4).toString());
+        System.out.println(Pages);
+        Author = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 5).toString());
+        System.out.println(Author);
+        PricePerWeek = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 6).toString());
+        System.out.println(PricePerWeek);
+
+        this.book.setISBN2(ISBN);
+        System.out.println("Still Working");
+        this.book.setName(Name);
+        this.book.setEdition(Edition);
+        this.book.setPublisher(Publisher);
+        this.book.setPages(Pages);
+        this.book.setAuthor(Author);
+        this.book.setPricePerWeek(PricePerWeek);
+        System.out.println("Still Working");
+        getBackWithBook(this.book);
+    }//GEN-LAST:event_jTableBooksMouseReleased
 
     /**
      * @param args the command line arguments
@@ -503,16 +616,24 @@ public class BooksSearch extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BooksSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BooksSearch.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BooksSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BooksSearch.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BooksSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BooksSearch.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BooksSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BooksSearch.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -524,6 +645,7 @@ public class BooksSearch extends javax.swing.JFrame {
             public void run() {
                 new BooksSearch().setVisible(true);
             }
+
         });
     }
 

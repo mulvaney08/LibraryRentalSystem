@@ -63,47 +63,49 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelAccNum" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                  <Component id="jTextFieldDOB" max="32767" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="54" max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jButtonModifyAccount" max="32767" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButtonCancelDeleteUser" min="-2" pref="97" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="jTextFieldFName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextFieldLName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextFieldAccountNum" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextFieldAddLine2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextFieldAddLine1" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabelUserType" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelUserType1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabelUserType2" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
+                          <EmptySpace min="121" pref="121" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTextFieldFunds" max="32767" attributes="0"/>
-                              <Component id="jTextFieldBIC" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldIBAN" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jButtonSearchBook" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTextFieldBIC" linkSize="1" alignment="1" min="-2" pref="205" max="-2" attributes="0"/>
+                              <Component id="jTextFieldIBAN" linkSize="1" min="-2" pref="205" max="-2" attributes="0"/>
+                              <Component id="jTextFieldFunds" linkSize="1" min="-2" pref="205" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabelAccNum" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextFieldDOB" linkSize="1" max="32767" attributes="0"/>
+                              <Component id="jButtonSearchBook" alignment="1" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jButtonModifyAccount" max="32767" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jButtonCancelDeleteUser" min="-2" pref="97" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jTextFieldFName" linkSize="1" alignment="0" pref="205" max="32767" attributes="0"/>
+                              <Component id="jTextFieldLName" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTextFieldAccountNum" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTextFieldAddLine2" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTextFieldAddLine1" linkSize="1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -117,17 +119,17 @@
                   <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelAccNum" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldAccountNum" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldAccountNum" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldFName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldFName" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldLName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldLName" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
@@ -137,32 +139,32 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTextFieldAddLine1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldAddLine1" linkSize="2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextFieldAddLine2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldAddLine2" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldDOB" alignment="1" min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="jTextFieldDOB" linkSize="2" alignment="1" min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelUserType" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldIBAN" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldIBAN" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelUserType1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldBIC" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldBIC" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jTextFieldFunds" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextFieldFunds" linkSize="2" alignment="1" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabelUserType2" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="9" max="32767" attributes="0"/>
@@ -171,6 +173,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonCancelDeleteUser" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonModifyAccount" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -299,6 +302,9 @@
               <Font name="Trebuchet MS" size="12" style="0"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldIBANActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonSearchBook">
           <Properties>
@@ -350,6 +356,17 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Funds"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton2">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\aaronm\Documents\AaronYear3Project\LibraryRentalSystem\images\user.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="List of Customers"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

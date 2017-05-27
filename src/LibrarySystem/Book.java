@@ -12,7 +12,7 @@ package LibrarySystem;
 public class Book {
 
     private int ISBN;
-    private String Name, Edition, Publisher, Pages, Author, PricePerWeek;
+    private String ISBN2, Name, Edition, Publisher, Pages, Author, PricePerWeek;
 
     public Book(int ISBN, String Name, String Edition, String Publisher, String Pages, String Author, String PricePerWeek) {
         this.ISBN = ISBN;
@@ -21,6 +21,16 @@ public class Book {
         this.Author = Author;
         this.Pages = Pages;
         this.Publisher = Publisher;
+        this.PricePerWeek = PricePerWeek;
+    }
+
+    public Book(String ISBN2, String Name, String Edition, String Publisher, String Pages, String Author, String PricePerWeek) {
+        this.ISBN2 = ISBN2;
+        this.Name = Name;
+        this.Edition = Edition;
+        this.Publisher = Publisher;
+        this.Pages = Pages;
+        this.Author = Author;
         this.PricePerWeek = PricePerWeek;
     }
 
@@ -51,7 +61,42 @@ public class Book {
     public String getPublisher() {
         return Publisher;
     }
-    
-    
+
+    public void setAuthor(String Author) {
+        this.Author = Author;
+    }
+
+    public void setEdition(String Edition) {
+        this.Edition = Edition;
+    }
+
+    public void setISBN(int ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public void setPages(String Pages) {
+        this.Pages = Pages;
+    }
+
+    public void setPricePerWeek(String PricePerWeek) {
+        this.PricePerWeek = PricePerWeek;
+    }
+
+    public void setPublisher(String Publisher) {
+        this.Publisher = Publisher;
+    }
+
+    public String getISBN2() {
+        setISBN(Integer.parseInt(ISBN2));
+        return ISBN2;
+    }
+
+    public void setISBN2(String ISBN2) {
+        this.ISBN2 = ISBN2;
+    }
 
 }

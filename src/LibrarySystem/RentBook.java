@@ -23,8 +23,8 @@ public class RentBook extends javax.swing.JFrame {
     ResultSet result;
     PreparedStatement pStatement;
 
-    private int rentID;
-
+    Book book;
+    
     /**
      * Creates new form RentBook
      */
@@ -33,12 +33,22 @@ public class RentBook extends javax.swing.JFrame {
         initComponents();
         connection = dbConnect.connectDb();
     }
+    
+    public RentBook(Book book){
+        initComponents();
+        connection = dbConnect.connectDb();
+        this.book = book;
+        jTextFieldISBN.setText(book.getISBN2());
+    }
 
-    public void generateRentID() {
+    public int generateRentID() {
+
+        int id;
 
         Random r = new Random();
-        rentID = r.nextInt(10000000 + 1);
+        id = r.nextInt(10000000 + 1);
 
+        return id;
     }
 
     /**
@@ -710,18 +720,17 @@ public class RentBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldEditionActionPerformed
 
     private void jButtonConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConfirmActionPerformed
-        String insert = "INSERT into RentBook (RentID,ISBN,Name,AccountNum,FirstName,LastName,RentDate) values (?,?,?,?,?,?,?)";
+        String insert = "INSERT into RentBook (RentID,ISBN,AccountNum,Username,RentDate) values (?,?,?,?,?)";
+        int id = generateRentID();
         try {
 
             pStatement = connection.prepareStatement(insert);
-            generateRentID();
-            pStatement.setInt(1, rentID);
+
+            pStatement.setInt(1, id);
             pStatement.setString(2, jTextFieldISBN.getText());
-            pStatement.setString(3, jTextFieldBookName.getText());
-            pStatement.setString(4, jTextFieldAccID.getText());
-            pStatement.setString(5, jTextFieldFName.getText());
-            pStatement.setString(6, jTextFieldLName.getText());
-            pStatement.setString(7, ((JTextField) jDateChooser.getDateEditor().getUiComponent()).getText());
+            pStatement.setString(3, jTextFieldAccID.getText());
+            pStatement.setString(4, Login.username);
+            pStatement.setString(5, ((JTextField) jDateChooser.getDateEditor().getUiComponent()).getText());
             pStatement.execute();
             JOptionPane.showMessageDialog(null, "Rental Confirmed");
 
@@ -729,6 +738,26 @@ public class RentBook extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex + ", please try again");
 
         }
+
+        insert = "INSERT into RentBookAll (RentID,ISBN,AccountNum,Username,RentDate) values (?,?,?,?,?)";
+        try {
+
+            pStatement = connection.prepareStatement(insert);
+
+            pStatement.setInt(1, id);
+            pStatement.setString(2, jTextFieldISBN.getText());
+            pStatement.setString(3, jTextFieldAccID.getText());
+            pStatement.setString(4, Login.username);
+            pStatement.setString(5, ((JTextField) jDateChooser.getDateEditor().getUiComponent()).getText());
+            pStatement.execute();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
+
+        this.clearFormBook();
+        this.clearFormCust();
     }//GEN-LAST:event_jButtonConfirmActionPerformed
 
     private void jButtonListAllBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListAllBooksActionPerformed

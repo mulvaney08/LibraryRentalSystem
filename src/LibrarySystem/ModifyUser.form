@@ -73,12 +73,8 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jButtonModifyUser" max="32767" attributes="0"/>
-                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButtonBack" min="-2" pref="97" max="-2" attributes="0"/>
-                                      </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jButtonBack" linkSize="3" alignment="1" min="-2" pref="97" max="-2" attributes="0"/>
                                       <Component id="jTextFieldFName" linkSize="1" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jPasswordField1" linkSize="1" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jTextFieldLName" linkSize="1" alignment="1" max="32767" attributes="0"/>
@@ -97,9 +93,18 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabelUserType" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                          <Component id="jTextFieldUserType" linkSize="1" min="-2" pref="200" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButtonSearchBook" max="32767" attributes="0"/>
-                              <Component id="jTextFieldUserType" linkSize="1" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="jButtonModifyUser" linkSize="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="jButtonListAllBooks" linkSize="3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="jButtonSearchBook" linkSize="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -151,11 +156,14 @@
                       <Component id="jTextFieldUserType" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="19" max="32767" attributes="0"/>
-                  <Component id="jButtonSearchBook" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButtonSearchBook" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonListAllBooks" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButtonBack" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonModifyUser" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonBack" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonModifyUser" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -329,6 +337,17 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButtonListAllBooks">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="C:\Users\aaronm\Documents\AaronYear3Project\LibraryRentalSystem\images\smallBook.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="List of Users"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonListAllBooksActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

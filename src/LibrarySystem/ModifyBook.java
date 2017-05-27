@@ -56,6 +56,7 @@ public class ModifyBook extends javax.swing.JFrame {
         jTextFieldAuthor = new javax.swing.JTextField();
         jLabelAuthor = new javax.swing.JLabel();
         jButtonSearchBook = new javax.swing.JButton();
+        jButtonListAllBooks = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,6 +153,14 @@ public class ModifyBook extends javax.swing.JFrame {
             }
         });
 
+        jButtonListAllBooks.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\smallBook.png")); // NOI18N
+        jButtonListAllBooks.setText("List of Books");
+        jButtonListAllBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListAllBooksActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -168,23 +177,29 @@ public class ModifyBook extends javax.swing.JFrame {
                     .addComponent(jLabelAuthor))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(jButtonAddBook)
-                            .addGap(12, 12, 12)
-                            .addComponent(jButtonBack))
-                        .addComponent(jTextFieldISBN)
-                        .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldPages, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxEdition, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldBookName, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldBookName, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldISBN))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButtonListAllBooks)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonSearchBook))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButtonAddBook)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonBack)))
+                .addContainerGap())
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonAddBook, jButtonBack});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonAddBook, jButtonBack, jButtonListAllBooks, jButtonSearchBook});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBoxEdition, jTextFieldAuthor, jTextFieldBookName, jTextFieldISBN, jTextFieldPages, jTextFieldPricePerWeek, jTextFieldPublisher});
 
@@ -220,7 +235,9 @@ public class ModifyBook extends javax.swing.JFrame {
                     .addComponent(jLabelPricePerWeek)
                     .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonSearchBook)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSearchBook)
+                    .addComponent(jButtonListAllBooks))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddBook)
@@ -228,7 +245,7 @@ public class ModifyBook extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonAddBook, jButtonBack});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonAddBook, jButtonBack, jButtonListAllBooks, jButtonSearchBook});
 
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBoxEdition, jTextFieldAuthor, jTextFieldBookName, jTextFieldISBN, jTextFieldPages, jTextFieldPricePerWeek, jTextFieldPublisher});
 
@@ -344,6 +361,12 @@ public class ModifyBook extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonSearchBookActionPerformed
 
+    private void jButtonListAllBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListAllBooksActionPerformed
+        setVisible(false);
+        BooksSearch bs = new BooksSearch(this);
+        bs.setVisible(true);
+    }//GEN-LAST:event_jButtonListAllBooksActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -392,6 +415,7 @@ public class ModifyBook extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddBook;
     private javax.swing.JButton jButtonBack;
+    private javax.swing.JButton jButtonListAllBooks;
     private javax.swing.JButton jButtonSearchBook;
     private javax.swing.JComboBox<String> jComboBoxEdition;
     private javax.swing.JLabel jLabelAuthor;

@@ -68,6 +68,7 @@ public class AddAccount extends javax.swing.JFrame {
         jTextFieldAddL1 = new javax.swing.JTextField();
         jTextFieldFunds = new javax.swing.JTextField();
         jlabelfunds = new javax.swing.JLabel();
+        jButtonListOFCustomers = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -111,7 +112,15 @@ public class AddAccount extends javax.swing.JFrame {
             }
         });
 
-        jlabelfunds.setText("Funds:                      €");
+        jlabelfunds.setText("Funds:                               €");
+
+        jButtonListOFCustomers.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\user.png")); // NOI18N
+        jButtonListOFCustomers.setText("List of Customers");
+        jButtonListOFCustomers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListOFCustomersActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -128,27 +137,28 @@ public class AddAccount extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel2)
-                    .addComponent(jlabelfunds))
-                .addGap(18, 18, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldFunds)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldAccNum)
-                            .addComponent(jTextFieldFName)
-                            .addComponent(jTextFieldLName)
-                            .addComponent(jTextFieldAddL1)
-                            .addComponent(jTextFieldAddL2)
-                            .addComponent(jTextFieldDOB)
-                            .addComponent(jTextFieldIBAN)
-                            .addComponent(jTextFieldBIC, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jButtonListOFCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlabelfunds, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldAccNum)
+                    .addComponent(jTextFieldFName)
+                    .addComponent(jTextFieldLName)
+                    .addComponent(jTextFieldAddL1)
+                    .addComponent(jTextFieldAddL2)
+                    .addComponent(jTextFieldDOB)
+                    .addComponent(jTextFieldIBAN)
+                    .addComponent(jTextFieldBIC, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldFunds))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextFieldAccNum, jTextFieldAddL1, jTextFieldAddL2, jTextFieldBIC, jTextFieldDOB, jTextFieldFName, jTextFieldFunds, jTextFieldIBAN, jTextFieldLName});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -191,9 +201,12 @@ public class AddAccount extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButtonListOFCustomers))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextFieldAccNum, jTextFieldAddL1, jTextFieldAddL2, jTextFieldBIC, jTextFieldDOB, jTextFieldFName, jTextFieldFunds, jTextFieldIBAN, jTextFieldLName});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,8 +214,8 @@ public class AddAccount extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +225,7 @@ public class AddAccount extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(449, 504));
+        setSize(new java.awt.Dimension(493, 504));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -245,6 +258,12 @@ public class AddAccount extends javax.swing.JFrame {
         this.clearForm();
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonListOFCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListOFCustomersActionPerformed
+        setVisible(false);
+        CustomersSearch cs = new CustomersSearch(this);
+        cs.setVisible(true);
+    }//GEN-LAST:event_jButtonListOFCustomersActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,6 +314,7 @@ public class AddAccount extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonListOFCustomers;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

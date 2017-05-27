@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aaronm
  */
-public class CustomersSearch extends javax.swing.JFrame {
+public class RentalsSearch extends javax.swing.JFrame {
 
     Connection connection;
     ResultSet result;
@@ -23,87 +23,64 @@ public class CustomersSearch extends javax.swing.JFrame {
 
     DefaultTableModel dm = new DefaultTableModel();
 
-    private RentBook rb;
-    private boolean rbControl;
-    private AddAccount a;
-    private boolean aControl;
-    private DeleteAccount d;
-    private boolean dControl;
-    private ModifyAccount m;
-    private boolean mControl;
+    private ReturnBook rb;
+    private boolean rbControl = false;
+    private BookManagement b;
+    private boolean bControl = false;
 
     /**
-     * Creates new form CustomersSearch
+     * Creates new form RentalsSearch
      */
-    public CustomersSearch() {
+    public RentalsSearch() {
         initComponents();
         connection = dbConnect.connectDb();
-        searchCustomers();
-        AutoSizeTable.sizeColumnsToFit(jTableCustomers);
+        searchRentals();
+        AutoSizeTable.sizeColumnsToFit(jTableRentals);
     }
 
-    public CustomersSearch(RentBook rb) {
+    public RentalsSearch(ReturnBook rb) {
         initComponents();
         connection = dbConnect.connectDb();
-        searchCustomers();
-        AutoSizeTable.sizeColumnsToFit(jTableCustomers);
+        searchRentals();
+        AutoSizeTable.sizeColumnsToFit(jTableRentals);
         this.rb = rb;
         rbControl = true;
     }
-
-    public CustomersSearch(AddAccount a) {
+    
+    public RentalsSearch(BookManagement b){
         initComponents();
         connection = dbConnect.connectDb();
-        searchCustomers();
-        AutoSizeTable.sizeColumnsToFit(jTableCustomers);
-        this.a = a;
-        aControl = true;
+        searchRentals();
+        AutoSizeTable.sizeColumnsToFit(jTableRentals);
+        this.b = b;
+        bControl = true;
     }
 
-    public CustomersSearch(DeleteAccount d) {
-        initComponents();
-        connection = dbConnect.connectDb();
-        searchCustomers();
-        AutoSizeTable.sizeColumnsToFit(jTableCustomers);
-        this.d = d;
-        dControl = true;
-    }
-
-    public CustomersSearch(ModifyAccount m) {
-        initComponents();
-        connection = dbConnect.connectDb();
-        searchCustomers();
-        AutoSizeTable.sizeColumnsToFit(jTableCustomers);
-        this.m = m;
-        mControl = true;
-    }
-
-    public ArrayList<Customer> ListCustomersAll(String searchValue) {
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+    public ArrayList<Rental> ListRentals() {
+        ArrayList<Rental> rentalsList = new ArrayList<Rental>();
 
         try {
 
-            String query = "select * from Account where AccountNum LIKE '%" + searchValue + "%' OR FirstName LIKE '%" + searchValue + "%' OR LastName LIKE '%" + searchValue + "%' OR AddLine1 LIKE '%" + searchValue + "%' OR AddLine2 LIKE '%" + searchValue + "%' OR DOB LIKE '%" + searchValue + "%' OR IBAN LIKE '%" + searchValue + "%' OR BIC LIKE '%" + searchValue + "%' OR Funds LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Customer customer;
-
+            Rental rental;
             while (result.next()) {
 
-                customer = new Customer(result.getInt("AccountNum"),
+                rental = new Rental(
+                        result.getInt("RentID"),
+                        result.getInt("ISBN"),
+                        result.getString("Name"),
+                        result.getString("Username"),
+                        result.getInt("AccountNum"),
                         result.getString("FirstName"),
                         result.getString("LastName"),
-                        result.getString("AddLine1"),
-                        result.getString("AddLine2"),
-                        result.getString("DOB"),
-                        result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getString("RentDate"));
 
-                customers.add(customer);
+                rentalsList.add(rental);
 
             }
 
@@ -111,35 +88,34 @@ public class CustomersSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return customers;
+        return rentalsList;
     }
 
-    public ArrayList<Customer> ListCustomersFirstName(String searchValue) {
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+    public ArrayList<Rental> ListRentalsBookName(String searchValue) {
+        ArrayList<Rental> rentalsList = new ArrayList<Rental>();
 
         try {
 
-            String query = "select * from Account where FirstName LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND b.Name LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Customer customer;
-
+            Rental rental;
             while (result.next()) {
 
-                customer = new Customer(result.getInt("AccountNum"),
+                rental = new Rental(
+                        result.getInt("RentID"),
+                        result.getInt("ISBN"),
+                        result.getString("Name"),
+                        result.getString("Username"),
+                        result.getInt("AccountNum"),
                         result.getString("FirstName"),
                         result.getString("LastName"),
-                        result.getString("AddLine1"),
-                        result.getString("AddLine2"),
-                        result.getString("DOB"),
-                        result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getString("RentDate"));
 
-                customers.add(customer);
+                rentalsList.add(rental);
 
             }
 
@@ -147,35 +123,34 @@ public class CustomersSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return customers;
+        return rentalsList;
     }
 
-    public ArrayList<Customer> ListCustomersLastName(String searchValue) {
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+    public ArrayList<Rental> ListRentalsUsername(String searchValue) {
+        ArrayList<Rental> rentalsList = new ArrayList<Rental>();
 
         try {
 
-            String query = "select * from Account where LastName LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND r.Username LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Customer customer;
-
+            Rental rental;
             while (result.next()) {
 
-                customer = new Customer(result.getInt("AccountNum"),
+                rental = new Rental(
+                        result.getInt("RentID"),
+                        result.getInt("ISBN"),
+                        result.getString("Name"),
+                        result.getString("Username"),
+                        result.getInt("AccountNum"),
                         result.getString("FirstName"),
                         result.getString("LastName"),
-                        result.getString("AddLine1"),
-                        result.getString("AddLine2"),
-                        result.getString("DOB"),
-                        result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getString("RentDate"));
 
-                customers.add(customer);
+                rentalsList.add(rental);
 
             }
 
@@ -183,35 +158,34 @@ public class CustomersSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return customers;
+        return rentalsList;
     }
 
-    public ArrayList<Customer> ListCustomersAddLine(String searchValue) {
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+    public ArrayList<Rental> ListRentalsFirstName(String searchValue) {
+        ArrayList<Rental> rentalsList = new ArrayList<Rental>();
 
         try {
 
-            String query = "select * from Account where AddLine1 LIKE '%" + searchValue + "%' OR AddLine2 LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND a.FirstName LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Customer customer;
-
+            Rental rental;
             while (result.next()) {
 
-                customer = new Customer(result.getInt("AccountNum"),
+                rental = new Rental(
+                        result.getInt("RentID"),
+                        result.getInt("ISBN"),
+                        result.getString("Name"),
+                        result.getString("Username"),
+                        result.getInt("AccountNum"),
                         result.getString("FirstName"),
                         result.getString("LastName"),
-                        result.getString("AddLine1"),
-                        result.getString("AddLine2"),
-                        result.getString("DOB"),
-                        result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getString("RentDate"));
 
-                customers.add(customer);
+                rentalsList.add(rental);
 
             }
 
@@ -219,35 +193,34 @@ public class CustomersSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return customers;
+        return rentalsList;
     }
 
-    public ArrayList<Customer> ListCustomersDOB(String searchValue) {
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+    public ArrayList<Rental> ListRentalsLastName(String searchValue) {
+        ArrayList<Rental> rentalsList = new ArrayList<Rental>();
 
         try {
 
-            String query = "select * from Account where DOB LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND a.LastName LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
             result = statement.executeQuery(query);
 
-            Customer customer;
-
+            Rental rental;
             while (result.next()) {
 
-                customer = new Customer(result.getInt("AccountNum"),
+                rental = new Rental(
+                        result.getInt("RentID"),
+                        result.getInt("ISBN"),
+                        result.getString("Name"),
+                        result.getString("Username"),
+                        result.getInt("AccountNum"),
                         result.getString("FirstName"),
                         result.getString("LastName"),
-                        result.getString("AddLine1"),
-                        result.getString("AddLine2"),
-                        result.getString("DOB"),
-                        result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getString("RentDate"));
 
-                customers.add(customer);
+                rentalsList.add(rental);
 
             }
 
@@ -255,54 +228,90 @@ public class CustomersSearch extends javax.swing.JFrame {
             System.out.println(ex);
         }
 
-        return customers;
+        return rentalsList;
     }
 
-    public void searchCustomers() {
+    public ArrayList<Rental> ListRentalsRentDate(String searchValue) {
+        ArrayList<Rental> rentalsList = new ArrayList<Rental>();
+
+        try {
+
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND r.RentDate LIKE '%" + searchValue + "%'";
+
+            statement = connection.createStatement();
+
+            result = statement.executeQuery(query);
+
+            Rental rental;
+            while (result.next()) {
+
+                rental = new Rental(
+                        result.getInt("RentID"),
+                        result.getInt("ISBN"),
+                        result.getString("Name"),
+                        result.getString("Username"),
+                        result.getInt("AccountNum"),
+                        result.getString("FirstName"),
+                        result.getString("LastName"),
+                        result.getString("RentDate"));
+
+                rentalsList.add(rental);
+
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+        return rentalsList;
+    }
+
+    public void searchRentals() {
         if (dm.getRowCount() > 0) {
             for (int i = dm.getRowCount() - 1; i > -1; i--) {
                 dm.removeRow(i);
             }
         }
-        ArrayList<Customer> customers = new ArrayList<Customer>();
+        ArrayList<Rental> rentals = new ArrayList<Rental>();
 
         switch (jComboBoxChoose.getSelectedItem().toString()) {
             case "All":
-                customers = ListCustomersAll(jTextFieldSearch.getText());
+                rentals = ListRentals();
+                break;
+            case "Book Name":
+                rentals = ListRentalsBookName(jTextFieldSearch.getText());
+                break;
+            case "Staff":
+                rentals = ListRentalsUsername(jTextFieldSearch.getText());
                 break;
             case "First Name":
-                customers = ListCustomersFirstName(jTextFieldSearch.getText());
+                rentals = ListRentalsFirstName(jTextFieldSearch.getText());
                 break;
             case "Last Name":
-                customers = ListCustomersLastName(jTextFieldSearch.getText());
+                rentals = ListRentalsLastName(jTextFieldSearch.getText());
                 break;
-            case "Address":
-                customers = ListCustomersAddLine(jTextFieldSearch.getText());
+            case "Rent Date":
+                rentals = ListRentalsRentDate(jTextFieldSearch.getText());
                 break;
-            case "DOB":
-                customers = ListCustomersDOB(jTextFieldSearch.getText());
-                break;
-
         }
 
-        dm.setColumnIdentifiers(new Object[]{"AccountNum", "FirstName", "LastName", "AddLine1", "AddLine2", "DOB", "IBAN", "BIC", "Funds"});
-        Object[] row = new Object[9];
+        dm.setColumnIdentifiers(new Object[]{"Rent ID", "ISBN", "Book Name", "Staff", "Account Number", "First Name", "Last Name", "Rent Date"});
+        Object[] row = new Object[8];
 
-        for (int i = 0; i < customers.size(); i++) {
+        for (int i = 0; i < rentals.size(); i++) {
 
-            row[0] = customers.get(i).getAccountNum();
-            row[1] = customers.get(i).getFirstName();
-            row[2] = customers.get(i).getLastName();
-            row[3] = customers.get(i).getAddLine1();
-            row[4] = customers.get(i).getAddLine2();
-            row[5] = customers.get(i).getDOB();
-            row[6] = customers.get(i).getIBAN();
-            row[7] = customers.get(i).getBIC();
-            row[8] = customers.get(i).getFunds();
+            row[0] = rentals.get(i).getRentID();
+            row[1] = rentals.get(i).getISBN();
+            row[2] = rentals.get(i).getBookName();
+            row[3] = rentals.get(i).getUsername();
+            row[4] = rentals.get(i).getAccountNum();
+            row[5] = rentals.get(i).getFirstName();
+            row[6] = rentals.get(i).getLastName();
+            row[7] = rentals.get(i).getRentDate();
             dm.addRow(row);
         }
 
-        jTableCustomers.setModel(dm);
+        jTableRentals.setModel(dm);
     }
 
     /**
@@ -318,7 +327,7 @@ public class CustomersSearch extends javax.swing.JFrame {
         jTextFieldSearch = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableCustomers = new javax.swing.JTable();
+        jTableRentals = new javax.swing.JTable();
         jButtonBack = new javax.swing.JButton();
         jComboBoxChoose = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -326,7 +335,7 @@ public class CustomersSearch extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Customers", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 18), new java.awt.Color(102, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Rentals", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 18), new java.awt.Color(102, 0, 0))); // NOI18N
 
         jTextFieldSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -341,7 +350,7 @@ public class CustomersSearch extends javax.swing.JFrame {
             }
         });
 
-        jTableCustomers.setModel(new javax.swing.table.DefaultTableModel(
+        jTableRentals.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -352,7 +361,7 @@ public class CustomersSearch extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTableCustomers);
+        jScrollPane1.setViewportView(jTableRentals);
 
         jButtonBack.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButtonBack.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\exit.png")); // NOI18N
@@ -363,7 +372,12 @@ public class CustomersSearch extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxChoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "First Name", "Last Name", "Address", "DOB" }));
+        jComboBoxChoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Book Name", "Staff", "First Name", "Last Name", "Rent Date" }));
+        jComboBoxChoose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxChooseActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Choose filter:");
 
@@ -376,9 +390,7 @@ public class CustomersSearch extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -391,7 +403,7 @@ public class CustomersSearch extends javax.swing.JFrame {
                         .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBack)
-                        .addGap(0, 250, Short.MAX_VALUE))))
+                        .addGap(0, 163, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -405,7 +417,7 @@ public class CustomersSearch extends javax.swing.JFrame {
                     .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBack))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -426,7 +438,7 @@ public class CustomersSearch extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(953, 676));
+        setSize(new java.awt.Dimension(868, 338));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -435,32 +447,28 @@ public class CustomersSearch extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldSearchActionPerformed
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
-        searchCustomers();
+        searchRentals();
+        AutoSizeTable.sizeColumnsToFit(jTableRentals);
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         setVisible(false);
         if (rbControl == true) {
-            rb = new RentBook();
+            rb = new ReturnBook();
             rb.setVisible(true);
-        } else if (aControl == true) {
-            a = new AddAccount();
-            a.setVisible(true);
-        } else if (dControl == true) {
-            d = new DeleteAccount();
-            d.setVisible(true);
-        } else if (mControl == true) {
-            m = new ModifyAccount();
-            m.setVisible(true);
+        } else if (bControl == true) {
+            b.setVisible(true);
         }
 
         rbControl = false;
-        aControl = false;
-        dControl = false;
-        mControl = false;
+        bControl = false;
 
         dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
+
+    private void jComboBoxChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxChooseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxChooseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -479,20 +487,20 @@ public class CustomersSearch extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomersSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RentalsSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomersSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RentalsSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomersSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RentalsSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomersSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RentalsSearch.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomersSearch().setVisible(true);
+                new RentalsSearch().setVisible(true);
             }
         });
     }
@@ -505,7 +513,7 @@ public class CustomersSearch extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableCustomers;
+    private javax.swing.JTable jTableRentals;
     private javax.swing.JTextField jTextFieldSearch;
     // End of variables declaration//GEN-END:variables
 }

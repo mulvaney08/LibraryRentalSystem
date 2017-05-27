@@ -56,6 +56,7 @@ public class ModifyUser extends javax.swing.JFrame {
         jButtonSearchBook = new javax.swing.JButton();
         jPasswordFieldAnswer = new javax.swing.JPasswordField();
         jComboBoxSecQ = new javax.swing.JComboBox<>();
+        jButtonListAllBooks = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,6 +144,14 @@ public class ModifyUser extends javax.swing.JFrame {
         jComboBoxSecQ.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jComboBoxSecQ.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose a Question", "What is your childhood Nickname?", "Where were you born?", "What is your pet's name?" }));
 
+        jButtonListAllBooks.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\smallBook.png")); // NOI18N
+        jButtonListAllBooks.setText("List of Users");
+        jButtonListAllBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListAllBooksActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -161,11 +170,8 @@ public class ModifyUser extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButtonModifyUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldFName)
                                     .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jTextFieldLName, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -178,13 +184,22 @@ public class ModifyUser extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabelUserType)
                         .addGap(92, 92, 92)
+                        .addComponent(jTextFieldUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButtonModifyUser)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonListAllBooks)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonSearchBook)))))
                 .addContainerGap())
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBoxSecQ, jPasswordField1, jPasswordFieldAnswer, jTextFieldFName, jTextFieldLName, jTextFieldUserType, jTextFieldUsername});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonBack, jButtonListAllBooks, jButtonModifyUser, jButtonSearchBook});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +236,9 @@ public class ModifyUser extends javax.swing.JFrame {
                     .addComponent(jLabelUserType)
                     .addComponent(jTextFieldUserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jButtonSearchBook)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSearchBook)
+                    .addComponent(jButtonListAllBooks))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonBack)
@@ -230,6 +247,8 @@ public class ModifyUser extends javax.swing.JFrame {
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBoxSecQ, jPasswordField1, jPasswordFieldAnswer, jTextFieldFName, jTextFieldLName, jTextFieldUserType, jTextFieldUsername});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonBack, jButtonListAllBooks, jButtonModifyUser, jButtonSearchBook});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -334,6 +353,12 @@ public class ModifyUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldUserTypeActionPerformed
 
+    private void jButtonListAllBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListAllBooksActionPerformed
+        setVisible(false);
+        UsersSearch us = new UsersSearch(this);
+        us.setVisible(true);
+    }//GEN-LAST:event_jButtonListAllBooksActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -382,6 +407,7 @@ public class ModifyUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBack;
+    private javax.swing.JButton jButtonListAllBooks;
     private javax.swing.JButton jButtonModifyUser;
     private javax.swing.JButton jButtonSearchBook;
     private javax.swing.JComboBox<String> jComboBoxSecQ;
