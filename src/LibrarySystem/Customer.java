@@ -12,14 +12,12 @@ package LibrarySystem;
 public class Customer {
 
     private int AccountNum, IBAN, BIC;
-    private double Funds;
     private String FirstName, LastName, AddLine1, AddLine2, DOB;
 
-    public Customer(int AccountNum, String FirstName, String LastName, String AddLine1, String AddLine2, String DOB, int IBAN, int BIC, double Funds) {
+    public Customer(int AccountNum, String FirstName, String LastName, String AddLine1, String AddLine2, String DOB, int IBAN, int BIC) {
         this.AccountNum = AccountNum;
         this.IBAN = IBAN;
         this.BIC = BIC;
-        this.Funds = Funds;
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.AddLine1 = AddLine1;
@@ -53,10 +51,6 @@ public class Customer {
 
     public int getBIC() {
         return BIC;
-    }
-
-    public double getFunds() {
-        return Funds;
     }
 
     public int getIBAN() {

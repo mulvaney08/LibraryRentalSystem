@@ -60,45 +60,63 @@ public class ReturnBook extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel3 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabelLName = new javax.swing.JLabel();
-        jLabelBookName1 = new javax.swing.JLabel();
-        jLabelFName = new javax.swing.JLabel();
-        jTextFieldBookName = new javax.swing.JTextField();
-        jTextFieldISBN = new javax.swing.JTextField();
-        jTextFieldLastName = new javax.swing.JTextField();
-        jTextFieldFirstName = new javax.swing.JTextField();
         jLabelISBN1 = new javax.swing.JLabel();
-        jButtonSearchBook = new javax.swing.JButton();
+        jTextFieldISBN = new javax.swing.JTextField();
         jLabelEdition1 = new javax.swing.JLabel();
-        jTextFieldRentDate = new javax.swing.JTextField();
-        jLabelRentDate = new javax.swing.JLabel();
-        jButtonClearBook = new javax.swing.JButton();
         jTextFieldAccountNum = new javax.swing.JTextField();
-        jButtonListAllBooks = new javax.swing.JButton();
-        jLabelRental1 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jButtonConfirm1 = new javax.swing.JButton();
-        jButtonBack1 = new javax.swing.JButton();
-        jLabelStaff = new javax.swing.JLabel();
-        jTextFieldUsername = new javax.swing.JTextField();
         jLabelRentID = new javax.swing.JLabel();
         jTextFieldRentID = new javax.swing.JTextField();
+        jLabelBookName1 = new javax.swing.JLabel();
+        jTextFieldBookName = new javax.swing.JTextField();
+        jLabelFName = new javax.swing.JLabel();
+        jTextFieldFirstName = new javax.swing.JTextField();
+        jLabelLName = new javax.swing.JLabel();
+        jTextFieldLastName = new javax.swing.JTextField();
+        jLabelRentDate = new javax.swing.JLabel();
+        jTextFieldRentDate = new javax.swing.JTextField();
+        jLabelStaff = new javax.swing.JLabel();
+        jTextFieldUsername = new javax.swing.JTextField();
+        jButtonSearchBook = new javax.swing.JButton();
+        jButtonClearBook = new javax.swing.JButton();
+        jButtonListAllBooks = new javax.swing.JButton();
+        jButtonConfirm1 = new javax.swing.JButton();
+        jButtonBack1 = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jLabelRental1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Return Book", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Book Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 18), new java.awt.Color(102, 0, 0))); // NOI18N
+        jLabelISBN1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelISBN1.setText("Book ISBN:");
 
-        jLabelLName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelLName.setText("Last Name:");
+        jTextFieldISBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldISBNActionPerformed(evt);
+            }
+        });
+
+        jLabelEdition1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelEdition1.setText("Account Number:");
+
+        jTextFieldAccountNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldAccountNumActionPerformed(evt);
+            }
+        });
+
+        jLabelRentID.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelRentID.setText("Rental ID:");
+
+        jTextFieldRentID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRentIDActionPerformed(evt);
+            }
+        });
 
         jLabelBookName1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabelBookName1.setText("Book Name:");
-
-        jLabelFName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelFName.setText("First Name:");
 
         jTextFieldBookName.setEditable(false);
         jTextFieldBookName.addActionListener(new java.awt.event.ActionListener() {
@@ -107,18 +125,8 @@ public class ReturnBook extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldISBN.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldISBNActionPerformed(evt);
-            }
-        });
-
-        jTextFieldLastName.setEditable(false);
-        jTextFieldLastName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldLastNameActionPerformed(evt);
-            }
-        });
+        jLabelFName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelFName.setText("First Name:");
 
         jTextFieldFirstName.setEditable(false);
         jTextFieldFirstName.addActionListener(new java.awt.event.ActionListener() {
@@ -127,8 +135,35 @@ public class ReturnBook extends javax.swing.JFrame {
             }
         });
 
-        jLabelISBN1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelISBN1.setText("Book ISBN:");
+        jLabelLName.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelLName.setText("Last Name:");
+
+        jTextFieldLastName.setEditable(false);
+        jTextFieldLastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldLastNameActionPerformed(evt);
+            }
+        });
+
+        jLabelRentDate.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelRentDate.setText("Rent Date:");
+
+        jTextFieldRentDate.setEditable(false);
+        jTextFieldRentDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRentDateActionPerformed(evt);
+            }
+        });
+
+        jLabelStaff.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelStaff.setText("Staff Member:");
+
+        jTextFieldUsername.setEditable(false);
+        jTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldUsernameActionPerformed(evt);
+            }
+        });
 
         jButtonSearchBook.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButtonSearchBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\search.png")); // NOI18N
@@ -139,31 +174,12 @@ public class ReturnBook extends javax.swing.JFrame {
             }
         });
 
-        jLabelEdition1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelEdition1.setText("Account Number:");
-
-        jTextFieldRentDate.setEditable(false);
-        jTextFieldRentDate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldRentDateActionPerformed(evt);
-            }
-        });
-
-        jLabelRentDate.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelRentDate.setText("Rent Date:");
-
         jButtonClearBook.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButtonClearBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\delete.png")); // NOI18N
         jButtonClearBook.setText("Clear");
         jButtonClearBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonClearBookActionPerformed(evt);
-            }
-        });
-
-        jTextFieldAccountNum.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldAccountNumActionPerformed(evt);
             }
         });
 
@@ -174,9 +190,6 @@ public class ReturnBook extends javax.swing.JFrame {
                 jButtonListAllBooksActionPerformed(evt);
             }
         });
-
-        jLabelRental1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelRental1.setText("Return Date:");
 
         jButtonConfirm1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jButtonConfirm1.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\tick.png")); // NOI18N
@@ -196,135 +209,8 @@ public class ReturnBook extends javax.swing.JFrame {
             }
         });
 
-        jLabelStaff.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelStaff.setText("Staff Member:");
-
-        jTextFieldUsername.setEditable(false);
-        jTextFieldUsername.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldUsernameActionPerformed(evt);
-            }
-        });
-
-        jLabelRentID.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelRentID.setText("Rental ID:");
-
-        jTextFieldRentID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldRentIDActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButtonListAllBooks)
-                                .addGap(29, 29, 29)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                    .addComponent(jButtonClearBook, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelISBN1)
-                                    .addComponent(jLabelEdition1))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldAccountNum)
-                                    .addComponent(jTextFieldISBN))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonConfirm1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelRental1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonBack1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelRentDate)
-                            .addComponent(jLabelFName)
-                            .addComponent(jLabelLName)
-                            .addComponent(jLabelBookName1)
-                            .addComponent(jLabelStaff)
-                            .addComponent(jLabelRentID))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldBookName, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                            .addComponent(jTextFieldUsername)
-                            .addComponent(jTextFieldLastName)
-                            .addComponent(jTextFieldFirstName)
-                            .addComponent(jTextFieldRentDate)
-                            .addComponent(jTextFieldRentID))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelBookName1, jLabelEdition1, jLabelFName, jLabelISBN1, jLabelLName, jLabelRentDate, jLabelRentID, jLabelStaff, jTextFieldAccountNum, jTextFieldBookName, jTextFieldFirstName, jTextFieldISBN, jTextFieldLastName, jTextFieldRentDate, jTextFieldRentID, jTextFieldUsername});
-
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelRental1)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelISBN1)
-                            .addComponent(jTextFieldISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelEdition1)
-                            .addComponent(jTextFieldAccountNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelRentID)
-                    .addComponent(jTextFieldRentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelBookName1)
-                    .addComponent(jTextFieldBookName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelFName)
-                    .addComponent(jTextFieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelLName)
-                    .addComponent(jTextFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelRentDate)
-                    .addComponent(jTextFieldRentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelStaff)
-                    .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonConfirm1)
-                            .addComponent(jButtonBack1)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonSearchBook)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonClearBook)
-                            .addComponent(jButtonListAllBooks))))
-                .addContainerGap())
-        );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabelBookName1, jLabelEdition1, jLabelFName, jLabelISBN1, jLabelLName, jLabelRentDate, jLabelRentID, jLabelStaff, jTextFieldAccountNum, jTextFieldBookName, jTextFieldFirstName, jTextFieldISBN, jTextFieldLastName, jTextFieldRentDate, jTextFieldRentID, jTextFieldUsername});
+        jLabelRental1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jLabelRental1.setText("Return Date:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -332,15 +218,109 @@ public class ReturnBook extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelISBN1)
+                                    .addComponent(jLabelEdition1))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldAccountNum)
+                                    .addComponent(jTextFieldISBN)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(158, 158, 158)
+                                .addComponent(jButtonClearBook, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonConfirm1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelRental1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonBack1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelRentDate)
+                            .addComponent(jLabelFName)
+                            .addComponent(jLabelLName)
+                            .addComponent(jLabelBookName1)
+                            .addComponent(jLabelStaff)
+                            .addComponent(jLabelRentID)
+                            .addComponent(jButtonListAllBooks, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldBookName, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(jTextFieldUsername)
+                            .addComponent(jTextFieldLastName)
+                            .addComponent(jTextFieldFirstName)
+                            .addComponent(jTextFieldRentDate)
+                            .addComponent(jTextFieldRentID)
+                            .addComponent(jButtonSearchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 378, Short.MAX_VALUE)))
+                .addContainerGap())
         );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelBookName1, jLabelEdition1, jLabelFName, jLabelISBN1, jLabelLName, jLabelRentDate, jLabelRentID, jLabelStaff, jTextFieldAccountNum, jTextFieldBookName, jTextFieldFirstName, jTextFieldISBN, jTextFieldLastName, jTextFieldRentDate, jTextFieldRentID, jTextFieldUsername});
+
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelRental1)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelISBN1)
+                            .addComponent(jTextFieldISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelEdition1)
+                            .addComponent(jTextFieldAccountNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelRentID)
+                            .addComponent(jTextFieldRentID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelBookName1)
+                            .addComponent(jTextFieldBookName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelFName)
+                            .addComponent(jTextFieldFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelLName)
+                            .addComponent(jTextFieldLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelRentDate)
+                            .addComponent(jTextFieldRentDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabelStaff)
+                            .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonSearchBook)
+                            .addComponent(jButtonListAllBooks))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonClearBook)
+                        .addGap(0, 13, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonConfirm1)
+                            .addComponent(jButtonBack1))
+                        .addContainerGap())))
         );
+
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabelBookName1, jLabelEdition1, jLabelFName, jLabelISBN1, jLabelLName, jLabelRentDate, jLabelRentID, jLabelStaff, jTextFieldAccountNum, jTextFieldBookName, jTextFieldFirstName, jTextFieldISBN, jTextFieldLastName, jTextFieldRentDate, jTextFieldRentID, jTextFieldUsername});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -354,11 +334,11 @@ public class ReturnBook extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(734, 563));
+        setSize(new java.awt.Dimension(734, 496));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -551,7 +531,6 @@ public class ReturnBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelRentID;
     private javax.swing.JLabel jLabelRental1;
     private javax.swing.JLabel jLabelStaff;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextFieldAccountNum;
     private javax.swing.JTextField jTextFieldBookName;

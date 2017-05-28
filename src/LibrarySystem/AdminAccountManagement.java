@@ -42,7 +42,6 @@ public class AdminAccountManagement extends javax.swing.JFrame {
         jMenuItemHome2 = new javax.swing.JMenuItem();
         jMenuItemBookManagement2 = new javax.swing.JMenuItem();
         jMenuItemReports = new javax.swing.JMenuItem();
-        jMenuItemAccManagement = new javax.swing.JMenuItem();
         jMenuItemAbout = new javax.swing.JMenuItem();
         jMenuItemLogout = new javax.swing.JMenuItem();
 
@@ -178,16 +177,6 @@ public class AdminAccountManagement extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItemReports);
 
-        jMenuItemAccManagement.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jMenuItemAccManagement.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\user.png")); // NOI18N
-        jMenuItemAccManagement.setText("Account Management");
-        jMenuItemAccManagement.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemAccManagementActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItemAccManagement);
-
         jMenuItemAbout.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jMenuItemAbout.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\info.png")); // NOI18N
         jMenuItemAbout.setText("About");
@@ -250,18 +239,6 @@ public class AdminAccountManagement extends javax.swing.JFrame {
     private void jMenuItemReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemReportsActionPerformed
-
-    private void jMenuItemAccManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAccManagementActionPerformed
-        if ("Admin".equals(Login.userType) || "admin".equals(Login.userType)) {
-            setVisible(false);
-            AdminAccountManagement AaccM = new AdminAccountManagement();
-            AaccM.setVisible(true);
-        } else {
-            setVisible(false);
-            AccountManagement accM = new AccountManagement();
-            accM.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenuItemAccManagementActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         // TODO add your handling code here:
@@ -326,7 +303,6 @@ public class AdminAccountManagement extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar3;
     private javax.swing.JMenuItem jMenuItemAbout;
-    private javax.swing.JMenuItem jMenuItemAccManagement;
     private javax.swing.JMenuItem jMenuItemBookManagement2;
     private javax.swing.JMenuItem jMenuItemHome2;
     private javax.swing.JMenuItem jMenuItemLogout;

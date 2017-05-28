@@ -96,7 +96,7 @@ public class CustomersSearch extends javax.swing.JFrame {
 
         try {
 
-            String query = "select * from Account where AccountNum LIKE '%" + searchValue + "%' OR FirstName LIKE '%" + searchValue + "%' OR LastName LIKE '%" + searchValue + "%' OR AddLine1 LIKE '%" + searchValue + "%' OR AddLine2 LIKE '%" + searchValue + "%' OR DOB LIKE '%" + searchValue + "%' OR IBAN LIKE '%" + searchValue + "%' OR BIC LIKE '%" + searchValue + "%' OR Funds LIKE '%" + searchValue + "%'";
+            String query = "select * from Account where AccountNum LIKE '%" + searchValue + "%' OR FirstName LIKE '%" + searchValue + "%' OR LastName LIKE '%" + searchValue + "%' OR AddLine1 LIKE '%" + searchValue + "%' OR AddLine2 LIKE '%" + searchValue + "%' OR DOB LIKE '%" + searchValue + "%' OR IBAN LIKE '%" + searchValue + "%' OR BIC LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
@@ -113,8 +113,7 @@ public class CustomersSearch extends javax.swing.JFrame {
                         result.getString("AddLine2"),
                         result.getString("DOB"),
                         result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getInt("BIC"));
 
                 customers.add(customer);
 
@@ -149,8 +148,7 @@ public class CustomersSearch extends javax.swing.JFrame {
                         result.getString("AddLine2"),
                         result.getString("DOB"),
                         result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getInt("BIC"));
 
                 customers.add(customer);
 
@@ -185,8 +183,7 @@ public class CustomersSearch extends javax.swing.JFrame {
                         result.getString("AddLine2"),
                         result.getString("DOB"),
                         result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getInt("BIC"));
 
                 customers.add(customer);
 
@@ -221,8 +218,7 @@ public class CustomersSearch extends javax.swing.JFrame {
                         result.getString("AddLine2"),
                         result.getString("DOB"),
                         result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getInt("BIC"));
 
                 customers.add(customer);
 
@@ -257,8 +253,7 @@ public class CustomersSearch extends javax.swing.JFrame {
                         result.getString("AddLine2"),
                         result.getString("DOB"),
                         result.getInt("IBAN"),
-                        result.getInt("BIC"),
-                        result.getInt("Funds"));
+                        result.getInt("BIC"));
 
                 customers.add(customer);
 
@@ -298,8 +293,8 @@ public class CustomersSearch extends javax.swing.JFrame {
 
         }
 
-        dm.setColumnIdentifiers(new Object[]{"AccountNum", "FirstName", "LastName", "AddLine1", "AddLine2", "DOB", "IBAN", "BIC", "Funds"});
-        Object[] row = new Object[9];
+        dm.setColumnIdentifiers(new Object[]{"AccountNum", "FirstName", "LastName", "AddLine1", "AddLine2", "DOB", "IBAN", "BIC"});
+        Object[] row = new Object[8];
 
         for (int i = 0; i < customers.size(); i++) {
 
@@ -311,7 +306,6 @@ public class CustomersSearch extends javax.swing.JFrame {
             row[5] = customers.get(i).getDOB();
             row[6] = customers.get(i).getIBAN();
             row[7] = customers.get(i).getBIC();
-            row[8] = customers.get(i).getFunds();
             dm.addRow(row);
         }
 
@@ -325,6 +319,14 @@ public class CustomersSearch extends javax.swing.JFrame {
             rb.setVisible(true);
             rb.search();
             rb.searchCust();
+        } else if (dControl == true) {
+            d = new DeleteAccount(AccountNum);
+            d.setVisible(true);
+            d.search();
+        } else if (mControl == true) {
+            m = new ModifyAccount(AccountNum);
+            m.setVisible(true);
+            m.search();
         }
 
         rbControl = false;
@@ -475,9 +477,7 @@ public class CustomersSearch extends javax.swing.JFrame {
         if (rbControl == true) {
             rb = new RentBook();
             rb.setVisible(true);
-            rb.ISBN = this.ISBN;
-            rb.search();
-            rb.searchCust();
+
         } else if (aControl == true) {
             a = new AddAccount();
             a.setVisible(true);
@@ -498,9 +498,11 @@ public class CustomersSearch extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonBackActionPerformed
 
     private void jTableCustomersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCustomersMouseReleased
-        String AccNum;
-        AccNum = (jTableCustomers.getValueAt(jTableCustomers.getSelectedRow(), 0).toString());
-        getBackWithCust(AccNum);
+        if (dControl == true || mControl == true || rbControl == true) {
+            String AccNum;
+            AccNum = (jTableCustomers.getValueAt(jTableCustomers.getSelectedRow(), 0).toString());
+            getBackWithCust(AccNum);
+        }
     }//GEN-LAST:event_jTableCustomersMouseReleased
 
     /**

@@ -390,9 +390,21 @@ public class BooksSearch extends javax.swing.JFrame {
         } else if (bControl == true) {
             b.setVisible(true);
         }
+        else if (dControl == true) {
+            d = new DeleteBook(ISBN);
+            d.setVisible(true);
+            d.search();
+        }
+        else if (mControl == true) {
+            m = new ModifyBook(ISBN);
+            m.setVisible(true);
+            m.search();
+        }
 
         rbControl = false;
         bControl = false;
+        aControl = false;
+        mControl = false;
 
         dispose();
     }
@@ -571,7 +583,7 @@ public class BooksSearch extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableBooksMouseClicked
 
     private void jTableBooksMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableBooksMouseReleased
-        if (rbControl == true) {
+        if (rbControl == true || dControl == true || mControl == true) {
             String ISBN;
             ISBN = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 0).toString());
             getBackWithBook(ISBN);

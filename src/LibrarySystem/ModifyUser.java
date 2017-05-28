@@ -29,6 +29,13 @@ public class ModifyUser extends javax.swing.JFrame {
         connection = dbConnect.connectDb();
     }
 
+    public ModifyUser(String Username) {
+        initComponents();
+        this.clearForm();
+        connection = dbConnect.connectDb();
+        jTextFieldUsername.setText(Username);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -283,14 +290,14 @@ public class ModifyUser extends javax.swing.JFrame {
 
     private void jButtonModifyUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyUserActionPerformed
 
-       String update = "UPDATE User SET FirstName=?, LastName=?, Password=?, Security_Q=? , Answer=?, UserType=? WHERE  Username = ?";
+        String update = "UPDATE User SET FirstName=?, LastName=?, Password=?, Security_Q=? , Answer=?, UserType=? WHERE  Username = ?";
         try {
             pStatement = connection.prepareStatement(update);
 
             pStatement.setString(1, jTextFieldFName.getText());
             pStatement.setString(2, jTextFieldLName.getText());
             pStatement.setString(3, jPasswordField1.getText());
-            pStatement.setString(4, (String)jComboBoxSecQ.getSelectedItem());
+            pStatement.setString(4, (String) jComboBoxSecQ.getSelectedItem());
             pStatement.setString(5, jPasswordFieldAnswer.getText());
             pStatement.setString(6, jTextFieldUserType.getText());
             pStatement.setString(7, jTextFieldUsername.getText());
@@ -310,6 +317,10 @@ public class ModifyUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        search();
+    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+
+    public void search() {
         String query = "select * from User Where Username = ?";
         try {
             pStatement = connection.prepareStatement(query);
@@ -343,7 +354,7 @@ public class ModifyUser extends javax.swing.JFrame {
 
             }
         }
-    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+    }
 
     private void jPasswordFieldAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldAnswerActionPerformed
         // TODO add your handling code here:

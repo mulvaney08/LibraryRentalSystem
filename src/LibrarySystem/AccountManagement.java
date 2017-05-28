@@ -271,18 +271,6 @@ public class AccountManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemReportsActionPerformed
 
-    private void jMenuItemAccManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAccManagementActionPerformed
-        if ("Admin".equals(Login.userType) || "admin".equals(Login.userType)) {
-            setVisible(false);
-            AdminAccountManagement AaccM = new AdminAccountManagement();
-            AaccM.setVisible(true);
-        } else {
-            setVisible(false);
-            AccountManagement accM = new AccountManagement();
-            accM.setVisible(true);
-        }
-    }//GEN-LAST:event_jMenuItemAccManagementActionPerformed
-
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemAboutActionPerformed
@@ -306,6 +294,18 @@ public class AccountManagement extends javax.swing.JFrame {
         h.setVisible(true);
 
     }//GEN-LAST:event_jMenuItemHomeActionPerformed
+
+    private void jMenuItemAccManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAccManagementActionPerformed
+        if ("Admin".equals(Login.userType) || "admin".equals(Login.userType)) {
+            setVisible(false);
+            AdminAccountManagement AaccM = new AdminAccountManagement();
+            AaccM.setVisible(true);
+        } else {
+            setVisible(false);
+            AccountManagement accM = new AccountManagement();
+            accM.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItemAccManagementActionPerformed
 
     /**
      * @param args the command line arguments

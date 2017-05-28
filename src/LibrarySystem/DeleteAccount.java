@@ -20,6 +20,8 @@ public class DeleteAccount extends javax.swing.JFrame {
     ResultSet result;
     PreparedStatement pStatement;
 
+    
+    
     /**
      * Creates new form DeleteAccount
      */
@@ -29,6 +31,14 @@ public class DeleteAccount extends javax.swing.JFrame {
         connection = dbConnect.connectDb();
     }
 
+    public DeleteAccount(String AccountNum) {
+        initComponents();
+        this.clearForm();
+        connection = dbConnect.connectDb();
+        jTextFieldAccountNum.setText(AccountNum);
+        search();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,8 +68,6 @@ public class DeleteAccount extends javax.swing.JFrame {
         jTextFieldBIC = new javax.swing.JTextField();
         jTextFieldDOB = new javax.swing.JTextField();
         jTextFieldAddLine1 = new javax.swing.JTextField();
-        jTextFieldFunds = new javax.swing.JTextField();
-        jLabelUserType2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -152,12 +160,6 @@ public class DeleteAccount extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldFunds.setEditable(false);
-        jTextFieldFunds.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jLabelUserType2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelUserType2.setText("Funds");
-
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\user.png")); // NOI18N
         jButton1.setText("List of Customers");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -176,20 +178,12 @@ public class DeleteAccount extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelUserType)
-                            .addComponent(jLabelUserType1)
-                            .addComponent(jLabelUserType2))
-                        .addGap(123, 123, 123)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldFunds)
-                            .addComponent(jTextFieldBIC)
-                            .addComponent(jTextFieldIBAN)))
+                            .addComponent(jLabelUserType1))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel6)
@@ -197,21 +191,29 @@ public class DeleteAccount extends javax.swing.JFrame {
                                     .addComponent(jLabel3)
                                     .addComponent(jLabelAccNum)
                                     .addComponent(jLabel1))
-                                .addGap(59, 59, 59)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldDOB)
-                            .addComponent(jButtonSearchBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(59, 59, 59)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldDOB)
+                                    .addComponent(jTextFieldFName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldLName)
+                                    .addComponent(jTextFieldAccountNum)
+                                    .addComponent(jTextFieldAddLine2)
+                                    .addComponent(jTextFieldAddLine1)
+                                    .addComponent(jTextFieldIBAN)
+                                    .addComponent(jTextFieldBIC)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonDeleteUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonCancelDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextFieldFName, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jTextFieldLName)
-                            .addComponent(jTextFieldAccountNum)
-                            .addComponent(jTextFieldAddLine2)
-                            .addComponent(jTextFieldAddLine1))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonDeleteUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonSearchBook, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                                    .addComponent(jButtonCancelDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap())
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButtonSearchBook});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -251,18 +253,15 @@ public class DeleteAccount extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelUserType1)
                     .addComponent(jTextFieldBIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldFunds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUserType2))
-                .addGap(18, 18, 18)
-                .addComponent(jButtonSearchBook)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonCancelDeleteUser)
-                    .addComponent(jButtonDeleteUser)
+                    .addComponent(jButtonSearchBook)
                     .addComponent(jButton1))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonDeleteUser)
+                    .addComponent(jButtonCancelDeleteUser))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,12 +276,12 @@ public class DeleteAccount extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(50, 50, 50))
         );
 
-        setSize(new java.awt.Dimension(421, 567));
+        setSize(new java.awt.Dimension(421, 528));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -312,9 +311,24 @@ public class DeleteAccount extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex + ", please try again");
 
         }
+        
+        deleteS = "DELETE FROM RentBook where AccountNum = ?";
+        try {
+
+            pStatement = connection.prepareStatement(deleteS);
+            pStatement.setString(1, jTextFieldAccountNum.getText());
+            pStatement.execute();
+            JOptionPane.showMessageDialog(null, "All Rentals for that account Deleted");
+
+            this.clearForm();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
     }//GEN-LAST:event_jButtonDeleteUserActionPerformed
 
-    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+    public void search(){
         String query = "select * from Account Where AccountNum = ?";
         try {
             pStatement = connection.prepareStatement(query);
@@ -335,8 +349,6 @@ public class DeleteAccount extends javax.swing.JFrame {
                 jTextFieldIBAN.setText(s);
                 s = result.getString("BIC");
                 jTextFieldBIC.setText(s);
-                s = result.getString("Funds");
-                jTextFieldFunds.setText(s);
 
                 result.close();
                 pStatement.close();
@@ -353,6 +365,10 @@ public class DeleteAccount extends javax.swing.JFrame {
 
             }
         }
+    }
+    
+    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        search();
     }//GEN-LAST:event_jButtonSearchBookActionPerformed
 
     private void jTextFieldAccountNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAccountNumActionPerformed
@@ -413,7 +429,6 @@ public class DeleteAccount extends javax.swing.JFrame {
         this.jTextFieldDOB.setText("");
         this.jTextFieldIBAN.setText("");
         this.jTextFieldBIC.setText("");
-        this.jTextFieldFunds.setText("");
 
     }
 
@@ -430,7 +445,6 @@ public class DeleteAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelAccNum;
     private javax.swing.JLabel jLabelUserType;
     private javax.swing.JLabel jLabelUserType1;
-    private javax.swing.JLabel jLabelUserType2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldAccountNum;
     private javax.swing.JTextField jTextFieldAddLine1;
@@ -438,7 +452,6 @@ public class DeleteAccount extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldBIC;
     private javax.swing.JTextField jTextFieldDOB;
     private javax.swing.JTextField jTextFieldFName;
-    private javax.swing.JTextField jTextFieldFunds;
     private javax.swing.JTextField jTextFieldIBAN;
     private javax.swing.JTextField jTextFieldLName;
     // End of variables declaration//GEN-END:variables

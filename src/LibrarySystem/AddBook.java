@@ -172,11 +172,13 @@ public class AddBook extends javax.swing.JFrame {
                             .addComponent(jTextFieldBookName)
                             .addComponent(jTextFieldPages)
                             .addComponent(jTextFieldPublisher)
-                            .addComponent(jComboBoxEdition, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabelAuthor)
+                            .addComponent(jComboBoxEdition, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabelPricePerWeek)
-                        .addGap(51, 51, 51)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelAuthor)
+                            .addComponent(jLabelPricePerWeek))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -184,6 +186,8 @@ public class AddBook extends javax.swing.JFrame {
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jComboBoxEdition, jTextFieldAuthor, jTextFieldBookName, jTextFieldISBN, jTextFieldPages, jTextFieldPricePerWeek, jTextFieldPublisher});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelAuthor, jLabelBookName, jLabelEdition, jLabelISBN, jLabelPages, jLabelPricePerWeek, jLabelPublisher});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,6 +229,8 @@ public class AddBook extends javax.swing.JFrame {
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jComboBoxEdition, jTextFieldAuthor, jTextFieldBookName, jTextFieldISBN, jTextFieldPages, jTextFieldPricePerWeek, jTextFieldPublisher});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabelAuthor, jLabelBookName, jLabelEdition, jLabelISBN, jLabelPages, jLabelPricePerWeek, jLabelPublisher});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

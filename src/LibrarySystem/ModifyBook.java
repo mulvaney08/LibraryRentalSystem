@@ -29,6 +29,14 @@ public class ModifyBook extends javax.swing.JFrame {
         connection = dbConnect.connectDb();
     }
 
+    public ModifyBook(String ISBN) {
+        initComponents();
+        this.clearForm();
+        connection = dbConnect.connectDb();
+        jTextFieldISBN.setText(ISBN);
+        search();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -320,11 +328,7 @@ public class ModifyBook extends javax.swing.JFrame {
         this.clearForm();
     }//GEN-LAST:event_jButtonAddBookActionPerformed
 
-    private void jTextFieldAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAuthorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldAuthorActionPerformed
-
-    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+    public void search() {
         String query = "select * from Book Where ISBN = ?";
         try {
             pStatement = connection.prepareStatement(query);
@@ -359,6 +363,14 @@ public class ModifyBook extends javax.swing.JFrame {
 
             }
         }
+    }
+
+    private void jTextFieldAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAuthorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldAuthorActionPerformed
+
+    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        search();
     }//GEN-LAST:event_jButtonSearchBookActionPerformed
 
     private void jButtonListAllBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListAllBooksActionPerformed

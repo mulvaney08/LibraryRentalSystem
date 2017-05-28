@@ -28,6 +28,13 @@ public class DeleteBook extends javax.swing.JFrame {
         connection = dbConnect.connectDb();
     }
 
+    public DeleteBook(String ISBN) {
+        initComponents();
+        connection = dbConnect.connectDb();
+        jTextFieldISBN.setText(ISBN);
+        search();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -161,46 +168,40 @@ public class DeleteBook extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelAuthor)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelPublisher)
-                                    .addComponent(jLabelPages)
-                                    .addComponent(jLabelEdition)
-                                    .addComponent(jLabelBookName)
-                                    .addComponent(jLabelISBN))
-                                .addGap(57, 57, 57)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldISBN, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                    .addComponent(jTextFieldPublisher)
-                                    .addComponent(jTextFieldPages)
-                                    .addComponent(jTextFieldEdition)
-                                    .addComponent(jTextFieldBookName)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabelPricePerWeek)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                                .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabelPublisher)
+                            .addComponent(jLabelPages)
+                            .addComponent(jLabelEdition)
+                            .addComponent(jLabelBookName)
+                            .addComponent(jLabelISBN)
+                            .addComponent(jLabelPricePerWeek, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldISBN)
+                            .addComponent(jTextFieldPublisher)
+                            .addComponent(jTextFieldPages)
+                            .addComponent(jTextFieldEdition)
+                            .addComponent(jTextFieldBookName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButtonDeleteBook)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jButtonListAllBooks)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jButtonSearchBook))))
-                        .addGap(0, 22, Short.MAX_VALUE))))
+                            .addComponent(jButtonListAllBooks)
+                            .addComponent(jButtonDeleteBook))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonSearchBook, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 20, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonBack, jButtonDeleteBook, jButtonListAllBooks, jButtonSearchBook});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelAuthor, jLabelBookName, jLabelEdition, jLabelISBN, jLabelPages, jLabelPricePerWeek, jLabelPublisher});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,8 +255,8 @@ public class DeleteBook extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,7 +266,7 @@ public class DeleteBook extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(340, 486));
+        setSize(new java.awt.Dimension(355, 486));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -313,11 +314,7 @@ public class DeleteBook extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonDeleteBookActionPerformed
 
-    private void jTextFieldAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAuthorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldAuthorActionPerformed
-
-    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+    public void search() {
         String query = "select * from Book Where ISBN = ?";
         try {
             pStatement = connection.prepareStatement(query);
@@ -351,6 +348,14 @@ public class DeleteBook extends javax.swing.JFrame {
 
             }
         }
+    }
+
+    private void jTextFieldAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAuthorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldAuthorActionPerformed
+
+    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        search();
     }//GEN-LAST:event_jButtonSearchBookActionPerformed
 
     private void jTextFieldEditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEditionActionPerformed

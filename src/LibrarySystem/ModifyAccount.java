@@ -29,6 +29,14 @@ public class ModifyAccount extends javax.swing.JFrame {
         connection = dbConnect.connectDb();
     }
 
+    public ModifyAccount(String AccountNum) {
+        initComponents();
+        this.clearForm();
+        connection = dbConnect.connectDb();
+        jTextFieldAccountNum.setText(AccountNum);
+        search();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,8 +66,6 @@ public class ModifyAccount extends javax.swing.JFrame {
         jTextFieldBIC = new javax.swing.JTextField();
         jTextFieldDOB = new javax.swing.JTextField();
         jTextFieldAddLine1 = new javax.swing.JTextField();
-        jTextFieldFunds = new javax.swing.JTextField();
-        jLabelUserType2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -149,11 +155,6 @@ public class ModifyAccount extends javax.swing.JFrame {
             }
         });
 
-        jTextFieldFunds.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-
-        jLabelUserType2.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelUserType2.setText("Funds");
-
         jButton2.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\user.png")); // NOI18N
         jButton2.setText("List of Customers");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -172,44 +173,43 @@ public class ModifyAccount extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelUserType)
-                            .addComponent(jLabelUserType1)
-                            .addComponent(jLabelUserType2))
-                        .addGap(121, 121, 121)
+                            .addComponent(jLabelUserType1))
+                        .addGap(128, 128, 128)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldBIC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldFunds, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldIBAN, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabelAccNum)
-                                    .addComponent(jLabel1))
-                                .addGap(59, 59, 59)))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabelAccNum)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldDOB)
-                            .addComponent(jButtonSearchBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButtonModifyAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonCancelDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextFieldFName, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
                             .addComponent(jTextFieldLName)
                             .addComponent(jTextFieldAccountNum)
                             .addComponent(jTextFieldAddLine2)
-                            .addComponent(jTextFieldAddLine1))))
+                            .addComponent(jTextFieldAddLine1)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonModifyAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonSearchBook, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonCancelDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextFieldAccountNum, jTextFieldAddLine1, jTextFieldAddLine2, jTextFieldBIC, jTextFieldDOB, jTextFieldFName, jTextFieldFunds, jTextFieldIBAN, jTextFieldLName});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextFieldAccountNum, jTextFieldAddLine1, jTextFieldAddLine2, jTextFieldBIC, jTextFieldDOB, jTextFieldFName, jTextFieldIBAN, jTextFieldLName});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton2, jButtonCancelDeleteUser, jButtonModifyAccount, jButtonSearchBook});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,20 +251,19 @@ public class ModifyAccount extends javax.swing.JFrame {
                     .addComponent(jLabelUserType1)
                     .addComponent(jTextFieldBIC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextFieldFunds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelUserType2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jButtonSearchBook)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButtonSearchBook))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelDeleteUser)
-                    .addComponent(jButtonModifyAccount)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                    .addComponent(jButtonModifyAccount))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextFieldAccountNum, jTextFieldAddLine1, jTextFieldAddLine2, jTextFieldBIC, jTextFieldDOB, jTextFieldFName, jTextFieldFunds, jTextFieldIBAN, jTextFieldLName});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextFieldAccountNum, jTextFieldAddLine1, jTextFieldAddLine2, jTextFieldBIC, jTextFieldDOB, jTextFieldFName, jTextFieldIBAN, jTextFieldLName});
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton2, jButtonCancelDeleteUser, jButtonModifyAccount, jButtonSearchBook});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -303,7 +302,7 @@ public class ModifyAccount extends javax.swing.JFrame {
 
     private void jButtonModifyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyAccountActionPerformed
 
-        String update = "UPDATE Account SET FirstName=?, LastName=?, AddLine1=?, AddLine2=? , DOB=?, IBAN=?, BIC=?, Funds=? WHERE  AccountNum = ?";
+        String update = "UPDATE Account SET FirstName=?, LastName=?, AddLine1=?, AddLine2=? , DOB=?, IBAN=?, BIC=? WHERE  AccountNum = ?";
         try {
             pStatement = connection.prepareStatement(update);
 
@@ -314,8 +313,7 @@ public class ModifyAccount extends javax.swing.JFrame {
             pStatement.setString(5, jTextFieldDOB.getText());
             pStatement.setString(6, jTextFieldIBAN.getText());
             pStatement.setString(7, jTextFieldBIC.getText());
-            pStatement.setString(8, jTextFieldFunds.getText());
-            pStatement.setString(9, jTextFieldAccountNum.getText());
+            pStatement.setString(8, jTextFieldAccountNum.getText());
 
             pStatement.execute();
             JOptionPane.showMessageDialog(null, "Account Modified");
@@ -324,10 +322,11 @@ public class ModifyAccount extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex + ", please try again");
 
         }
+
         this.clearForm();
     }//GEN-LAST:event_jButtonModifyAccountActionPerformed
 
-    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+    public void search() {
         String query = "select * from Account Where AccountNum = ?";
         try {
             pStatement = connection.prepareStatement(query);
@@ -348,8 +347,6 @@ public class ModifyAccount extends javax.swing.JFrame {
                 jTextFieldIBAN.setText(s);
                 s = result.getString("BIC");
                 jTextFieldBIC.setText(s);
-                s = result.getString("Funds");
-                jTextFieldFunds.setText(s);
 
                 result.close();
                 pStatement.close();
@@ -366,6 +363,10 @@ public class ModifyAccount extends javax.swing.JFrame {
 
             }
         }
+    }
+
+    private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        search();
     }//GEN-LAST:event_jButtonSearchBookActionPerformed
 
     private void jTextFieldAddLine1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAddLine1ActionPerformed
@@ -426,10 +427,8 @@ public class ModifyAccount extends javax.swing.JFrame {
         this.jTextFieldDOB.setText("");
         this.jTextFieldIBAN.setText("");
         this.jTextFieldBIC.setText("");
-        this.jTextFieldFunds.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonCancelDeleteUser;
     private javax.swing.JButton jButtonModifyAccount;
@@ -442,7 +441,6 @@ public class ModifyAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelAccNum;
     private javax.swing.JLabel jLabelUserType;
     private javax.swing.JLabel jLabelUserType1;
-    private javax.swing.JLabel jLabelUserType2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldAccountNum;
     private javax.swing.JTextField jTextFieldAddLine1;
@@ -450,7 +448,6 @@ public class ModifyAccount extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldBIC;
     private javax.swing.JTextField jTextFieldDOB;
     private javax.swing.JTextField jTextFieldFName;
-    private javax.swing.JTextField jTextFieldFunds;
     private javax.swing.JTextField jTextFieldIBAN;
     private javax.swing.JTextField jTextFieldLName;
     // End of variables declaration//GEN-END:variables

@@ -57,18 +57,18 @@ public class UsersSearch extends javax.swing.JFrame {
         searchUsers();
         AutoSizeTable.sizeColumnsToFit(jTableUsers);
         this.d = d;
-        aControl = true;
+        dControl = true;
     }
 
-        public UsersSearch(ModifyUser m) {
+    public UsersSearch(ModifyUser m) {
         initComponents();
         connection = dbConnect.connectDb();
         searchUsers();
         AutoSizeTable.sizeColumnsToFit(jTableUsers);
         this.m = m;
-        aControl = true;
+        mControl = true;
     }
-    
+
     public ArrayList<User> ListUsersAll(String searchValue) {
         ArrayList<User> usersList = new ArrayList<User>();
 
@@ -265,6 +265,24 @@ public class UsersSearch extends javax.swing.JFrame {
         jTableUsers.setModel(dm);
     }
 
+    public void getBackWithUsername(String Username) {
+        setVisible(false);
+        if (dControl == true) {
+            d = new DeleteUser(Username);
+            d.setVisible(true);
+            d.search();
+        } else if(mControl == true){
+            m = new ModifyUser(Username);
+            m.setVisible(true);
+            m.search();
+        } 
+
+        dControl = false;
+        mControl = false;
+
+        dispose();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -418,35 +436,12 @@ public class UsersSearch extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableUsersMouseClicked
 
     private void jTableUsersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableUsersMouseReleased
-        /*
-        String ISBN;
-        String Name, Edition, Publisher, Pages, Author, PricePerWeek;
-
-        ISBN = (jTableUsers.getValueAt(jTableUsers.getSelectedRow(), 0).toString());
-        System.out.println(ISBN);
-        Name = (jTableUsers.getValueAt(jTableUsers.getSelectedRow(), 1).toString());
-        System.out.println(Name);
-        Edition = (jTableUsers.getValueAt(jTableUsers.getSelectedRow(), 2).toString());
-        System.out.println(Edition);
-        Publisher = (jTableUsers.getValueAt(jTableUsers.getSelectedRow(), 3).toString());
-        System.out.println(Publisher);
-        Pages = (jTableUsers.getValueAt(jTableUsers.getSelectedRow(), 4).toString());
-        System.out.println(Pages);
-        Author = (jTableUsers.getValueAt(jTableUsers.getSelectedRow(), 5).toString());
-        System.out.println(Author);
-        PricePerWeek = (jTableUsers.getValueAt(jTableUsers.getSelectedRow(), 6).toString());
-        System.out.println(PricePerWeek);
-
-        this.book.setISBN2(ISBN);
-        System.out.println("Still Working");
-        this.book.setName(Name);
-        this.book.setEdition(Edition);
-        this.book.setPublisher(Publisher);
-        this.book.setPages(Pages);
-        this.book.setAuthor(Author);
-        this.book.setPricePerWeek(PricePerWeek);
-        System.out.println("Still Working");
-        getBackWithBook(this.book);*/
+        if(dControl == true || mControl == true){
+            String Username;
+        
+        Username = (jTableUsers.getValueAt(jTableUsers.getSelectedRow(), 0).toString());
+        getBackWithUsername(Username);
+        }
     }//GEN-LAST:event_jTableUsersMouseReleased
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed

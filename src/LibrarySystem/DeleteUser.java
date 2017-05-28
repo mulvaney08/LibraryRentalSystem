@@ -29,6 +29,13 @@ public class DeleteUser extends javax.swing.JFrame {
         connection = dbConnect.connectDb();
     }
 
+    public DeleteUser(String Username) {
+        initComponents();
+        this.clearForm();
+        connection = dbConnect.connectDb();
+        jTextFieldUsername.setText(Username);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -294,6 +301,10 @@ public class DeleteUser extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        search();
+    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+
+    public void search() {
         String query = "select * from User Where Username = ?";
         try {
             pStatement = connection.prepareStatement(query);
@@ -327,7 +338,7 @@ public class DeleteUser extends javax.swing.JFrame {
 
             }
         }
-    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+    }
 
     private void jPasswordFieldAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordFieldAnswerActionPerformed
         // TODO add your handling code here:
