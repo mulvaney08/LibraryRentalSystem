@@ -32,6 +32,9 @@ public class CustomersSearch extends javax.swing.JFrame {
     private ModifyAccount m;
     private boolean mControl;
 
+    String ISBN;
+    String AccountNum;
+
     /**
      * Creates new form CustomersSearch
      */
@@ -49,6 +52,16 @@ public class CustomersSearch extends javax.swing.JFrame {
         AutoSizeTable.sizeColumnsToFit(jTableCustomers);
         this.rb = rb;
         rbControl = true;
+    }
+
+    public CustomersSearch(RentBook rb, String ISBN) {
+        initComponents();
+        connection = dbConnect.connectDb();
+        searchCustomers();
+        AutoSizeTable.sizeColumnsToFit(jTableCustomers);
+        this.rb = rb;
+        rbControl = true;
+        this.ISBN = ISBN;
     }
 
     public CustomersSearch(AddAccount a) {
@@ -305,6 +318,20 @@ public class CustomersSearch extends javax.swing.JFrame {
         jTableCustomers.setModel(dm);
     }
 
+    public void getBackWithCust(String AccountNum) {
+        setVisible(false);
+        if (rbControl == true) {
+            rb = new RentBook(AccountNum, this.ISBN);
+            rb.setVisible(true);
+            rb.search();
+            rb.searchCust();
+        }
+
+        rbControl = false;
+
+        dispose();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -352,6 +379,11 @@ public class CustomersSearch extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTableCustomersMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableCustomers);
 
         jButtonBack.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -443,6 +475,9 @@ public class CustomersSearch extends javax.swing.JFrame {
         if (rbControl == true) {
             rb = new RentBook();
             rb.setVisible(true);
+            rb.ISBN = this.ISBN;
+            rb.search();
+            rb.searchCust();
         } else if (aControl == true) {
             a = new AddAccount();
             a.setVisible(true);
@@ -461,6 +496,12 @@ public class CustomersSearch extends javax.swing.JFrame {
 
         dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
+
+    private void jTableCustomersMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableCustomersMouseReleased
+        String AccNum;
+        AccNum = (jTableCustomers.getValueAt(jTableCustomers.getSelectedRow(), 0).toString());
+        getBackWithCust(AccNum);
+    }//GEN-LAST:event_jTableCustomersMouseReleased
 
     /**
      * @param args the command line arguments

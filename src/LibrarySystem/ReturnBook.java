@@ -31,6 +31,15 @@ public class ReturnBook extends javax.swing.JFrame {
         connection = dbConnect.connectDb();
     }
 
+    public ReturnBook(String ISBN, String AccNum, String RentID) {
+        super("Return Book");
+        initComponents();
+        connection = dbConnect.connectDb();
+        jTextFieldISBN.setText(ISBN);
+        jTextFieldAccountNum.setText(AccNum);
+        jTextFieldRentID.setText(RentID);
+    }
+
     public int generateReturnID() {
 
         int id;
@@ -370,6 +379,11 @@ public class ReturnBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldFirstNameActionPerformed
 
     private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        search();
+
+    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+
+    public void search() {
         String query = "select * from RentBook rb, Book b, Account a Where rb.RentID = ? AND a.AccountNum = ? AND rb.AccountNum = a.AccountNum AND rb.ISBN = b.ISBN";
         try {
 
@@ -387,6 +401,8 @@ public class ReturnBook extends javax.swing.JFrame {
                 jTextFieldLastName.setText(s3);
                 String s4 = result.getString("RentDate");
                 jTextFieldRentDate.setText(s4);
+                String s5 = result.getString("Username");
+                jTextFieldUsername.setText(s5);
 
                 //result.close();
                 //pStatement.close();
@@ -411,7 +427,7 @@ public class ReturnBook extends javax.swing.JFrame {
 
             }
         }
-    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+    }
 
     private void jTextFieldRentDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRentDateActionPerformed
         // TODO add your handling code here:
@@ -454,26 +470,6 @@ public class ReturnBook extends javax.swing.JFrame {
 
             pStatement.setString(1, jTextFieldRentID.getText());
             pStatement.execute();
-            JOptionPane.showMessageDialog(null, "Rental Remove Confirmed");
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex + ", please try again");
-
-        }
-
-        insert = "INSERT into ReturnBookAll (ReturnID,RentID,ISBN,AccountNum,Username,ReturnDate) values (?,?,?,?,?,?)";
-
-        try {
-
-            pStatement = connection.prepareStatement(insert);
-
-            pStatement.setInt(1, id);
-            pStatement.setString(2, jTextFieldRentID.getText());
-            pStatement.setString(3, jTextFieldISBN.getText());
-            pStatement.setString(4, jTextFieldAccountNum.getText());
-            pStatement.setString(5, Login.username);
-            pStatement.setString(6, ((JTextField) jDateChooser1.getDateEditor().getUiComponent()).getText());
-            pStatement.execute();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex + ", please try again");
@@ -492,7 +488,7 @@ public class ReturnBook extends javax.swing.JFrame {
 
     private void jButtonListAllBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListAllBooksActionPerformed
         setVisible(false);
-        RentalsSearch rs = new RentalsSearch( this );
+        RentalsSearch rs = new RentalsSearch(this);
         rs.setVisible(true);
     }//GEN-LAST:event_jButtonListAllBooksActionPerformed
 

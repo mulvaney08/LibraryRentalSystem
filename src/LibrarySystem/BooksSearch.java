@@ -381,12 +381,12 @@ public class BooksSearch extends javax.swing.JFrame {
         jTableBooks.setModel(dm);
     }
 
-    public void getBackWithBook(Book book) {
+    public void getBackWithBook(String ISBN) {
         setVisible(false);
         if (rbControl == true) {
-            System.out.println("Still Working in rbControl");
-            rb = new RentBook(book);
+            rb = new RentBook(ISBN);
             rb.setVisible(true);
+            rb.search();
         } else if (bControl == true) {
             b.setVisible(true);
         }
@@ -562,7 +562,7 @@ public class BooksSearch extends javax.swing.JFrame {
         aControl = false;
         dControl = false;
         mControl = false;
-        
+
         dispose();
     }//GEN-LAST:event_jButtonBackActionPerformed
 
@@ -571,35 +571,12 @@ public class BooksSearch extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableBooksMouseClicked
 
     private void jTableBooksMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableBooksMouseReleased
+        if (rbControl == true) {
+            String ISBN;
+            ISBN = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 0).toString());
+            getBackWithBook(ISBN);
+        }
 
-        String ISBN;
-        String Name, Edition, Publisher, Pages, Author, PricePerWeek;
-
-        ISBN = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 0).toString());
-        System.out.println(ISBN);
-        Name = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 1).toString());
-        System.out.println(Name);
-        Edition = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 2).toString());
-        System.out.println(Edition);
-        Publisher = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 3).toString());
-        System.out.println(Publisher);
-        Pages = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 4).toString());
-        System.out.println(Pages);
-        Author = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 5).toString());
-        System.out.println(Author);
-        PricePerWeek = (jTableBooks.getValueAt(jTableBooks.getSelectedRow(), 6).toString());
-        System.out.println(PricePerWeek);
-
-        this.book.setISBN2(ISBN);
-        System.out.println("Still Working");
-        this.book.setName(Name);
-        this.book.setEdition(Edition);
-        this.book.setPublisher(Publisher);
-        this.book.setPages(Pages);
-        this.book.setAuthor(Author);
-        this.book.setPricePerWeek(PricePerWeek);
-        System.out.println("Still Working");
-        getBackWithBook(this.book);
     }//GEN-LAST:event_jTableBooksMouseReleased
 
     /**

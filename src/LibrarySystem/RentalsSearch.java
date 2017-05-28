@@ -27,6 +27,7 @@ public class RentalsSearch extends javax.swing.JFrame {
     private boolean rbControl = false;
     private BookManagement b;
     private boolean bControl = false;
+    
 
     /**
      * Creates new form RentalsSearch
@@ -314,6 +315,22 @@ public class RentalsSearch extends javax.swing.JFrame {
         jTableRentals.setModel(dm);
     }
 
+    public void getBackWithRental(String ISBN,String AccNum,String RentID) {
+        setVisible(false);
+        if (rbControl == true) {
+            rb = new ReturnBook(ISBN,AccNum,RentID);
+            rb.setVisible(true);
+            rb.search();
+        } else if (bControl == true) {
+            b.setVisible(true);
+        }
+
+        rbControl = false;
+        bControl = false;
+
+        dispose();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -361,6 +378,11 @@ public class RentalsSearch extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTableRentals.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTableRentalsMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableRentals);
 
         jButtonBack.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
@@ -469,6 +491,14 @@ public class RentalsSearch extends javax.swing.JFrame {
     private void jComboBoxChooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxChooseActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxChooseActionPerformed
+
+    private void jTableRentalsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRentalsMouseReleased
+        String ISBN, AccNum, RentID;
+        ISBN = (jTableRentals.getValueAt(jTableRentals.getSelectedRow(), 1).toString());
+        AccNum = (jTableRentals.getValueAt(jTableRentals.getSelectedRow(), 4).toString());
+        RentID = (jTableRentals.getValueAt(jTableRentals.getSelectedRow(), 0).toString());
+        getBackWithRental(ISBN, AccNum, RentID);
+    }//GEN-LAST:event_jTableRentalsMouseReleased
 
     /**
      * @param args the command line arguments

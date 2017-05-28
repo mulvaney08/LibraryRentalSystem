@@ -24,7 +24,9 @@ public class RentBook extends javax.swing.JFrame {
     PreparedStatement pStatement;
 
     Book book;
-    
+
+    String ISBN;
+
     /**
      * Creates new form RentBook
      */
@@ -33,12 +35,26 @@ public class RentBook extends javax.swing.JFrame {
         initComponents();
         connection = dbConnect.connectDb();
     }
-    
-    public RentBook(Book book){
+
+    public RentBook(Book book) {
         initComponents();
         connection = dbConnect.connectDb();
         this.book = book;
         jTextFieldISBN.setText(book.getISBN2());
+    }
+
+    public RentBook(String ISBN) {
+        initComponents();
+        connection = dbConnect.connectDb();
+        this.ISBN = ISBN;
+        jTextFieldISBN.setText(ISBN);
+    }
+
+    public RentBook(String AccountNum, String ISBN) {
+        initComponents();
+        connection = dbConnect.connectDb();
+        jTextFieldISBN.setText(ISBN);
+        jTextFieldAccID.setText(AccountNum);
     }
 
     public int generateRentID() {
@@ -587,6 +603,11 @@ public class RentBook extends javax.swing.JFrame {
 
     private void jButtonSearchCustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchCustActionPerformed
 
+        searchCust();
+
+    }//GEN-LAST:event_jButtonSearchCustActionPerformed
+
+    public void searchCust() {
         String query = "select * from Account Where AccountNum = ?";
         try {
             pStatement = connection.prepareStatement(query);
@@ -622,8 +643,7 @@ public class RentBook extends javax.swing.JFrame {
 
             }
         }
-
-    }//GEN-LAST:event_jButtonSearchCustActionPerformed
+    }
 
     private void jTextFieldPricePerWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPricePerWeekActionPerformed
         // TODO add your handling code here:
@@ -646,6 +666,10 @@ public class RentBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldPublisherActionPerformed
 
     private void jButtonSearchBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchBookActionPerformed
+        search();
+    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+
+    public void search() {
         String query = "select * from Book Where ISBN = ?";
         try {
             pStatement = connection.prepareStatement(query);
@@ -679,7 +703,7 @@ public class RentBook extends javax.swing.JFrame {
 
             }
         }
-    }//GEN-LAST:event_jButtonSearchBookActionPerformed
+    }
 
     private void jTextFieldAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAuthorActionPerformed
         // TODO add your handling code here:
@@ -771,6 +795,8 @@ public class RentBook extends javax.swing.JFrame {
         setVisible(false);
         CustomersSearch cs = new CustomersSearch(this);
         cs.setVisible(true);
+        cs.ISBN = this.ISBN;
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

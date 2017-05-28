@@ -27,47 +27,33 @@ public class BookManagement extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
         jLabelSelection2 = new javax.swing.JLabel();
         jLabelLogo2 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        jButtonLendBook4 = new javax.swing.JButton();
-        jButtonReturnBook2 = new javax.swing.JButton();
+        jButtonLendBook = new javax.swing.JButton();
+        jButtonReturnBook = new javax.swing.JButton();
         jLabelAddBook2 = new javax.swing.JLabel();
         jLabelReturnBook2 = new javax.swing.JLabel();
-        jButtonAddBook2 = new javax.swing.JButton();
+        jButtonAddBook = new javax.swing.JButton();
         jLabelRentBook4 = new javax.swing.JLabel();
-        jButtonDeleteBook2 = new javax.swing.JButton();
-        jButtonLendBook5 = new javax.swing.JButton();
-        jButtonModifyBook5 = new javax.swing.JButton();
+        jButtonDeleteBook = new javax.swing.JButton();
+        jButtonListOfBooks = new javax.swing.JButton();
+        jButtonModifyBook = new javax.swing.JButton();
         jLabelReturnBook6 = new javax.swing.JLabel();
         jLabelRentBook5 = new javax.swing.JLabel();
         jLabelDeleteBook6 = new javax.swing.JLabel();
         jLabeldisplayUsername1 = new javax.swing.JLabel();
-        jPanel9 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu = new javax.swing.JMenu();
         jMenuItemHome = new javax.swing.JMenuItem();
-        jMenuItemBookManagement = new javax.swing.JMenuItem();
         jMenuItemReports = new javax.swing.JMenuItem();
         jMenuItemAccManagement = new javax.swing.JMenuItem();
         jMenuItemAbout = new javax.swing.JMenuItem();
         jMenuItemLogout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1255, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Book Management", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
 
@@ -77,17 +63,17 @@ public class BookManagement extends javax.swing.JFrame {
 
         jLabelLogo2.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\lib.jpg")); // NOI18N
 
-        jButtonLendBook4.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\rentBookIcon.png")); // NOI18N
-        jButtonLendBook4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLendBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\rentBookIcon.png")); // NOI18N
+        jButtonLendBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLendBook4jButtonLendBookActionPerformed(evt);
+                jButtonLendBookjButtonLendBookActionPerformed(evt);
             }
         });
 
-        jButtonReturnBook2.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\returnBookIcon.png")); // NOI18N
-        jButtonReturnBook2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonReturnBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\returnBookIcon.png")); // NOI18N
+        jButtonReturnBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonReturnBook2jButtonReturnBookActionPerformed(evt);
+                jButtonReturnBookjButtonReturnBookActionPerformed(evt);
             }
         });
 
@@ -99,10 +85,10 @@ public class BookManagement extends javax.swing.JFrame {
         jLabelReturnBook2.setForeground(new java.awt.Color(102, 0, 0));
         jLabelReturnBook2.setText("Return Book");
 
-        jButtonAddBook2.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\lendBookIcon.png")); // NOI18N
-        jButtonAddBook2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAddBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\lendBookIcon.png")); // NOI18N
+        jButtonAddBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddBook2jButtonAddBookActionPerformed(evt);
+                jButtonAddBookjButtonAddBookActionPerformed(evt);
             }
         });
 
@@ -110,24 +96,24 @@ public class BookManagement extends javax.swing.JFrame {
         jLabelRentBook4.setForeground(new java.awt.Color(102, 0, 0));
         jLabelRentBook4.setText("Rent Book");
 
-        jButtonDeleteBook2.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\bookIcon.png")); // NOI18N
-        jButtonDeleteBook2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDeleteBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\bookIcon.png")); // NOI18N
+        jButtonDeleteBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteBookjButtonDeleteBook2ActionPerformed(evt);
+                jButtonDeleteBookjButtonDeleteBookActionPerformed(evt);
             }
         });
 
-        jButtonLendBook5.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\rentBookIcon.png")); // NOI18N
-        jButtonLendBook5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonListOfBooks.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\rentBookIcon.png")); // NOI18N
+        jButtonListOfBooks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLendBook5jButtonLendBook1ActionPerformed(evt);
+                jButtonListOfBooksjButtonLendBook1ActionPerformed(evt);
             }
         });
 
-        jButtonModifyBook5.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\returnBookIcon.png")); // NOI18N
-        jButtonModifyBook5.addActionListener(new java.awt.event.ActionListener() {
+        jButtonModifyBook.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\returnBookIcon.png")); // NOI18N
+        jButtonModifyBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModifyBook5jButtonModifyBook3jButtonModifyBookActionPerformed(evt);
+                jButtonModifyBookjButtonModifyBook3jButtonModifyBookActionPerformed(evt);
             }
         });
 
@@ -149,11 +135,11 @@ public class BookManagement extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonAddBook2)
+                .addComponent(jButtonAddBook)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonLendBook4)
+                .addComponent(jButtonLendBook)
                 .addGap(18, 18, 18)
-                .addComponent(jButtonReturnBook2)
+                .addComponent(jButtonReturnBook)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(138, 138, 138)
@@ -167,11 +153,11 @@ public class BookManagement extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jButtonModifyBook5)
+                        .addComponent(jButtonModifyBook)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonLendBook5)
+                        .addComponent(jButtonListOfBooks)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonDeleteBook2))
+                        .addComponent(jButtonDeleteBook))
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addGap(111, 111, 111)
                         .addComponent(jLabelReturnBook6)
@@ -187,9 +173,9 @@ public class BookManagement extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonAddBook2)
-                    .addComponent(jButtonLendBook4)
-                    .addComponent(jButtonReturnBook2))
+                    .addComponent(jButtonAddBook)
+                    .addComponent(jButtonLendBook)
+                    .addComponent(jButtonReturnBook))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelRentBook4)
@@ -197,9 +183,9 @@ public class BookManagement extends javax.swing.JFrame {
                     .addComponent(jLabelAddBook2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonDeleteBook2, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonLendBook5, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonModifyBook5, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jButtonDeleteBook, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonListOfBooks, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonModifyBook, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -216,35 +202,20 @@ public class BookManagement extends javax.swing.JFrame {
         jLabeldisplayUsername1.setForeground(new java.awt.Color(102, 0, 0));
         jLabeldisplayUsername1.setText("You are Logged in as: " + Login.username);
 
-        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
-        jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 923, Short.MAX_VALUE)
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabeldisplayUsername1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelSelection2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelLogo2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabeldisplayUsername1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSelection2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelLogo2, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(187, 187, 187))
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(23, 23, 23)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -260,8 +231,7 @@ public class BookManagement extends javax.swing.JFrame {
                     .addComponent(jLabelLogo2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane2.setViewportView(jPanel6);
@@ -277,16 +247,6 @@ public class BookManagement extends javax.swing.JFrame {
             }
         });
         jMenu.add(jMenuItemHome);
-
-        jMenuItemBookManagement.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jMenuItemBookManagement.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\smallBook.png")); // NOI18N
-        jMenuItemBookManagement.setText("Book Management");
-        jMenuItemBookManagement.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemBookManagementActionPerformed(evt);
-            }
-        });
-        jMenu.add(jMenuItemBookManagement);
 
         jMenuItemReports.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jMenuItemReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\Calc.png")); // NOI18N
@@ -336,34 +296,28 @@ public class BookManagement extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(173, 173, 173))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 684, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(665, 665, 665)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(1076, 759));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemBookManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemBookManagementActionPerformed
-        setVisible(false);
-        BookManagement bM = new BookManagement();
-        bM.setVisible(true);
-    }//GEN-LAST:event_jMenuItemBookManagementActionPerformed
+
+    private void jButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddBookActionPerformed
+
+    }//GEN-LAST:event_jButtonAddBookActionPerformed
+
 
     private void jMenuItemReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportsActionPerformed
         // TODO add your handling code here:
@@ -397,29 +351,40 @@ public class BookManagement extends javax.swing.JFrame {
         h.setVisible(true);
     }//GEN-LAST:event_jMenuItemHomeActionPerformed
 
-    private void jButtonModifyBook5jButtonModifyBook3jButtonModifyBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyBook5jButtonModifyBook3jButtonModifyBookActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonModifyBook5jButtonModifyBook3jButtonModifyBookActionPerformed
+    private void jButtonModifyBookjButtonModifyBook3jButtonModifyBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModifyBookjButtonModifyBook3jButtonModifyBookActionPerformed
+        setVisible(false);
+        ModifyBook m = new ModifyBook();
+        m.setVisible(true);
+    }//GEN-LAST:event_jButtonModifyBookjButtonModifyBook3jButtonModifyBookActionPerformed
 
-    private void jButtonLendBook5jButtonLendBook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLendBook5jButtonLendBook1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonLendBook5jButtonLendBook1ActionPerformed
+    private void jButtonListOfBooksjButtonLendBook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListOfBooksjButtonLendBook1ActionPerformed
+        setVisible(false);
+        BooksSearch bs = new BooksSearch(this);
+        bs.setVisible(true);
+    }//GEN-LAST:event_jButtonListOfBooksjButtonLendBook1ActionPerformed
 
-    private void jButtonDeleteBookjButtonDeleteBook2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteBookjButtonDeleteBook2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeleteBookjButtonDeleteBook2ActionPerformed
+    private void jButtonDeleteBookjButtonDeleteBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteBookjButtonDeleteBookActionPerformed
+        setVisible(false);
+        DeleteBook d = new DeleteBook();
+        d.setVisible(true);    }//GEN-LAST:event_jButtonDeleteBookjButtonDeleteBookActionPerformed
 
-    private void jButtonAddBook2jButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddBook2jButtonAddBookActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAddBook2jButtonAddBookActionPerformed
+    private void jButtonAddBookjButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddBookjButtonAddBookActionPerformed
+        setVisible(false);
+        AddBook addB = new AddBook();
+        addB.setVisible(true);
+    }//GEN-LAST:event_jButtonAddBookjButtonAddBookActionPerformed
 
-    private void jButtonReturnBook2jButtonReturnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnBook2jButtonReturnBookActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonReturnBook2jButtonReturnBookActionPerformed
+    private void jButtonReturnBookjButtonReturnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnBookjButtonReturnBookActionPerformed
+        setVisible(false);
+        ReturnBook rb = new ReturnBook();
+        rb.setVisible(true);
+    }//GEN-LAST:event_jButtonReturnBookjButtonReturnBookActionPerformed
 
-    private void jButtonLendBook4jButtonLendBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLendBook4jButtonLendBookActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonLendBook4jButtonLendBookActionPerformed
+    private void jButtonLendBookjButtonLendBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLendBookjButtonLendBookActionPerformed
+        setVisible(false);
+        RentBook rb = new RentBook();
+        rb.setVisible(true);
+    }//GEN-LAST:event_jButtonLendBookjButtonLendBookActionPerformed
 
     /**
      * @param args the command line arguments
@@ -458,48 +423,29 @@ public class BookManagement extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddBook;
-    private javax.swing.JButton jButtonAddBook2;
     private javax.swing.JButton jButtonDeleteBook;
-    private javax.swing.JButton jButtonDeleteBook2;
     private javax.swing.JButton jButtonLendBook;
-    private javax.swing.JButton jButtonLendBook1;
-    private javax.swing.JButton jButtonLendBook4;
-    private javax.swing.JButton jButtonLendBook5;
-    private javax.swing.JButton jButtonModifyBook3;
-    private javax.swing.JButton jButtonModifyBook5;
+    private javax.swing.JButton jButtonListOfBooks;
+    private javax.swing.JButton jButtonModifyBook;
     private javax.swing.JButton jButtonReturnBook;
-    private javax.swing.JButton jButtonReturnBook2;
-    private javax.swing.JLabel jLabelAddBook;
     private javax.swing.JLabel jLabelAddBook2;
-    private javax.swing.JLabel jLabelDeleteBook4;
     private javax.swing.JLabel jLabelDeleteBook6;
-    private javax.swing.JLabel jLabelLogo;
     private javax.swing.JLabel jLabelLogo2;
-    private javax.swing.JLabel jLabelRentBook;
-    private javax.swing.JLabel jLabelRentBook1;
     private javax.swing.JLabel jLabelRentBook4;
     private javax.swing.JLabel jLabelRentBook5;
-    private javax.swing.JLabel jLabelReturnBook;
     private javax.swing.JLabel jLabelReturnBook2;
-    private javax.swing.JLabel jLabelReturnBook4;
     private javax.swing.JLabel jLabelReturnBook6;
-    private javax.swing.JLabel jLabelSelection;
     private javax.swing.JLabel jLabelSelection2;
     private javax.swing.JLabel jLabeldisplayUsername1;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAccManagement;
-    private javax.swing.JMenuItem jMenuItemBookManagement;
     private javax.swing.JMenuItem jMenuItemHome;
     private javax.swing.JMenuItem jMenuItemLogout;
     private javax.swing.JMenuItem jMenuItemReports;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
