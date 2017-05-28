@@ -45,13 +45,11 @@ public class DeleteBook extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextFieldPricePerWeek = new javax.swing.JTextField();
         jLabelPages = new javax.swing.JLabel();
         jLabelBookName = new javax.swing.JLabel();
         jLabelPublisher = new javax.swing.JLabel();
         jTextFieldBookName = new javax.swing.JTextField();
         jButtonBack = new javax.swing.JButton();
-        jLabelPricePerWeek = new javax.swing.JLabel();
         jTextFieldISBN = new javax.swing.JTextField();
         jTextFieldPages = new javax.swing.JTextField();
         jTextFieldPublisher = new javax.swing.JTextField();
@@ -67,13 +65,6 @@ public class DeleteBook extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Delete Book", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 24), new java.awt.Color(102, 0, 0))); // NOI18N
-
-        jTextFieldPricePerWeek.setEditable(false);
-        jTextFieldPricePerWeek.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPricePerWeekActionPerformed(evt);
-            }
-        });
 
         jLabelPages.setText("Pages:");
 
@@ -95,8 +86,6 @@ public class DeleteBook extends javax.swing.JFrame {
                 jButtonBackActionPerformed(evt);
             }
         });
-
-        jLabelPricePerWeek.setText("Price Per Week:");
 
         jTextFieldISBN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,40 +157,39 @@ public class DeleteBook extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAuthor)
-                            .addComponent(jLabelPublisher)
-                            .addComponent(jLabelPages)
-                            .addComponent(jLabelEdition)
-                            .addComponent(jLabelBookName)
-                            .addComponent(jLabelISBN)
-                            .addComponent(jLabelPricePerWeek, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldISBN)
-                            .addComponent(jTextFieldPublisher)
-                            .addComponent(jTextFieldPages)
-                            .addComponent(jTextFieldEdition)
-                            .addComponent(jTextFieldBookName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButtonListAllBooks)
                             .addComponent(jButtonDeleteBook))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonSearchBook, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButtonBack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelAuthor)
+                            .addComponent(jLabelPublisher)
+                            .addComponent(jLabelPages)
+                            .addComponent(jLabelEdition)
+                            .addComponent(jLabelBookName)
+                            .addComponent(jLabelISBN))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldISBN)
+                            .addComponent(jTextFieldPublisher)
+                            .addComponent(jTextFieldPages)
+                            .addComponent(jTextFieldEdition)
+                            .addComponent(jTextFieldBookName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 20, Short.MAX_VALUE))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButtonBack, jButtonDeleteBook, jButtonListAllBooks, jButtonSearchBook});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelAuthor, jLabelBookName, jLabelEdition, jLabelISBN, jLabelPages, jLabelPricePerWeek, jLabelPublisher});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelAuthor, jLabelBookName, jLabelEdition, jLabelISBN, jLabelPages, jLabelPublisher});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,11 +218,7 @@ public class DeleteBook extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAuthor)
                     .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPricePerWeek)
-                    .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSearchBook)
                     .addComponent(jButtonListAllBooks))
@@ -247,7 +231,7 @@ public class DeleteBook extends javax.swing.JFrame {
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButtonBack, jButtonDeleteBook, jButtonListAllBooks, jButtonSearchBook});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextFieldAuthor, jTextFieldBookName, jTextFieldEdition, jTextFieldISBN, jTextFieldPages, jTextFieldPricePerWeek, jTextFieldPublisher});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jTextFieldAuthor, jTextFieldBookName, jTextFieldEdition, jTextFieldISBN, jTextFieldPages, jTextFieldPublisher});
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -269,10 +253,6 @@ public class DeleteBook extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(355, 486));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextFieldPricePerWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPricePerWeekActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPricePerWeekActionPerformed
 
     private void jTextFieldBookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBookNameActionPerformed
         // TODO add your handling code here:
@@ -331,8 +311,6 @@ public class DeleteBook extends javax.swing.JFrame {
                 jTextFieldPages.setText(s3);
                 String s4 = result.getString("Author");
                 jTextFieldAuthor.setText(s4);
-                String s5 = result.getString("PricePerWeek");
-                jTextFieldPricePerWeek.setText(s5);
                 result.close();
                 pStatement.close();
             } else {
@@ -410,7 +388,6 @@ public class DeleteBook extends javax.swing.JFrame {
         this.jTextFieldEdition.setText("");
         this.jTextFieldPages.setText("");
         this.jTextFieldAuthor.setText("");
-        this.jTextFieldPricePerWeek.setText("");
 
     }
 
@@ -424,7 +401,6 @@ public class DeleteBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelEdition;
     private javax.swing.JLabel jLabelISBN;
     private javax.swing.JLabel jLabelPages;
-    private javax.swing.JLabel jLabelPricePerWeek;
     private javax.swing.JLabel jLabelPublisher;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldAuthor;
@@ -432,7 +408,6 @@ public class DeleteBook extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldEdition;
     private javax.swing.JTextField jTextFieldISBN;
     private javax.swing.JTextField jTextFieldPages;
-    private javax.swing.JTextField jTextFieldPricePerWeek;
     private javax.swing.JTextField jTextFieldPublisher;
     // End of variables declaration//GEN-END:variables
 }

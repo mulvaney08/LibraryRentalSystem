@@ -98,12 +98,10 @@ public class RentBook extends javax.swing.JFrame {
         jButtonClearCust = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTextFieldPricePerWeek = new javax.swing.JTextField();
         jLabelPages1 = new javax.swing.JLabel();
         jLabelBookName1 = new javax.swing.JLabel();
         jLabelPublisher1 = new javax.swing.JLabel();
         jTextFieldBookName = new javax.swing.JTextField();
-        jLabelPricePerWeek1 = new javax.swing.JLabel();
         jTextFieldISBN = new javax.swing.JTextField();
         jTextFieldPages = new javax.swing.JTextField();
         jTextFieldPublisher = new javax.swing.JTextField();
@@ -312,13 +310,6 @@ public class RentBook extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Book Information", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 0, 18), new java.awt.Color(102, 0, 0))); // NOI18N
 
-        jTextFieldPricePerWeek.setEditable(false);
-        jTextFieldPricePerWeek.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPricePerWeekActionPerformed(evt);
-            }
-        });
-
         jLabelPages1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jLabelPages1.setText("Pages:");
 
@@ -334,9 +325,6 @@ public class RentBook extends javax.swing.JFrame {
                 jTextFieldBookNameActionPerformed(evt);
             }
         });
-
-        jLabelPricePerWeek1.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jLabelPricePerWeek1.setText("Price Per Week:");
 
         jTextFieldISBN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -428,13 +416,6 @@ public class RentBook extends javax.swing.JFrame {
                             .addComponent(jTextFieldBookName, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldISBN, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldEdition)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonListAllBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabelPricePerWeek1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -444,7 +425,10 @@ public class RentBook extends javax.swing.JFrame {
                                 .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jButtonSearchBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                                .addComponent(jButtonClearBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jButtonClearBook, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButtonListAllBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
@@ -474,10 +458,6 @@ public class RentBook extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelAuthor1)
                     .addComponent(jTextFieldAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelPricePerWeek1)
-                    .addComponent(jTextFieldPricePerWeek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSearchBook)
                 .addGap(18, 18, 18)
@@ -645,10 +625,6 @@ public class RentBook extends javax.swing.JFrame {
         }
     }
 
-    private void jTextFieldPricePerWeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPricePerWeekActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPricePerWeekActionPerformed
-
     private void jTextFieldBookNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldBookNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldBookNameActionPerformed
@@ -686,8 +662,6 @@ public class RentBook extends javax.swing.JFrame {
                 jTextFieldPages.setText(s3);
                 String s4 = result.getString("Author");
                 jTextFieldAuthor.setText(s4);
-                String s5 = result.getString("PricePerWeek");
-                jTextFieldPricePerWeek.setText(s5);
                 result.close();
                 pStatement.close();
             } else {
@@ -855,7 +829,6 @@ public class RentBook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPages;
     private javax.swing.JLabel jLabelPages1;
     private javax.swing.JLabel jLabelPricePerWeek;
-    private javax.swing.JLabel jLabelPricePerWeek1;
     private javax.swing.JLabel jLabelPricePerWeek2;
     private javax.swing.JLabel jLabelPublisher;
     private javax.swing.JLabel jLabelPublisher1;
@@ -877,7 +850,6 @@ public class RentBook extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldISBN;
     private javax.swing.JTextField jTextFieldLName;
     private javax.swing.JTextField jTextFieldPages;
-    private javax.swing.JTextField jTextFieldPricePerWeek;
     private javax.swing.JTextField jTextFieldPublisher;
     // End of variables declaration//GEN-END:variables
 
@@ -889,7 +861,6 @@ public class RentBook extends javax.swing.JFrame {
         this.jTextFieldPublisher.setText("");
         this.jTextFieldPages.setText("");
         this.jTextFieldAuthor.setText("");
-        this.jTextFieldPricePerWeek.setText("");
     }
 
     private void clearFormCust() {

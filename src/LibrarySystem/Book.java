@@ -12,26 +12,26 @@ package LibrarySystem;
 public class Book {
 
     private int ISBN;
-    private String ISBN2, Name, Edition, Publisher, Pages, Author, PricePerWeek;
+    private String ISBN2, Name, Edition, Publisher, Pages, Author;
 
-    public Book(int ISBN, String Name, String Edition, String Publisher, String Pages, String Author, String PricePerWeek) {
+    public Book(int ISBN, String Name, String Edition, String Publisher, String Pages, String Author) {
         this.ISBN = ISBN;
         this.Name = Name;
         this.Edition = Edition;
         this.Author = Author;
         this.Pages = Pages;
         this.Publisher = Publisher;
-        this.PricePerWeek = PricePerWeek;
+
     }
 
-    public Book(String ISBN2, String Name, String Edition, String Publisher, String Pages, String Author, String PricePerWeek) {
+    public Book(String ISBN2, String Name, String Edition, String Publisher, String Pages, String Author) {
         this.ISBN2 = ISBN2;
         this.Name = Name;
         this.Edition = Edition;
         this.Publisher = Publisher;
         this.Pages = Pages;
         this.Author = Author;
-        this.PricePerWeek = PricePerWeek;
+
     }
 
     public int getISBN() {
@@ -52,10 +52,6 @@ public class Book {
 
     public String getPages() {
         return Pages;
-    }
-
-    public String getPricePerWeek() {
-        return PricePerWeek;
     }
 
     public String getPublisher() {
@@ -80,10 +76,6 @@ public class Book {
 
     public void setPages(String Pages) {
         this.Pages = Pages;
-    }
-
-    public void setPricePerWeek(String PricePerWeek) {
-        this.PricePerWeek = PricePerWeek;
     }
 
     public void setPublisher(String Publisher) {

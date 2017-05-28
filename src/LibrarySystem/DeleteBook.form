@@ -59,30 +59,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelAuthor" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelPublisher" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelPages" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelEdition" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelBookName" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelISBN" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelPricePerWeek" linkSize="5" pref="115" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextFieldISBN" max="32767" attributes="0"/>
-                              <Component id="jTextFieldPublisher" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldPages" max="32767" attributes="0"/>
-                              <Component id="jTextFieldEdition" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextFieldBookName" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
-                              <Component id="jTextFieldAuthor" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                              <Component id="jTextFieldPricePerWeek" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jButtonListAllBooks" linkSize="1" min="-2" max="-2" attributes="0"/>
                               <Component id="jButtonDeleteBook" linkSize="1" min="-2" max="-2" attributes="0"/>
@@ -91,6 +70,26 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jButtonSearchBook" linkSize="1" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="jButtonBack" linkSize="1" alignment="1" min="-2" pref="96" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabelAuthor" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelPublisher" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelPages" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelEdition" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelBookName" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelISBN" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextFieldISBN" max="32767" attributes="0"/>
+                              <Component id="jTextFieldPublisher" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTextFieldPages" max="32767" attributes="0"/>
+                              <Component id="jTextFieldEdition" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTextFieldBookName" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
+                              <Component id="jTextFieldAuthor" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -131,12 +130,7 @@
                       <Component id="jLabelAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldAuthor" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabelPricePerWeek" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextFieldPricePerWeek" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonSearchBook" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonListAllBooks" linkSize="2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -152,14 +146,6 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextFieldPricePerWeek">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldPricePerWeekActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabelPages">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pages:"/>
@@ -193,11 +179,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBackActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabelPricePerWeek">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Price Per Week:"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldISBN">
           <Events>

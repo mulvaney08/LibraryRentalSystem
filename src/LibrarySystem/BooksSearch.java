@@ -98,7 +98,7 @@ public class BooksSearch extends javax.swing.JFrame {
 
         try {
 
-            String query = "select * from Book where ISBN LIKE '%" + searchValue + "%' OR Name LIKE '%" + searchValue + "%' OR Edition LIKE '%" + searchValue + "%' OR Publisher LIKE '%" + searchValue + "%' OR Pages LIKE '%" + searchValue + "%' OR Author LIKE '%" + searchValue + "%' OR PricePerWeek LIKE '%" + searchValue + "%'";
+            String query = "select * from Book where ISBN LIKE '%" + searchValue + "%' OR Name LIKE '%" + searchValue + "%' OR Edition LIKE '%" + searchValue + "%' OR Publisher LIKE '%" + searchValue + "%' OR Pages LIKE '%" + searchValue + "%' OR Author LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
@@ -113,8 +113,7 @@ public class BooksSearch extends javax.swing.JFrame {
                         result.getString("Edition"),
                         result.getString("Publisher"),
                         result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                        result.getString("Author"));
 
                 booksList.add(book);
 
@@ -147,8 +146,7 @@ public class BooksSearch extends javax.swing.JFrame {
                         result.getString("Edition"),
                         result.getString("Publisher"),
                         result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                        result.getString("Author"));
 
                 booksList.add(book);
 
@@ -181,8 +179,7 @@ public class BooksSearch extends javax.swing.JFrame {
                         result.getString("Edition"),
                         result.getString("Publisher"),
                         result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                        result.getString("Author"));
 
                 booksList.add(book);
 
@@ -215,8 +212,7 @@ public class BooksSearch extends javax.swing.JFrame {
                         result.getString("Edition"),
                         result.getString("Publisher"),
                         result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                        result.getString("Author"));
 
                 booksList.add(book);
 
@@ -249,8 +245,7 @@ public class BooksSearch extends javax.swing.JFrame {
                         result.getString("Edition"),
                         result.getString("Publisher"),
                         result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                        result.getString("Author"));
 
                 booksList.add(book);
 
@@ -283,42 +278,7 @@ public class BooksSearch extends javax.swing.JFrame {
                         result.getString("Edition"),
                         result.getString("Publisher"),
                         result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
-
-                booksList.add(book);
-
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-
-        return booksList;
-    }
-
-    public ArrayList<Book> ListBooksPricePerWeek(String searchValue) {
-        ArrayList<Book> booksList = new ArrayList<Book>();
-
-        try {
-
-            String query = "select * from Book where PricePerWeek LIKE '%" + searchValue + "%'";
-
-            statement = connection.createStatement();
-
-            result = statement.executeQuery(query);
-
-            Book book;
-
-            while (result.next()) {
-
-                book = new Book(result.getInt("ISBN"),
-                        result.getString("Name"),
-                        result.getString("Edition"),
-                        result.getString("Publisher"),
-                        result.getString("Pages"),
-                        result.getString("Author"),
-                        result.getString("PricePerWeek"));
+                        result.getString("Author"));
 
                 booksList.add(book);
 
@@ -358,13 +318,10 @@ public class BooksSearch extends javax.swing.JFrame {
             case "Author":
                 books = ListBooksAuthor(jTextFieldSearch.getText());
                 break;
-            case "PricePerWeek":
-                books = ListBooksPricePerWeek(jTextFieldSearch.getText());
-                break;
         }
 
-        dm.setColumnIdentifiers(new Object[]{"ISBN", "Name", "Edition", "Publisher", "Pages", "Author", "PricePerWeek"});
-        Object[] row = new Object[7];
+        dm.setColumnIdentifiers(new Object[]{"ISBN", "Name", "Edition", "Publisher", "Pages", "Author"});
+        Object[] row = new Object[6];
 
         for (int i = 0; i < books.size(); i++) {
 
@@ -374,7 +331,7 @@ public class BooksSearch extends javax.swing.JFrame {
             row[3] = books.get(i).getPublisher();
             row[4] = books.get(i).getPages();
             row[5] = books.get(i).getAuthor();
-            row[6] = books.get(i).getPricePerWeek();
+
             dm.addRow(row);
         }
 
@@ -389,13 +346,11 @@ public class BooksSearch extends javax.swing.JFrame {
             rb.search();
         } else if (bControl == true) {
             b.setVisible(true);
-        }
-        else if (dControl == true) {
+        } else if (dControl == true) {
             d = new DeleteBook(ISBN);
             d.setVisible(true);
             d.search();
-        }
-        else if (mControl == true) {
+        } else if (mControl == true) {
             m = new ModifyBook(ISBN);
             m.setVisible(true);
             m.search();
@@ -475,7 +430,7 @@ public class BooksSearch extends javax.swing.JFrame {
             }
         });
 
-        jComboBoxChoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Name", "Edition", "Publisher", "Pages", "Author", "PricePerWeek" }));
+        jComboBoxChoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Name", "Edition", "Publisher", "Pages", "Author" }));
 
         jLabel1.setText("Choose filter:");
 
@@ -486,9 +441,9 @@ public class BooksSearch extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 987, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -500,8 +455,7 @@ public class BooksSearch extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonBack)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jButtonBack))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,8 +479,8 @@ public class BooksSearch extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -536,7 +490,7 @@ public class BooksSearch extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(1045, 597));
+        setSize(new java.awt.Dimension(695, 597));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
