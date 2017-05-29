@@ -1,0 +1,1244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="381.5" initialHeight="381.5" initialWidth="763.0" onload="resizeSVG(evt)" onresize="resizeSVG(evt)" width="763.0"><g id="outerG" style="fill:none;stroke:none"><defs><clipPath id="clip1315587816"><path d=" M28.333334 55.0 L28.333334 158.16667 L756.0 158.16667 L756.0 55.0 Z"/></clipPath></defs><script><![CDATA[/*******************************************************************************
+ * Copyright (c) 2009 Actuate Corporation.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *  Actuate Corporation  - initial API and implementation
+ *******************************************************************************/
+/**
+ * This JavaScript library defines classes and methods to handle interactivity
+ * actions on Chart, it is valid for SVG format.
+ * 
+ * @since 2.5.1
+ */
+BuildHelper = function (tag, attrList, text) {
+	this.tag = tag;
+	this.attrList = attrList;
+	this.text = text;
+	this.element = null;
+	this.textNode = null;
+};
+
+BuildHelper.prototype.addToParent = function(parent) {
+	if (!parent)
+		return;
+	var svgDocument = parent.ownerDocument;
+	this.element = svgDocument.createElementNS("http://www.w3.org/2000/svg",
+			this.tag);
+
+	for ( var attribute in this.attrList) {
+		if (attribute == 'classType')
+			this.element
+					.setAttributeNS(null, 'class', this.attrList[attribute]);
+		else
+			this.element.setAttributeNS(null, attribute,
+					this.attrList[attribute]);
+	}
+
+	if (this.text) {
+		this.textNode = svgDocument.createTextNode(this.text);
+		this.element.appendChild(this.textNode);
+	}
+
+	parent.appendChild(this.element);
+};
+
+BuildHelper.prototype.insertBefore = function(parent, before) {
+	if (typeof parent == 'undefined')
+		return;
+	var svgDocument = parent.ownerDocument;
+	this.element = svgDocument.createElementNS("http://www.w3.org/2000/svg",
+			this.tag);
+
+	for ( var attribute in this.attrList) {
+		if (attribute == 'classType')
+			this.element
+					.setAttributeNS(null, 'class', this.attrList[attribute]);
+		else
+			this.element.setAttributeNS(null, attribute,
+					this.attrList[attribute]);
+	}
+
+	if (this.text) {
+		this.textNode = svgDocument.createTextNode(this.text);
+		this.element.appendChild(this.textNode);
+	}
+
+	parent.insertBefore(this.element, before);
+};
+
+BuildHelper.prototype.removeNode = function() {
+	if (this.element)
+		this.element.parentNode.removeChild(this.element);
+	this.tag = "";
+	this.attrList = null;
+	this.text = null;
+	this.element = null;
+	this.textNode = null;
+};
+
+TM = function () { };
+TM.prototype = new Object();
+
+TM.setParent = function (parent, mainSvg) {
+	this.parent = parent;
+	this.mainSvg = mainSvg;
+};
+
+TM.getTitleElement = function (evt) {
+	var elem = evt.currentTarget;
+	if (elem == null)
+		return null;
+	var childs = elem.childNodes;
+	for ( var x = 0; x < childs.length; x++) {
+		if (childs.item(x).nodeType == 1 && childs.item(x).nodeName == "title")
+			return childs.item(x);
+	}
+	return null;
+};
+
+TM.getText = function (elem) {
+	var childs = elem ? elem.childNodes : null;
+	for ( var x = 0; childs && x < childs.length; x++)
+		if (childs.item(x).nodeType == 3)
+			return childs.item(x).nodeValue;
+	return "";
+};
+
+TM.hideTimer = undefined;
+TM.registerHideTimer = function(time) {
+	if (this.hideTimer != undefined)
+		this.unregisterHideTimer();
+	this.hideTimer = setTimeout('TM.remove();',
+			time);
+};
+TM.unregisterHideTimer = function() {
+	try {
+		if (this.hideTimer != undefined)
+			clearTimeout(TM.hideTimer);
+	} catch (e) { }
+};
+
+TM.remove = function () {
+	if (typeof this.group != 'undefined') {
+		this.group.removeNode();
+		this.group = undefined;
+	}
+};
+
+function detectBrowser() {
+    var userAgent = navigator.userAgent;
+    var browserName = navigator.appName;
+    var fullVersion = '' + parseFloat(navigator.appVersion);
+    var majorVersion = parseInt(navigator.appVersion, 10);
+    var versionOffset;
+
+    // UserAgent property is null in some cases. such as Adobe SVG Viewer etc.
+    // browserName and fullVersion will remain as navigator.appName and navigator.appVersion by default
+	if(userAgent != undefined){
+		// The true version is after the browser name in userAgent
+		// For Safari, it may be after "Safari" or "Version" 
+		if ((versionOffset = userAgent.indexOf("MSIE")) != -1) {
+	        browserName = "Microsoft Internet Explorer";
+	        fullVersion = userAgent.substring(versionOffset + 5);
+	    }
+	    else if ((versionOffset = userAgent.indexOf("Chrome")) != -1) {
+	        browserName = "Chrome";
+	        fullVersion = userAgent.substring(versionOffset + 7);
+	    }
+	    
+	    else if ((versionOffset = userAgent.indexOf("Safari")) != -1) {
+	        browserName = "Safari";
+	        fullVersion = userAgent.substring(versionOffset + 7);
+	        if ((versionOffset = userAgent.indexOf("Version")) != -1) fullVersion = userAgent.substring(versionOffset + 8);
+	    }
+	    else if ((versionOffset = userAgent.indexOf("Firefox")) != -1) {
+	        browserName = "Firefox";
+	        fullVersion = userAgent.substring(versionOffset + 8);
+	    }
+	}
+
+    // Trim the semicolon or space
+	var index;
+    if ((index = fullVersion.indexOf(";")) != -1) fullVersion = fullVersion.substring(0, index);
+    if ((index = fullVersion.indexOf(" ")) != -1) fullVersion = fullVersion.substring(0, index);
+
+    majorVersion = parseInt('' + fullVersion, 10);
+    if (isNaN(majorVersion)) {
+        majorVersion = parseInt(navigator.appVersion, 10);
+    }
+    
+    return {"browserName" : browserName, "majorVersion" : majorVersion};
+};
+
+function isSvgTitleToolTipSupported() {
+	var browserInfo = detectBrowser();
+	var isSupported = false;
+	
+	if(((browserInfo.browserName === "Chrome") && (browserInfo.majorVersion >= 3)) ||
+		((browserInfo.browserName === "Firefox") && (browserInfo.majorVersion >= 4)) ||
+		((browserInfo.browserName === "Safari") && (browserInfo.majorVersion >= 4)) ||
+		((browserInfo.browserName === "Microsoft Internet Explorer") && (browserInfo.majorVersion >= 9))) {
+		
+		isSupported = true;
+	}
+
+	return isSupported;
+};
+
+TM.show = function (evt, id, title, tooltipText) {
+	// If the browser has native tooltip for title element, do not show
+	// it twice.
+	if (evt.type == 'mousemove') {
+		if (isSvgTitleToolTipSupported()) {
+			return;
+		}
+	}
+	
+	if (id != null && typeof id != 'undefined') {
+		var mainSvg = evt.target.ownerDocument;
+		var comp = mainSvg.getElementById(id);
+		var styleStr = comp.getAttribute("style");
+		rHiddenExp = /visibility:[ ]*hidden/g;
+		results = styleStr.search(rHiddenExp);
+		if (results != -1)
+			return;
+	}
+	var text = TM.getText(TM.getTitleElement(evt));
+	if ( tooltipText ) text = tooltipText;
+	if (title)
+		text = TM.getText(title);
+	var x = evt.clientX;
+	var y = evt.clientY;
+	update = true;
+	if (this.oldX != 'undefined') {
+		diffX = (x - this.oldX);
+		if (diffX < 0)
+			diffX = diffX * (-1);
+		diffY = (y - this.oldY);
+		if (diffY < 0)
+			diffY = diffY * (-1);
+		if ((diffY > 5) || (diffX > 5))
+			update = true;
+	}
+	if (update)
+		TM.remove();
+	if (typeof this.group == 'undefined') {
+		this.oldX = x;
+		this.oldY = y;
+		this.height = 15;
+		this.xPadding = 5;
+		this.yPadding = 20;
+		var mainSvg = evt.target.ownerDocument.documentElement;
+		var off = mainSvg.currentTranslate;
+		var scl = mainSvg.currentScale;
+		var adjustedX = (x - off.x) / scl;
+		var adjustedY = (y - off.y) / scl;
+		this.group = new BuildHelper("g", {
+			opacity : 0.8,
+			display : "inline",
+			transform : "translate(" + (adjustedX + (10 / scl)) + ","
+					+ (adjustedY + (10 / scl)) + ")"
+		});
+		this.group.addToParent(mainSvg);
+		this.rectangle = new BuildHelper("rect", {
+			id : "test",
+			x : 0,
+			y : 5,
+			transform : "scale(" + (1 / scl) + "," + (1 / scl) + ")",
+			rx : 2,
+			ry : 2,
+			stroke : "black",
+			height : this.height,
+			classType : "tooltip"
+		});
+		this.rectangle.addToParent(this.group.element);
+		var textObj = new BuildHelper("text", {
+			id : "tooltip",
+			x : this.xPadding,
+			y : (this.yPadding),
+			transform : "scale(" + (1 / scl) + "," + (1 / scl) + ")",
+			classType : "tooltip text"
+		});
+		textObj.addToParent(this.group.element);
+		TM.setContent(textObj, text);
+		var outline = textObj.element.getBBox();
+		var tooltipHeight = outline.height + 6;
+		if (tooltipHeight < 17)
+			tooltipHeight = 17;
+		var tooltipWidth = outline.width + 2 * this.xPadding;
+		var root = evt.target.ownerDocument.documentElement;
+		var rootWidth = root.getAttribute('width');
+		var rootHeight = root.getAttribute('height');
+		if (((y + tooltipHeight) > rootHeight)
+				|| ((x + tooltipWidth) > rootWidth)) {
+			var transformX = x + this.xPadding;
+			var transformY = y + this.yPadding;
+			if ((y + tooltipHeight) > rootHeight)
+				transformY = (rootHeight - tooltipHeight) - this.yPadding;
+			if ((x + tooltipWidth) > rootWidth)
+				transformX = (rootWidth - tooltipWidth) - this.xPadding;
+			this.group.element.setAttributeNS(null, "transform", "translate("
+					+ (transformX * xScale) + ", " + (transformY * yScale)
+					+ ")");
+		}
+		this.rectangle.element.setAttributeNS(null, "width", tooltipWidth);
+		this.rectangle.element.setAttributeNS(null, "height", tooltipHeight);
+	}
+	SVGChartUtil.stopBubble(evt);
+	SVGChartUtil.stopDefault(evt);
+};
+
+TM.toggleToolTip = function (evt) {
+	if (typeof this.group != 'undefined') {
+		TM.remove();
+	} else {
+		TM.show(evt);
+	}
+};
+
+TM.setContent = function (textElement, text) {
+	text = text.replace(/\n/g, "\\n");
+	var multiLine = text.split(/\\n/);
+	for ( var x = 0; x < multiLine.length; x++) {
+		if (x == 0) {
+			textObj = new BuildHelper("tspan", {
+				x : 5
+			}, multiLine[x]);
+		} else {
+			textObj = new BuildHelper("tspan", {
+				x : 5,
+				dy : 17
+			}, multiLine[x]);
+		}
+		textObj.addToParent(textElement.element);
+	}
+};
+
+function toggleLabelsVisibility(evt, id, compList, labelList) {
+	var mainSvg = evt.target.ownerDocument;
+	for (var i = 0; i < compList.length; i = i + 1) {
+		var comp = mainSvg.getElementById(id + '_' + compList[i]);
+		if (comp == null)
+			continue;
+		var styleStr = comp.getAttribute("style");
+		rVisibleExp = /visibility:[ ]*visible/g;
+		rInheritExp = /visibility:[ ]*inherit/g;
+		rHiddenExp = /visibility:[ ]*hidden/g;
+		results = styleStr.search(rVisibleExp);
+		inResults = styleStr.search(rInheritExp);
+		if ((results == -1) && (inResults == -1)) {
+			results = styleStr.search(rHiddenExp);
+			if (results == -1)
+				styleStr = styleStr + "visibility:hidden;";
+			else
+				styleStr = styleStr.replace(rHiddenExp, "visibility:visible");
+		} else {
+			if (inResults == -1) {
+				styleStr = styleStr.replace(rVisibleExp, "visibility:hidden");
+			} else {
+				styleStr = styleStr.replace(rInheritExp, "visibility:hidden");
+			}
+		}
+		comp.setAttributeNS(null, "style", styleStr);
+	}
+}
+function toggleVisibility(evt, id, compList, labelList) {
+	var mainSvg = evt.target.ownerDocument;
+	var isHidden = true;
+	for (var i = 0; i < compList.length; i = i + 1) {
+		var comp = mainSvg.getElementById(id + '_' + compList[i]);
+		if (comp == null)
+			continue;
+		var styleStr = comp.getAttribute("style");
+		rVisibleExp = /visibility:[ ]*visible/g;
+		rHiddenExp = /visibility:[ ]*hidden/g;
+		results = styleStr.search(rVisibleExp);
+		if (results == -1) {
+			results = styleStr.search(rHiddenExp);
+			if (results == -1)
+				styleStr = styleStr + "visibility:hidden;";
+			else {
+				styleStr = styleStr.replace(rHiddenExp, "visibility:visible");
+				isHidden = false;
+			}
+		} else {
+			styleStr = styleStr.replace(rVisibleExp, "visibility:hidden");
+		}
+		comp.setAttributeNS(null, "style", styleStr);
+	}
+	if (labelList != null) {
+		for (i = 0; i < labelList.length; i = i + 1) {
+			var comp = mainSvg.getElementById(id + '_' + labelList[i] + '_g');
+			if (comp == null)
+				continue;
+			var styleStr = comp.getAttribute("style");
+			if (isHidden) {
+				styleStr = styleStr + "visibility:hidden;";
+				toggleLabelVisibility(evt, id + '_' + labelList[i], 'inherit');
+			} else {
+				styleStr = styleStr.replace(rHiddenExp, "visibility:visible");
+			}
+			comp.setAttributeNS(null, "style", styleStr);
+		}
+	}
+}
+function toggleLabelVisibility(evt, id, property) {
+	var mainSvg = evt.target.ownerDocument;
+	var comp = mainSvg.getElementById(id);
+	var styleStr = comp.getAttribute("style");
+	rVisibleExp = /visibility:[ ]*visible/g;
+	rInheritExp = /visibility:[ ]*inherit/g;
+	rHiddenExp = /visibility:[ ]*hidden/g;
+	results = styleStr.search(rVisibleExp);
+	inResults = styleStr.search(rInheritExp);
+	if ((results == -1) && (inResults == -1)) {
+		results = styleStr.search(rHiddenExp);
+		if (results == -1)
+			styleStr = styleStr + "visibility:" + property + ";";
+	} else {
+		if (inResults == -1)
+			styleStr = styleStr.replace(rVisibleExp, "visibility:" + property);
+		else
+			styleStr = styleStr.replace(rInheritExp, "visibility:" + property);
+	}
+	comp.setAttributeNS(null, "style", styleStr);
+}
+function toHex(val) {
+	strVal = Number(val).toString(16);
+	while (strVal.length < 6) {
+		strVal = "0" + strVal;
+	}
+	return strVal;
+}
+function getXorColor(color) {
+	var value = parseInt(color, 16);
+	value = 0xFFFFFF ^ value;
+	return "#" + toHex(value);
+}
+var oldCompId = null;
+var oldCompList = null;
+var fillToColor = new Array();
+var strokeToColor = new Array();
+function highlight(evt, id, compList) {
+	highlightElement(evt, oldCompId, oldCompList, false);
+	if (id != oldCompId) {
+		highlightElement(evt, id, compList, true);
+		oldCompId = id;
+		oldCompList = compList;
+	} else {
+		oldCompId = null;
+		oldCompList = null;
+		fillToColor = new Array();
+		strokeToColor = new Array();
+	}
+}
+function highlightElement(evt, id, compList, highlight) {
+	if ((id == null) || (compList == null))
+		return;
+	var mainSvg = evt.target.ownerDocument;
+	for (var i = 0; i < compList.length; i = i + 1) {
+		var comp = mainSvg.getElementById(id + '_' + compList[i]);
+		if (comp == null)
+			continue;
+		var styleStr = comp.getAttribute("style");
+		// There's a blank between property name and value in IE9, so here
+		// remove the blank first
+		styleStr = styleStr.replace(/:[ ]*/g,':');
+		fillIndex = styleStr.search("fill:");
+		if (fillIndex != -1) {
+			styleStr = getNewStyle(styleStr, fillIndex, "fill:", highlight,
+					fillToColor, compList[i]);
+		}
+		strokeIndex = styleStr.search("stroke:");
+		if (strokeIndex != -1) {
+			styleStr = getNewStyle(styleStr, strokeIndex, "stroke:", highlight,
+					strokeToColor, compList[i]);
+		}
+		comp.setAttributeNS(null, "style", styleStr);
+	}
+}
+function getNewStyle(style, index, styleAttr, highlight, lookUpTable, id) {
+    var start = index + styleAttr.length;
+    var end = style.length;
+    for ( var i = start; i < style.length; i++ ) {
+         if ( style.charAt(i) == ';' ) {
+             end = i;
+             break;
+         }
+    }
+    color = style.substring(start, end);
+    if (color.substring(0, 6).search("none") != -1)
+        return style;
+    rgbIndex = color.search("rgb");
+    urlIndex = color.search("url");
+    if (rgbIndex == -1 || urlIndex != -1 ) {
+        if ( urlIndex != -1 ) {
+        	var rgbPattern = /rgb\s*([^\x27]+)/g;
+	        var rgbResult = rgbPattern.exec(style);
+    	    if ( rgbResult != null && typeof rgbResult != 'undefnied' ) {
+        	    style = style.replace( rgbPattern, "");
+            	style = style + rgbResult[0].substring( rgbResult[0].search(";") );
+        	}
+        }
+
+        var urlStr = undefined;
+        if (styleAttr == "fill:")
+            urlStr = /fill:[\x20]*url\(#([^\x27]+)\)[\x20]*;/g;
+        else
+            urlStr = /stroke:[\x20]*url\(#([^\x27]+)\)[\x20]*;/g;
+        var result = urlStr.exec(style);
+        if (result != null && typeof result != 'undefined') {
+            var endOf = /\w+h\b/;
+            var re =  endOf.exec(result[1]);
+            if ( typeof re == 'undefined' || re == null ) {
+                return style.replace(urlStr, styleAttr + "url(#" + result[1]
+                        + "h);");
+            } else {
+                return style.replace(urlStr, styleAttr + "url(#"
+                        + result[1].substring(0, result[1].length - 1) + ");");
+            }
+        } else {
+            hexColor = color.substring(1, 7);
+            hc = getHighlight(hexColor, highlight, lookUpTable, id);
+            return style.replace(styleAttr + "#" + hexColor, styleAttr + hc);
+        }
+    } else {
+        bracketIndex = color.search("\\)");
+        color = color.substring(0, bracketIndex);
+        hexColor = getHexFromRGB(color);
+        hc = getHighlight(hexColor, highlight, lookUpTable, id);
+        return style.substring(0, index)
+                + styleAttr
+                + hc
+                + style.substring(index + bracketIndex + styleAttr.length + 1,
+                        style.length);
+    } 
+    return style;
+}
+function redirect(target, url) {
+	if (isIE() && getIEVersion() < 9) {
+		// SVG viewer in IE has issue in location.href, but IE 9 supports native
+		// SVG so works well.
+		target = '_blank';
+	}
+	if (target == '_top') {
+		window.top.location.href = url;
+	} else if (target == '_parent') {
+		parent.location.href = url;
+	} else if (target == '_self') {
+		parent.location.href = url;
+	} else {
+		// Include '_blank'
+		try {
+			open(url);
+		} catch (e) {
+		}
+	}
+}
+function isIPadIPhone() {
+	var agt = parent.navigator.userAgent.toLowerCase();
+	return agt.match(/iPad/i) || agt.match(/iPhone/i);
+}
+function isAndroid() {
+	var agt = parent.navigator.userAgent.toLowerCase();
+	return (agt.indexOf("android") > -1);
+}
+var isIPadIPhoneAndroid = isIPadIPhone() || isAndroid();
+
+function isIE() {
+	var agt = parent.navigator.userAgent.toLowerCase();
+	return (agt.indexOf("msie") != -1);
+}
+function getIEVersion() {
+	var agt = parent.navigator.userAgent.toLowerCase();
+	var indexStart = agt.indexOf("msie");	
+	if(indexStart>0) {
+		var indexEnd = agt.substring(indexStart).indexOf(";");
+		return parseFloat(agt.substring(indexStart+5,indexStart+indexEnd));
+	}
+	return 0;
+}
+
+var xScale = 1;
+var yScale = 1;
+function resizeSVG(e) {
+	try {
+		var root = e.target.ownerDocument.documentElement;
+		var hotSpot = e.target.ownerDocument.getElementById('hotSpots');
+		var g = e.target.ownerDocument.getElementById('outerG');
+		xScale = innerWidth>0 ? innerWidth / root.getAttribute('initialWidth') : 1;
+		yScale = innerHeight>0 ? innerHeight / root.getAttribute('initialHeight') : 1;
+		root.setAttribute('width', xScale * root.getAttribute('initialWidth'));
+		root
+				.setAttribute('height', yScale
+						* root.getAttribute('initialHeight'));
+		g.setAttributeNS(null, 'transform', 'scale(' + xScale + ',' + yScale
+				+ ')');
+		hotSpot.setAttributeNS(null, 'transform', 'scale(' + xScale + ','
+				+ yScale + ')');
+	} catch (e) {
+	}
+}
+function getHighlight(color, highlight, lookupTable, id) {
+	if (!(highlight)) {
+		color = lookupTable[id];
+	} else {
+		lookupTable[id] = color;
+	}
+	var r = color.substring(0, 2);
+	r = parseInt(r, 16);
+	var g = color.substring(2, 4);
+	g = parseInt(g, 16);
+	var b = color.substring(4, 6);
+	b = parseInt(b, 16);
+	if (highlight) {
+		r = Math.ceil((r + 255) / 2);
+		g = Math.ceil((g + 255) / 2);
+		b = Math.ceil((b + 255) / 2);
+	}
+	rStr = r.toString(16);
+	gStr = g.toString(16);
+	bStr = b.toString(16);
+	while (rStr.length < 2) {
+		rStr = "0" + rStr;
+	}
+	while (gStr.length < 2) {
+		gStr = "0" + gStr;
+	}
+	while (bStr.length < 2) {
+		bStr = "0" + bStr;
+	}
+	return "#" + rStr + gStr + bStr;
+}
+function getHexFromRGB(color) {
+	findThem = /\d{1,3}/g;
+	listOfnum = color.match(findThem);
+	r = Number(listOfnum[0]).toString(16);
+	while (r.length < 2) {
+		r = "0" + r;
+	}
+	g = Number(listOfnum[1]).toString(16);
+	while (g.length < 2) {
+		g = "0" + g;
+	}
+	b = Number(listOfnum[2]).toString(16);
+	while (b.length < 2) {
+		b = "0" + b;
+	}
+	return r + g + b;
+};
+
+MenuLayout = function () {
+	this.width = 0;
+	this.height = 0;
+};
+
+MenuLayout.prototype.updateMenuWidth = function(width) {
+	if (width > this.width)
+		this.width = width;
+};
+
+BirtChartActionsMenu = function() {
+	this.hideTimer = undefined;
+	this.group = undefined;
+	this.menuInfo = undefined;
+};
+BirtChartActionsMenu.prototype= new Object();
+
+BirtChartActionsMenu.TEXT_STYLES = 'font:font-family:font-size:font-size-adjust:font-stretch:font-style:font-variant:font-weight:direction:letter-spacing:text-decoration:unicode-bidi:word-spacing:alignment-baseline:baseline-shift:dominant-baseline:glyph-orientation-horizontal:glyph-orientation-vertical:kerning:text-anchor:writing-mode:cursor:color:';
+
+// Hide tooltip		
+BirtChartActionsMenu.remove = function() {
+	if (typeof this.group != 'undefined') {
+		this.group.removeNode();
+		this.group = undefined;
+	}
+};
+
+BirtChartActionsMenu.show = function (evt, source, menuInfo ) {
+	
+	if ( menuInfo.menuItemNames.length == 0 ) {
+		BirtChartActionsMenu.remove();
+	} else {
+	this.menuInfo = menuInfo;
+	this.menuLayout = new MenuLayout();
+
+	var x = evt.clientX;
+	var y = evt.clientY;
+
+	update = true;
+	if (this.oldX != 'undefined') {
+		diffX = (x - this.oldX);
+		if (diffX < 0)
+			diffX = diffX * (-1);
+		diffY = (y - this.oldY);
+		if (diffY < 0)
+			diffY = diffY * (-1);
+		if ((diffY > 5) || (diffX > 5))
+			update = true;
+	}
+
+	if (update)
+		BirtChartActionsMenu.remove();
+
+	// Destory this menu if no action in two seconds.
+	if ( isIPadIPhoneAndroid ) {
+		this.hideTimer = window.setTimeout('BirtChartActionsMenu.remove();', 2000);
+	}
+	    
+	if (typeof this.group == 'undefined') {
+		this.oldX = x;
+		this.oldY = y;
+		this.xPadding = 5;
+		this.yPadding = 5;
+		var mainSvg = evt.target.ownerDocument.documentElement;
+		var off = mainSvg.currentTranslate;
+		var scl = mainSvg.currentScale;
+		var adjustedX = (x - off.x) / scl;
+		var adjustedY = (y - off.y) / scl;
+		this.group = new BuildHelper('g', {
+			display : 'inline',
+			transform : 'translate(' + adjustedX + ',' + adjustedY + ')'
+		});
+		this.group.addToParent(mainSvg);
+
+		// Create menu items
+		this.menuItems = new Array();
+		this.textItems = new Array();
+		var menuX = 0;
+		var menuY = 0;
+
+		// Create menu.
+		var menu = BirtChartActionsMenu.createMenu(evt, this.group, menuX, menuY, scl);
+		menuX = menuX + 1;
+		menuY = menuY + 1;
+
+		var offset = 0;
+		for ( var i = 0; i < this.menuInfo.menuItemNames.length; i++) {
+			var menuIdentify = this.menuInfo.menuItemNames[i];
+			
+			// Create a menu item.
+			// 1. Create a menu item group.
+			var menuItemGroup = new BuildHelper('g', {
+				opacity : 1,
+				display : 'inline'
+			});
+			// Add to parent.
+			menuItemGroup.addToParent(this.group.element);
+
+			// 2. Create outline of menu item.
+			this.menuItems.push( BirtChartActionsMenu.createMenuItem(evt, menuItemGroup, menuX, menuY,
+					scl, this.menuInfo.menuItems[menuIdentify], menuIdentify, i) );
+			// 3. Create menu item text.
+			this.textItems.push( BirtChartActionsMenu.createTextItem(evt, menuItemGroup, menuX
+					+ this.xPadding, menuY + this.yPadding, scl,
+					this.menuInfo.menuItems[menuIdentify], menuIdentify, i) );
+			var outline = this.textItems[i].element.getBBox();
+			// 4. Adjust menu item bounds.
+			var menuHeight = this.yPadding * 2 + outline.height;
+			var menuWidth = this.xPadding * 2 + outline.width;
+			this.menuItems[i].element.setAttribute('height', menuHeight);
+			this.menuLayout.updateMenuWidth(menuWidth);
+			this.menuLayout.height += menuHeight;
+			menuY = menuY + menuHeight;
+
+			// 5. Adjust menu item text bounds.
+			if (outline.y < 0) {
+				offset += Math.abs(outline.y);
+			}
+			var curY = this.textItems[i].element.getAttribute('y');
+			this.textItems[i].element.setAttribute('y', parseInt(curY) + offset
+					+ this.yPadding);
+		}
+
+		// Set menu layout and styles.
+		menu.element.setAttribute('width', this.menuLayout.width + 2);
+		menu.element.setAttribute('height', this.menuLayout.height + 2);
+		menu.element.setAttribute('stroke', 'black');
+		menu.element.setAttribute('stroke-width', '1px');
+		SVGChartUtil.setStyles(menu.element, BirtChartActionsMenu.getMenuStyles(this.menuInfo.menuStyles));
+
+		// Update all menu items bounds.
+		for ( var i = 0; i < this.menuItems.length; i++) {
+			this.menuItems[i].element.setAttribute('width', this.menuLayout.width);
+		}
+
+		// Adjust position of menu.		
+		var root = evt.target.ownerDocument.documentElement;
+		var rootWidth = root.getAttribute('width');
+		var rootHeight = root.getAttribute('height');
+		var menuWidth = this.menuLayout.width;
+		var menuHeight = this.menuLayout.height;
+		if (((y + menuHeight) > rootHeight) || ((x + menuWidth) > rootWidth)) {
+			var transformX = x + this.xPadding;
+			var transformY = y + this.yPadding;
+			if ((y + menuHeight) > rootHeight)
+				transformY = (rootHeight - menuHeight) - this.yPadding;
+			if ((x + menuWidth) > rootWidth)
+				transformX = (rootWidth - menuWidth) - this.xPadding;
+			if ( transformX < 0 ) transformX = 0;
+			if ( transformY < 0 ) transformY = 0;
+			this.group.element.setAttribute('transform', 'translate('
+					+ (transformX / scl) + ', ' + (transformY / scl) + ')');
+		}
+	}
+	}
+	SVGChartUtil.stopBubble(evt);
+	SVGChartUtil.stopDefault(evt);
+};
+
+BirtChartActionsMenu.createMenu = function(evt, group, xOff, yOff, scl) {
+	var rectangle = new BuildHelper('rect', {
+		id : 'hyperlinkmenu',
+		x : xOff,
+		y : yOff,
+		height : 1,
+		width : 1,
+		fill : 'white',
+		transform : 'scale(' + (1 / scl) + ',' + (1 / scl) + ')',
+		onmouseover : isIPadIPhoneAndroid ? '' : 'BirtChartActionsMenu.onMouseOver( evt )',
+		onmouseout : isIPadIPhoneAndroid ? '' : 'BirtChartActionsMenu.onMouseOut( evt )'
+	});
+
+	rectangle.addToParent(group.element);
+	return rectangle;
+};
+
+BirtChartActionsMenu.createMenuItem = function(evt, group, xOff, yOff, scl,
+		menuItemInfo, identify, index ) {
+	var menuID = 'menuitem_' + menuItemInfo.text + '_' + index;
+	var rectangle = new BuildHelper('rect', {
+		id : menuID,
+		x : xOff,
+		y : yOff,
+		height : 1,
+		width : 1,
+		transform : 'scale(' + (1 / scl) + ',' + (1 / scl) + ')',
+		fill : 'white',
+		stroke : 'none',
+		onmouseover : isIPadIPhoneAndroid ? '' : 'BirtChartActionsMenu.onMouseOver( evt, ' + identify + ');',
+		onmouseout : isIPadIPhoneAndroid ? '' : 'BirtChartActionsMenu.onMouseOut( evt, ' + identify + ');',
+		onclick : 'BirtChartActionsMenu.executeMenuAction( evt, ' + identify + ');'
+	});
+
+	rectangle.addToParent(group.element);
+	SVGChartUtil.setStyles(rectangle.element, BirtChartActionsMenu.getMenuStyles(this.menuInfo.menuItemStyles));
+	BirtChartActionsMenu.createTooltipItem(evt, rectangle, menuItemInfo.tooltip);
+	return rectangle;
+};
+
+BirtChartActionsMenu.createTextItem = function(evt, group, xOff, yOff, scl,
+		menuItemInfo, identify, index ) {
+	var menuID = 'menuitem_' + menuItemInfo.text + '_' + index;
+	var textObj = new BuildHelper('text', {
+		id : 'text_' + menuID,
+		x : xOff,
+		y : yOff,
+		transform : 'scale(' + (1 / scl) + ',' + (1 / scl) + ')',
+		style : 'text-anchor:start; fill:black',
+		onmouseover : isIPadIPhoneAndroid ? '' : 'BirtChartActionsMenu.onMouseOver( evt, ' + identify + ');',
+		onmouseout : isIPadIPhoneAndroid ? '' : 'BirtChartActionsMenu.onMouseOut( evt, ' + identify + ');',
+		onclick : 'BirtChartActionsMenu.executeMenuAction( evt, ' + identify + ');'
+	});
+
+	textObj.addToParent(group.element);
+	var styles = BirtChartActionsMenu.getTextStyles(this.menuInfo.menuItemStyles)
+	BirtChartActionsMenu.setContent(evt, textObj, styles, menuItemInfo.text, menuItemInfo.tooltip);
+	SVGChartUtil.setStyles(textObj.element, styles);
+	if (!BirtChartActionsMenu.isSetCursor(styles))
+		textObj.element.setAttribute('pointer-events', 'none');
+
+	return textObj;
+};
+
+BirtChartActionsMenu.setContent = function(evt, textElement, styles, text, tooltip) {
+	text = text.replace(/\n/g, '\\n');
+	var multiLine = text.split(/\n/);
+	for ( var x = 0; x < multiLine.length; x++) {
+		if (x == 0) {
+			textObj = new BuildHelper('tspan', {
+				x : 5,
+				onmouseover : isIPadIPhoneAndroid ? '' : 'BirtChartActionsMenu.showTooltip(evt);',
+				onmouseout : isIPadIPhoneAndroid ? '' : 'try{TM.remove();}catch(e){}'
+			}, multiLine[x]);
+		} else {
+			textObj = new BuildHelper('tspan', {
+				x : 5,
+				dy : 17,
+				onmouseover : isIPadIPhoneAndroid ? '' : 'BirtChartActionsMenu.showTooltip(evt);',
+				onmouseout : isIPadIPhoneAndroid ? '' : 'try{TM.remove();}catch(e){}'
+			}, multiLine[x]);
+		}
+		textObj.addToParent(textElement.element);
+		SVGChartUtil.setStyles(textObj.element, styles);
+		if (!BirtChartActionsMenu.isSetCursor(styles))
+			textObj.element.setAttribute('pointer-events', 'none');
+		BirtChartActionsMenu.createTooltipItem(evt, textElement, tooltip);
+	}
+};
+
+BirtChartActionsMenu.createTooltipItem = function(evt, parent, tooltip) {
+	if (typeof tooltip == 'undefined')
+		return null;
+	var title = new BuildHelper('title', {
+		id : 'title_' + tooltip
+	});
+	title.addToParent(parent.element);
+	var textObj = evt.target.ownerDocument.createTextNode(tooltip);
+	title.element.appendChild(textObj);
+	return title;
+};
+
+BirtChartActionsMenu.showTooltip = function(evt) {
+	try {
+		var elem = BirtChartActionsMenu.getTitleElement(evt.currentTarget);
+		if (elem != null)
+			TM.show(evt, null, elem);
+	} catch (e) {
+	}
+	return;
+};
+
+BirtChartActionsMenu.getTitleElement = function(elem) {
+	if (elem == null)
+		return null;
+	var childs = elem.childNodes;
+
+	for ( var x = 0; x < childs.length; x++) {
+		if (childs.item(x).nodeType == 1 && childs.item(x).nodeName == 'title')
+			return childs.item(x);
+		var e = BirtChartActionsMenu.getTitleElement(childs.item(x));
+		if (e != null)
+			return e;
+	}
+	return null;
+};
+
+BirtChartActionsMenu.executeMenuAction = function(evt, identify){
+	try {
+		TM.remove();
+	} catch (e) {
+	};
+	BirtChartActionsMenu.remove();
+    var menuItemInfo = this.menuInfo.menuItems[identify];
+    BirtChartActionsMenu.executeMenuActionImpl( evt, menuItemInfo, this.menuInfo );
+};
+
+BirtChartActionsMenu.executeMenuActionImpl = function(evt, menuItemInfo, menuInfo ){
+ 	switch (menuItemInfo.actionType) {
+        case BirtChartInteractivityActions.HYPER_LINK:
+            BirtChartActionsMenu.redirect(menuItemInfo.actionValue, menuItemInfo.target);
+            break;
+        case BirtChartInteractivityActions.INVOKE_SCRIPTS:
+			var scripts = menuItemInfo.actionValue;
+			if (scripts != undefined) {
+				BirtChartActionsMenu.invokeScripts(scripts, evt,
+					menuInfo.categoryData, menuInfo.valueData,
+					menuInfo.valueSeriesName, menuInfo.legendItemData,
+					menuInfo.legendItemText, menuInfo.legendItemValue,
+					menuInfo.axisLabel, menuInfo);
+			}
+            break;
+        case BirtChartInteractivityActions.HIGHLIGHT:
+            highlight(evt, menuInfo.id2, menuInfo.compList);
+            break;
+        case BirtChartInteractivityActions.TOGGLE_VISIBILITY:
+            toggleVisibility(evt, menuInfo.id2, menuInfo.compList, menuInfo.labelList);
+            break;
+        case BirtChartInteractivityActions.TOGGLE_DATA_POINT_VISIBILITY:
+            toggleLabelsVisibility(evt, menuInfo.id2, menuInfo.labelList);
+            break;
+        case BirtChartInteractivityActions.SHOW_TOOLTIP:
+            TM.show( evt, null, null, menuItemInfo.text );
+            TM.registerHideTimer(1000);
+            break;
+ 	}
+}
+
+BirtChartActionsMenu.redirect = function(url, urlTarget){
+
+    if (url.indexOf('#', 0) == 0) {
+        top.document.location.hash = url;
+        return;
+    }
+    if (url.indexOf('javascript:', 0) == 0) {
+        eval(url.substring(11, url.length - 1));
+        return;
+    }
+    var target = 'null';
+    if (urlTarget && urlTarget != '') 
+        target = urlTarget;
+    try {
+        parent.redirect(target, url);
+    } 
+    catch (e) {
+        redirect(target, url);
+    }
+};
+
+BirtChartActionsMenu.invokeScripts = function(scripts, evt, categoryData,
+		valueData, valueSeriesName, legendItemData, legendItemText,
+		legendItemValue, axisLabel, menuInfo) {
+	eval( scripts );
+};
+
+BirtChartActionsMenu.onMouseOver = function(evt, identify){
+    var target = evt.currentTarget;
+    if (target == null) return;
+	try { window.clearTimeout(this.hideTimer); } catch (e) {};
+    if ( typeof identify == 'undefined' ) return;
+    var menuItemInfo = this.menuInfo.menuItems[identify];
+    if ( menuItemInfo.isTooltipItem( ) ) return;
+    var id = target.id;
+    if (id.substr(0, 'text_'.length) == 'text_') {
+        var mainSvg = evt.target.ownerDocument;
+        var menuComp = mainSvg.getElementById(id.substring('text_'.length, id.length));
+        SVGChartUtil.setStyles(menuComp, BirtChartActionsMenu.getMenuStyles(this.menuInfo.mouseOverStyles));
+        var textStyle = BirtChartActionsMenu.getTextStyles(this.menuInfo.mouseOverStyles);
+        SVGChartUtil.setStyles(target, textStyle);
+        SVGChartUtil.setStyles(target.childNodes.item(0), textStyle);
+    } else {
+        var mainSvg = evt.target.ownerDocument;
+        var menuComp = mainSvg.getElementById(id);
+        var textComp = mainSvg.getElementById('text_' + id);
+        SVGChartUtil.setStyles(menuComp, BirtChartActionsMenu.getMenuStyles(this.menuInfo.mouseOverStyles));
+        var textStyle = BirtChartActionsMenu.getTextStyles(this.menuInfo.mouseOverStyles);
+        SVGChartUtil.setStyles(textComp, textStyle);
+        SVGChartUtil.setStyles(textComp.childNodes.item(0), textStyle);
+    }
+    BirtChartActionsMenu.showTooltip(evt);
+};
+
+BirtChartActionsMenu.onMouseOut = function(evt, identify ){
+    var target = evt.currentTarget;
+    if (target == null) return;
+    try { TM.remove(); } catch (e) {};
+    this.hideTimer = window.setTimeout('BirtChartActionsMenu.remove();', 300);
+    if ( typeof identify == 'undefined' ) return;
+    var id = target.id;
+    var menuItemInfo = this.menuInfo.menuItems[identify];
+    if ( menuItemInfo.isTooltipItem( ) ) return;
+    if (id.substr(0, 'text_'.length) == 'text_') {
+        var mainSvg = evt.target.ownerDocument;
+        var menuComp = mainSvg.getElementById(id.substring('text_'.length, id.length));
+        SVGChartUtil.setStyles(menuComp, BirtChartActionsMenu.getMenuStyles(this.menuInfo.mouseOutStyles));
+        var textStyle = BirtChartActionsMenu.getTextStyles(this.menuInfo.mouseOutStyles);
+        SVGChartUtil.setStyles(target, textStyle);
+        SVGChartUtil.setStyles(target.childNodes.item(0), textStyle);
+    } else {
+        var mainSvg = evt.target.ownerDocument;
+        var menuComp = mainSvg.getElementById(id);
+        var textComp = mainSvg.getElementById('text_' + id);
+        SVGChartUtil.setStyles(menuComp, BirtChartActionsMenu.getMenuStyles(this.menuInfo.mouseOutStyles));
+        var textStyle = BirtChartActionsMenu.getTextStyles(this.menuInfo.mouseOutStyles);
+        SVGChartUtil.setStyles(textComp, textStyle);
+        SVGChartUtil.setStyles(textComp.childNodes.item(0), textStyle);
+    }
+};
+
+BirtChartActionsMenu.getTextStyles = function(styles) {
+	var total;
+	if (!SVGChartUtil.isArray(styles)) {
+		total = SVGChartUtil.getStylesArray(styles);
+	} else {
+		total = styles;
+	}
+
+	var styleString = '';
+	for ( var i = 0; i < total.length; i++) {
+		if (this.TEXT_STYLES.search(total[i][0] + ':') < 0)
+			continue;
+		if (total[i][0] == 'backgroundColor'
+				|| total[i][0] == 'background-color')
+			continue;
+		if (total[i][0] == 'fill')
+			continue;
+		if (total[i][0] == 'color') {
+			styleString += 'fill';
+		} else
+			styleString += total[i][0];
+		styleString += ': ' + total[i][1] + ';';
+	}
+
+	return styleString;
+};
+
+BirtChartActionsMenu.getMenuStyles = function(styles) {
+	var total;
+	if (!SVGChartUtil.isArray(styles)) {
+		total = SVGChartUtil.getStylesArray(styles);
+	} else {
+		total = styles;
+	}
+
+	var styleString = '';
+	for ( var i = 0; i < total.length; i++) {
+		if (this.TEXT_STYLES.search(total[i][0] + ':') >= 0)
+			continue;
+		if (total[i][0] == 'color')
+			continue;
+		if (total[i][0] == 'backgroundColor'
+				|| total[i][0] == 'background-color') {
+			styleString += 'fill';
+		} else
+			styleString += total[i][0];
+		styleString += ': ' + total[i][1] + ';';
+	}
+	return styleString;
+};
+
+BirtChartActionsMenu.isSetCursor = function(styleStr) {
+	if (styleStr.search('cursor[ ]*:') >= 0)
+		return true;
+	return false;
+};
+
+SVGChartUtil = function() {};
+SVGChartUtil.prototype = new Object();
+
+SVGChartUtil.getStylesArray = function (stylesStr) {
+	var stylesArray = stylesStr.split(';');
+	var total = new Array(stylesArray.length);
+	for ( var i = 0; i < stylesArray.length; i++) {
+		var unit = stylesArray[i].split(':');
+		total[i] = new Array(2);
+		total[i][0] = unit[0];
+		total[i][1] = unit[1];
+	}
+	return total;
+};
+
+SVGChartUtil.setStyles = function (element, styles) {
+	var total;
+	if (!this.isArray(styles)) {
+		total = this.getStylesArray(styles);
+	} else {
+		total = styles;
+	}
+
+	var styleAttr = element.getAttribute('style');
+	for ( var i = 0; i < total.length; i++) {
+		var key = total[i][0];
+		var value = total[i][1];
+		if (key == '' || typeof value == 'undefined')
+			continue;
+		styleAttr = this.updateStyle(styleAttr, key, value);
+	}
+	element.setAttribute('style', styleAttr);
+};
+
+SVGChartUtil.updateStyle = function (styleStr, key, value) {
+	if (!styleStr)
+		return key + ':' + value + ';';
+	var styleAttr = styleStr;
+	var index = styleAttr.search('[ ]*' + key + ':');
+	if (index >= 0) {
+		var index2 = styleAttr.indexOf(';', index);
+		var s = styleAttr.substring(index, index2 + 1);
+		styleAttr = styleAttr.replace(s, key + ':' + value + ';');
+	} else {
+		styleAttr = styleAttr + key + ':' + value + ';';
+	}
+	return styleAttr;
+};
+
+SVGChartUtil.isArray = function (arr) {
+	return !!arr && arr.constructor == Array;
+};
+
+// Stop the event bubble.		
+SVGChartUtil.stopBubble = function (e) {
+	// If the e exists, then it isn't in IE.		
+	try {
+		if (e && e.stopPropagation)
+			e.stopPropagation();
+		else
+			window.event.cancelBubble = true;
+	} catch (e) {
+	}
+	;
+	return false;
+};
+
+// Stop default action of Browser for event.		
+SVGChartUtil.stopDefault = function (e) {
+	// If the e exists, the it isn't in IE.		
+	try {
+		if (e && e.preventDefault)
+			e.preventDefault();
+		else
+			window.event.returnValue = false;
+	} catch (e) {
+	}
+	;
+	return false;
+};
+
+BirtChartMenuInfo = function() {
+	this.className = 'BirtChartMenuInfo';
+
+	this.id = undefined;
+	this.text = undefined;
+	this.cssClass = undefined;
+
+	this.categoryData = undefined;
+	this.valueData = undefined;
+	this.valueSeriesName = undefined;
+
+	this.legendItemText = undefined;
+	this.legendItemValue = undefined;
+	this.axisLabel = undefined;
+	
+	this.menuStyles = undefined;
+	this.menuItemStyles = undefined;
+	this.mouseOverStyles = undefined;
+	this.mouseOutStyles = undefined;
+
+	this.menuItemNames = [];
+	this.menuItems = [];
+	this.menuCount = 0;
+	
+	this.compList = undefined;
+	this.labelList = undefined;
+	this.id2 = undefined;
+};
+
+BirtChartMenuInfo.prototype = {
+	addItemInfo : function(itemInfo) {
+		var item = '' + this.menuCount;
+		this.menuItemNames.push( item );
+		this.menuItems[item] = itemInfo;
+		this.menuCount = this.menuCount + 1;
+	}
+};
+
+BirtChartMenuItemInfo = function() {
+	this.className = 'BirtChartMenuItemInfo';
+	this.text = undefined;
+	this.target = undefined;
+	this.cssClass = undefined;
+	this.tooltip = undefined;
+
+	this.actionType = undefined;
+	this.actionValue = undefined;
+};
+
+BirtChartMenuItemInfo.prototype = new Object();
+BirtChartMenuItemInfo.prototype.isTooltipItem = function() {
+	return ( this.actionType == BirtChartInteractivityActions.SHOW_TOOLTIP );
+}
+
+BirtChartInteractivityActions = function () {};
+BirtChartInteractivityActions.prototype = new Object();
+
+BirtChartInteractivityActions.HYPER_LINK = 1;
+BirtChartInteractivityActions.INVOKE_SCRIPTS = 2;
+BirtChartInteractivityActions.HIGHLIGHT = 3;
+BirtChartInteractivityActions.TOGGLE_VISIBILITY = 4;
+BirtChartInteractivityActions.TOGGLE_DATA_POINT_VISIBILITY = 5;
+BirtChartInteractivityActions.SHOW_TOOLTIP = 6;
+]]></script><style type="text/css"><![CDATA[.tooltip.text{ text-anchor:start;font-size:12pt;fill:black;}.tooltip{fill:rgb(244,245,235)}]]></style><g id="246430286_1463325641" style="visibility:visible;fill-opacity:1.0;fill:#ffffff;stroke:none;"><path d=" M0.0 0.0 L763.0 0.0 L763.0 381.5 L0.0 381.5 L0.0 0.0 Z"/></g><g id="246430286_1463325641@1" style="visibility:visible;"/><g id="1525188500_1463325641" style="visibility:visible;"/><g id="1525188500_1463325641@1" style="visibility:visible;"/><g id="1525188500_1426433229@2" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M8.0 8.0 L164.66667 8.0 L164.66667 31.0 L8.0 31.0 L8.0 8.0 Z"/><text font-family="Arial" font-size="19" stroke="none" style="fill-opacity:1.0;fill:#555555;" x="11.333333" xml:space="preserve" y="27.0">Purchased Offers</text></g><g id="1185989503_1463325641" style="visibility:visible;"/><g id="1185989503_1463325641@1" style="visibility:visible;"/><g id="1185989503_1463325641@2" style="visibility:visible;"/><g id="565144356_1063623842" style="visibility:visible;"/><g id="565144356_1063623842@1" style="visibility:visible;"/><g id="565144356_1063623842@2" style="visibility:visible;"/><g id="565144356_1063623842@3" style="visibility:visible;"/><g id="565144356_1063623842@4" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M28.333334 158.83333 L28.333334 168.83333"/></g><g id="565144356_1063623842@5" style="visibility:visible;"/><g id="565144356_1063623842@6" style="visibility:visible;"/><g id="565144356_1063623842@7" style="visibility:visible;"/><g id="565144356_1063623842@8" style="visibility:visible;"/><g id="565144356_1063623842@9" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M57.4 158.83333 L57.4 168.83333"/></g><g id="565144356_1063623842@10" style="visibility:visible;"/><g id="565144356_1063623842@11" style="visibility:visible;"/><g id="565144356_1063623842@12" style="visibility:visible;"/><g id="565144356_1063623842@13" style="visibility:visible;"/><g id="565144356_1063623842@14" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M86.46667 158.83333 L86.46667 168.83333"/></g><g id="565144356_1063623842@15" style="visibility:visible;"/><g id="565144356_1063623842@16" style="visibility:visible;"/><g id="565144356_1063623842@17" style="visibility:visible;"/><g id="565144356_1063623842@18" style="visibility:visible;"/><g id="565144356_1063623842@19" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M115.53333 158.83333 L115.53333 168.83333"/></g><g id="565144356_1063623842@20" style="visibility:visible;"/><g id="565144356_1063623842@21" style="visibility:visible;"/><g id="565144356_1063623842@22" style="visibility:visible;"/><g id="565144356_1063623842@23" style="visibility:visible;"/><g id="565144356_1063623842@24" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M144.6 158.83333 L144.6 168.83333"/></g><g id="565144356_1063623842@25" style="visibility:visible;"/><g id="565144356_1063623842@26" style="visibility:visible;"/><g id="565144356_1063623842@27" style="visibility:visible;"/><g id="565144356_1063623842@28" style="visibility:visible;"/><g id="565144356_1063623842@29" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M173.66667 158.83333 L173.66667 168.83333"/></g><g id="565144356_1063623842@30" style="visibility:visible;"/><g id="565144356_1063623842@31" style="visibility:visible;"/><g id="565144356_1063623842@32" style="visibility:visible;"/><g id="565144356_1063623842@33" style="visibility:visible;"/><g id="565144356_1063623842@34" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M202.73334 158.83333 L202.73334 168.83333"/></g><g id="565144356_1063623842@35" style="visibility:visible;"/><g id="565144356_1063623842@36" style="visibility:visible;"/><g id="565144356_1063623842@37" style="visibility:visible;"/><g id="565144356_1063623842@38" style="visibility:visible;"/><g id="565144356_1063623842@39" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M231.8 158.83333 L231.8 168.83333"/></g><g id="565144356_1063623842@40" style="visibility:visible;"/><g id="565144356_1063623842@41" style="visibility:visible;"/><g id="565144356_1063623842@42" style="visibility:visible;"/><g id="565144356_1063623842@43" style="visibility:visible;"/><g id="565144356_1063623842@44" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M260.86667 158.83333 L260.86667 168.83333"/></g><g id="565144356_1063623842@45" style="visibility:visible;"/><g id="565144356_1063623842@46" style="visibility:visible;"/><g id="565144356_1063623842@47" style="visibility:visible;"/><g id="565144356_1063623842@48" style="visibility:visible;"/><g id="565144356_1063623842@49" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M289.93332 158.83333 L289.93332 168.83333"/></g><g id="565144356_1063623842@50" style="visibility:visible;"/><g id="565144356_1063623842@51" style="visibility:visible;"/><g id="565144356_1063623842@52" style="visibility:visible;"/><g id="565144356_1063623842@53" style="visibility:visible;"/><g id="565144356_1063623842@54" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M319.0 158.83333 L319.0 168.83333"/></g><g id="565144356_1063623842@55" style="visibility:visible;"/><g id="565144356_1063623842@56" style="visibility:visible;"/><g id="565144356_1063623842@57" style="visibility:visible;"/><g id="565144356_1063623842@58" style="visibility:visible;"/><g id="565144356_1063623842@59" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M348.06668 158.83333 L348.06668 168.83333"/></g><g id="565144356_1063623842@60" style="visibility:visible;"/><g id="565144356_1063623842@61" style="visibility:visible;"/><g id="565144356_1063623842@62" style="visibility:visible;"/><g id="565144356_1063623842@63" style="visibility:visible;"/><g id="565144356_1063623842@64" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M377.13333 158.83333 L377.13333 168.83333"/></g><g id="565144356_1063623842@65" style="visibility:visible;"/><g id="565144356_1063623842@66" style="visibility:visible;"/><g id="565144356_1063623842@67" style="visibility:visible;"/><g id="565144356_1063623842@68" style="visibility:visible;"/><g id="565144356_1063623842@69" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M406.2 158.83333 L406.2 168.83333"/></g><g id="565144356_1063623842@70" style="visibility:visible;"/><g id="565144356_1063623842@71" style="visibility:visible;"/><g id="565144356_1063623842@72" style="visibility:visible;"/><g id="565144356_1063623842@73" style="visibility:visible;"/><g id="565144356_1063623842@74" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M435.26666 158.83333 L435.26666 168.83333"/></g><g id="565144356_1063623842@75" style="visibility:visible;"/><g id="565144356_1063623842@76" style="visibility:visible;"/><g id="565144356_1063623842@77" style="visibility:visible;"/><g id="565144356_1063623842@78" style="visibility:visible;"/><g id="565144356_1063623842@79" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M464.33334 158.83333 L464.33334 168.83333"/></g><g id="565144356_1063623842@80" style="visibility:visible;"/><g id="565144356_1063623842@81" style="visibility:visible;"/><g id="565144356_1063623842@82" style="visibility:visible;"/><g id="565144356_1063623842@83" style="visibility:visible;"/><g id="565144356_1063623842@84" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M493.4 158.83333 L493.4 168.83333"/></g><g id="565144356_1063623842@85" style="visibility:visible;"/><g id="565144356_1063623842@86" style="visibility:visible;"/><g id="565144356_1063623842@87" style="visibility:visible;"/><g id="565144356_1063623842@88" style="visibility:visible;"/><g id="565144356_1063623842@89" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M522.4667 158.83333 L522.4667 168.83333"/></g><g id="565144356_1063623842@90" style="visibility:visible;"/><g id="565144356_1063623842@91" style="visibility:visible;"/><g id="565144356_1063623842@92" style="visibility:visible;"/><g id="565144356_1063623842@93" style="visibility:visible;"/><g id="565144356_1063623842@94" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M551.5333 158.83333 L551.5333 168.83333"/></g><g id="565144356_1063623842@95" style="visibility:visible;"/><g id="565144356_1063623842@96" style="visibility:visible;"/><g id="565144356_1063623842@97" style="visibility:visible;"/><g id="565144356_1063623842@98" style="visibility:visible;"/><g id="565144356_1063623842@99" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M580.6 158.83333 L580.6 168.83333"/></g><g id="565144356_1063623842@100" style="visibility:visible;"/><g id="565144356_1063623842@101" style="visibility:visible;"/><g id="565144356_1063623842@102" style="visibility:visible;"/><g id="565144356_1063623842@103" style="visibility:visible;"/><g id="565144356_1063623842@104" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M609.6667 158.83333 L609.6667 168.83333"/></g><g id="565144356_1063623842@105" style="visibility:visible;"/><g id="565144356_1063623842@106" style="visibility:visible;"/><g id="565144356_1063623842@107" style="visibility:visible;"/><g id="565144356_1063623842@108" style="visibility:visible;"/><g id="565144356_1063623842@109" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M638.73334 158.83333 L638.73334 168.83333"/></g><g id="565144356_1063623842@110" style="visibility:visible;"/><g id="565144356_1063623842@111" style="visibility:visible;"/><g id="565144356_1063623842@112" style="visibility:visible;"/><g id="565144356_1063623842@113" style="visibility:visible;"/><g id="565144356_1063623842@114" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M667.8 158.83333 L667.8 168.83333"/></g><g id="565144356_1063623842@115" style="visibility:visible;"/><g id="565144356_1063623842@116" style="visibility:visible;"/><g id="565144356_1063623842@117" style="visibility:visible;"/><g id="565144356_1063623842@118" style="visibility:visible;"/><g id="565144356_1063623842@119" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M696.86664 158.83333 L696.86664 168.83333"/></g><g id="565144356_1063623842@120" style="visibility:visible;"/><g id="565144356_1063623842@121" style="visibility:visible;"/><g id="565144356_1063623842@122" style="visibility:visible;"/><g id="565144356_1063623842@123" style="visibility:visible;"/><g id="565144356_1063623842@124" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M725.93335 158.83333 L725.93335 168.83333"/></g><g id="565144356_1063623842@125" style="visibility:visible;stroke:#c4c4c4;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M755.0 158.83333 L755.0 168.83333"/></g><g id="565144356_1063623842@126" style="visibility:visible;stroke:#555555;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M28.333334 163.83333 L755.0 163.83333"/></g><g id="435049798_1063623842" style="visibility:visible;stroke:#555555;stroke-width:1.0;stroke-miterlimit:10.0;stroke-linejoin:round;stroke-linecap:square;"><path d=" M21.666666 157.16667 L21.666666 55.0"/></g><g clip-path="url(#clip1315587816)" id="1179673931index0_2051166054" style="visibility:visible;fill-opacity:1.0;fill:#9ecc4c;stroke:none;"><path d=" M30.513334 157.16667 L42.866665 123.111115 L55.22 157.16667 Z"/></g><g id="1179673931index0_2051166054@1" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index1_1389952718@2" style="visibility:visible;fill-opacity:1.0;fill:#e56b2e;stroke:none;"><path d=" M59.58 157.16667 L71.933334 123.111115 L84.28667 157.16667 Z"/></g><g id="1179673931index1_1389952718@3" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index2_1170018165@4" style="visibility:visible;fill-opacity:1.0;fill:#66b0d1;stroke:none;"><path d=" M88.64667 157.16667 L101.0 123.111115 L113.35333 157.16667 Z"/></g><g id="1179673931index2_1170018165@5" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index3_1501318188@6" style="visibility:visible;fill-opacity:1.0;fill:#f4d760;stroke:none;"><path d=" M117.71333 157.16667 L130.06667 123.111115 L142.42 157.16667 Z"/></g><g id="1179673931index3_1501318188@7" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index4_833421594@8" style="visibility:visible;fill-opacity:1.0;fill:#c9112f;stroke:none;"><path d=" M146.78 157.16667 L159.13333 123.111115 L171.48666 157.16667 Z"/></g><g id="1179673931index4_833421594@9" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index5_613857135@10" style="visibility:visible;fill-opacity:1.0;fill:#2e988c;stroke:none;"><path d=" M175.84666 157.16667 L188.2 123.111115 L200.55333 157.16667 Z"/></g><g id="1179673931index5_613857135@11" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index6_159236655@12" style="visibility:visible;fill-opacity:1.0;fill:#f4ac45;stroke:none;"><path d=" M204.91333 157.16667 L217.26666 123.111115 L229.62 157.16667 Z"/></g><g id="1179673931index6_159236655@13" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index7_853271040@14" style="visibility:visible;fill-opacity:1.0;fill:#3578ad;stroke:none;"><path d=" M233.98 157.16667 L246.33333 123.111115 L258.68668 157.16667 Z"/></g><g id="1179673931index7_853271040@15" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index8_1806143632@16" style="visibility:visible;fill-opacity:1.0;fill:#f29682;stroke:none;"><path d=" M263.04666 157.16667 L275.4 123.111115 L287.75333 157.16667 Z"/></g><g id="1179673931index8_1806143632@17" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index9_2057006916@18" style="visibility:visible;fill-opacity:1.0;fill:#2c8e3c;stroke:none;"><path d=" M292.11334 157.16667 L304.46667 123.111115 L316.82 157.16667 Z"/></g><g id="1179673931index9_2057006916@19" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index10_496019074@20" style="visibility:visible;fill-opacity:1.0;fill:#e5cc93;stroke:none;"><path d=" M321.18 157.16667 L333.53333 123.111115 L345.88666 157.16667 Z"/></g><g id="1179673931index10_496019074@21" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index11_1891015890@22" style="visibility:visible;fill-opacity:1.0;fill:#2c6b75;stroke:none;"><path d=" M350.24667 157.16667 L362.6 123.111115 L374.95334 157.16667 Z"/></g><g id="1179673931index11_1891015890@23" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index12_658678084@24" style="visibility:visible;fill-opacity:1.0;fill:#adb018;stroke:none;"><path d=" M379.31332 157.16667 L391.66666 123.111115 L404.02 157.16667 Z"/></g><g id="1179673931index12_658678084@25" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index13_109190055@26" style="visibility:visible;fill-opacity:1.0;fill:#3bd7a7;stroke:none;"><path d=" M408.38 157.16667 L420.73334 123.111115 L433.08667 157.16667 Z"/></g><g id="1179673931index13_109190055@27" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index14_507386179@28" style="visibility:visible;fill-opacity:1.0;fill:#101176;stroke:none;"><path d=" M437.44666 157.16667 L449.8 123.111115 L462.15332 157.16667 Z"/></g><g id="1179673931index14_507386179@29" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index15_1521112666@30" style="visibility:visible;fill-opacity:1.0;fill:#7598d3;stroke:none;"><path d=" M466.51334 157.16667 L478.86667 123.111115 L491.22 157.16667 Z"/></g><g id="1179673931index15_1521112666@31" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index16_1750111434@32" style="visibility:visible;fill-opacity:1.0;fill:#3bac8c;stroke:none;"><path d=" M495.58 157.16667 L507.93332 123.111115 L520.2867 157.16667 Z"/></g><g id="1179673931index16_1750111434@33" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index17_2124019012@34" style="visibility:visible;fill-opacity:1.0;fill:#7c78f4;stroke:none;"><path d=" M524.64667 157.16667 L537.0 123.111115 L549.35333 157.16667 Z"/></g><g id="1179673931index17_2124019012@35" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index18_268636117@36" style="visibility:visible;fill-opacity:1.0;fill:#3996c9;stroke:none;"><path d=" M553.7133 157.16667 L566.06665 89.05556 L578.42 157.16667 Z"/></g><g id="1179673931index18_268636117@37" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index19_403936009@38" style="visibility:visible;fill-opacity:1.0;fill:#738e83;stroke:none;"><path d=" M582.78 157.16667 L595.13336 123.111115 L607.4867 157.16667 Z"/></g><g id="1179673931index19_403936009@39" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index20_1955176965@40" style="visibility:visible;fill-opacity:1.0;fill:#9e1393;stroke:none;"><path d=" M611.8467 157.16667 L624.2 123.111115 L636.55334 157.16667 Z"/></g><g id="1179673931index20_1955176965@41" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index21_1158367749@42" style="visibility:visible;fill-opacity:1.0;fill:#e5b275;stroke:none;"><path d=" M640.9133 157.16667 L653.26666 123.111115 L665.62 157.16667 Z"/></g><g id="1179673931index21_1158367749@43" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index22_1300138198@44" style="visibility:visible;fill-opacity:1.0;fill:#66f718;stroke:none;"><path d=" M669.98 157.16667 L682.3333 123.111115 L694.68665 157.16667 Z"/></g><g id="1179673931index22_1300138198@45" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index23_1232191915@46" style="visibility:visible;fill-opacity:1.0;fill:#f41ea7;stroke:none;"><path d=" M699.0467 157.16667 L711.4 123.111115 L723.75336 157.16667 Z"/></g><g id="1179673931index23_1232191915@47" style="visibility:visible;"/><g clip-path="url(#clip1315587816)" id="1179673931index24_1892801290@48" style="visibility:visible;fill-opacity:1.0;fill:#c95876;stroke:none;"><path d=" M728.11334 157.16667 L740.4667 123.111115 L752.82 157.16667 Z"/></g><g id="1179673931index24_1892801290@49" style="visibility:visible;"/><g id="565144356_1863707767@127" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M49.366665 259.5 L152.03333 259.5 L152.03333 272.5 L49.366665 272.5 L49.366665 259.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,-223.13333333333333,321.8666666666667)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,-223.13333333333333,321.8666666666667)" x="52.033333" xml:space="preserve" y="269.5">Alice in Wonderland</text></g><g id="565144356_1444213115@128" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M78.433334 222.5 L144.1 222.5 L144.1 235.5 L78.433334 235.5 L78.433334 222.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,-157.06666666666666,313.93333333333334)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,-157.06666666666666,313.93333333333334)" x="81.1" xml:space="preserve" y="232.5">Animal Farm</text></g><g id="565144356_296685195@129" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M107.5 248.5 L199.16666 248.5 L199.16666 261.5 L107.5 261.5 L107.5 248.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,-154.0,369.0)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,-154.0,369.0)" x="110.166664" xml:space="preserve" y="258.5">Brave new world</text></g><g id="565144356_1868074559@130" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M136.56667 209.5 L189.23334 209.5 L189.23334 222.5 L136.56667 222.5 L136.56667 209.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,-85.93333333333331,359.0666666666666)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,-85.93333333333331,359.0666666666666)" x="139.23334" xml:space="preserve" y="219.5">Divergent</text></g><g id="565144356_795783671@131" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M165.63333 361.5 L370.3 361.5 L370.3 374.5 L165.63333 374.5 L165.63333 361.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,-208.86666666666667,540.1333333333333)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,-208.86666666666667,540.1333333333333)" x="168.3" xml:space="preserve" y="371.5">Harry Potter and the order of the pheonix</text></g><g id="565144356_1585451592@132" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M194.7 304.5 L342.36667 304.5 L342.36667 317.5 L194.7 317.5 L194.7 304.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,-122.79999999999998,512.2)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,-122.79999999999998,512.2)" x="197.36667" xml:space="preserve" y="314.5">Hitchikers guide to the galaxy</text></g><g id="565144356_926057541@133" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M223.76666 235.5 L302.43332 235.5 L302.43332 248.5 L223.76666 248.5 L223.76666 235.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,-24.73333333333332,472.26666666666665)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,-24.73333333333332,472.26666666666665)" x="226.43333" xml:space="preserve" y="245.5">Hunger Games</text></g><g id="565144356_472960490@134" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M252.83333 211.5 L307.5 211.5 L307.5 224.5 L252.83333 224.5 L252.83333 211.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,28.333333333333343,477.33333333333326)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,28.333333333333343,477.33333333333326)" x="255.5" xml:space="preserve" y="221.5">Jane Eyre</text></g><g id="565144356_1175139986@135" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M281.9 236.5 L361.56665 236.5 L361.56665 249.5 L281.9 249.5 L281.9 236.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,32.400000000000034,531.4000000000001)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,32.400000000000034,531.4000000000001)" x="284.56668" xml:space="preserve" y="246.5">Les Miserables</text></g><g id="565144356_415727177@136" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M310.96667 239.5 L393.63333 239.5 L393.63333 252.5 L310.96667 252.5 L310.96667 239.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,58.4666666666667,563.4666666666667)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,58.4666666666667,563.4666666666667)" x="313.63333" xml:space="preserve" y="249.5">Lord of the flies</text></g><g id="565144356_1005900216@137" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M340.03333 194.5 L377.69998 194.5 L377.69998 207.5 L340.03333 207.5 L340.03333 194.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,132.5333333333334,547.5333333333333)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,132.5333333333334,547.5333333333333)" x="342.7" xml:space="preserve" y="204.5">Narnia</text></g><g id="565144356_565249201@138" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M369.1 249.5 L461.76666 249.5 L461.76666 262.5 L369.1 262.5 L369.1 249.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,106.60000000000002,631.6)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,106.60000000000002,631.6)" x="371.76666" xml:space="preserve" y="259.5">Pride and Prjudice</text></g><g id="565144356_1041303987@139" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M398.16666 244.5 L485.8333 244.5 L485.8333 257.5 L398.16666 257.5 L398.16666 244.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,140.66666666666669,655.6666666666667)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,140.66666666666669,655.6666666666667)" x="400.83334" xml:space="preserve" y="254.5">Romeo and Juliet</text></g><g id="565144356_495394062@140" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M427.23334 231.5 L501.9 231.5 L501.9 244.5 L427.23334 244.5 L427.23334 231.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,182.73333333333335,671.7333333333333)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,182.73333333333335,671.7333333333333)" x="429.9" xml:space="preserve" y="241.5">The Alchemist</text></g><g id="565144356_14906903@141" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M456.3 235.5 L534.9667 235.5 L534.9667 248.5 L456.3 248.5 L456.3 235.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,207.8,704.8)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,207.8,704.8)" x="458.96667" xml:space="preserve" y="245.5">The Book Thief</text></g><g id="565144356_694054454@142" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M485.36667 252.5 L581.0333 252.5 L581.0333 265.5 L485.36667 265.5 L485.36667 252.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,219.86666666666667,750.8666666666667)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,219.86666666666667,750.8666666666667)" x="488.03333" xml:space="preserve" y="262.5">The Da Vinci Code</text></g><g id="565144356_523544127@143" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M514.43335 266.5 L624.10004 266.5 L624.10004 279.5 L514.43335 279.5 L514.43335 266.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,234.9333333333334,793.9333333333334)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,234.9333333333334,793.9333333333334)" x="517.1" xml:space="preserve" y="276.5">The Fault in our Stars</text></g><g id="565144356_981379002@144" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M543.5 239.5 L626.1667 239.5 L626.1667 252.5 L543.5 252.5 L543.5 239.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,291.0,796.0)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,291.0,796.0)" x="546.1667" xml:space="preserve" y="249.5">The Giving Tree</text></g><g id="565144356_557202732@145" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M572.56665 214.5 L630.23334 214.5 L630.23334 227.5 L572.56665 227.5 L572.56665 214.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,345.0666666666667,800.0666666666667)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,345.0666666666667,800.0666666666667)" x="575.23334" xml:space="preserve" y="224.5">The Hobbit</text></g><g id="565144356_2076428514@146" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M601.63336 245.5 L690.30005 245.5 L690.30005 258.5 L601.63336 258.5 L601.63336 245.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,343.1333333333333,860.1333333333333)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,343.1333333333333,860.1333333333333)" x="604.3" xml:space="preserve" y="255.5">The great gatsby</text></g><g id="565144356_1098681595@147" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M630.7 317.5 L791.3667 317.5 L791.3667 330.5 L630.7 330.5 L630.7 317.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,300.20000000000005,961.2)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,300.20000000000005,961.2)" x="633.36664" xml:space="preserve" y="327.5">The perks of being a wallflower</text></g><g id="565144356_250654745@148" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M659.76666 291.5 L794.43335 291.5 L794.43335 304.5 L659.76666 304.5 L659.76666 291.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,355.26666666666665,964.2666666666667)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,355.26666666666665,964.2666666666667)" x="662.43335" xml:space="preserve" y="301.5">The picutre of Dorian Grey</text></g><g id="565144356_515842998@149" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M688.8333 258.5 L790.5 258.5 L790.5 271.5 L688.8333 271.5 L688.8333 258.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,417.33333333333337,960.3333333333334)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,417.33333333333337,960.3333333333334)" x="691.5" xml:space="preserve" y="268.5">Time travellers wife</text></g><g id="565144356_2078178395@150" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M717.9 258.5 L819.5667 258.5 L819.5667 271.5 L717.9 271.5 L717.9 258.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,446.4,989.4)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,446.4,989.4)" x="720.56665" xml:space="preserve" y="268.5">To kill a mockingbird</text></g><g id="565144356_1583361167@151" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M746.9667 251.5 L841.63336 251.5 L841.63336 264.5 L746.9667 264.5 L746.9667 251.5 Z" transform="matrix(-0.0,-1.0,1.0,0.0,482.4666666666667,1011.4666666666667)"/><text font-family="Arial" font-size="11" stroke="none" style="text-rendering:optimizeSpeed;fill-opacity:1.0;fill:#555555;" transform="matrix(-0.0,-1.0,1.0,0.0,482.4666666666667,1011.4666666666667)" x="749.63336" xml:space="preserve" y="261.5">Wuthering Heights</text></g><g id="435049798_1427844898@1" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M7.0 149.16667 L20.666668 149.16667 L20.666668 165.16667 L7.0 165.16667 L7.0 149.16667 Z"/><text font-family="Arial" font-size="13" stroke="none" style="text-rendering:optimizeLegibility;fill-opacity:1.0;fill:#555555;" x="9.666667" xml:space="preserve" y="162.16667">0</text></g><g id="435049798_845026468@2" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M7.0 115.111115 L20.666668 115.111115 L20.666668 131.11111 L7.0 131.11111 L7.0 115.111115 Z"/><text font-family="Arial" font-size="13" stroke="none" style="text-rendering:optimizeLegibility;fill-opacity:1.0;fill:#555555;" x="9.666667" xml:space="preserve" y="128.11111">1</text></g><g id="435049798_980064784@3" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M7.0 81.05556 L20.666668 81.05556 L20.666668 97.05556 L7.0 97.05556 L7.0 81.05556 Z"/><text font-family="Arial" font-size="13" stroke="none" style="text-rendering:optimizeLegibility;fill-opacity:1.0;fill:#555555;" x="9.666667" xml:space="preserve" y="94.05556">2</text></g><g id="435049798_1697766790@4" style="visibility:visible;fill-opacity:0.0;fill:#ffffff;stroke:none;"><path d=" M7.0 47.0 L20.666668 47.0 L20.666668 63.0 L7.0 63.0 L7.0 47.0 Z"/><text font-family="Arial" font-size="13" stroke="none" style="text-rendering:optimizeLegibility;fill-opacity:1.0;fill:#555555;" x="9.666667" xml:space="preserve" y="60.0">3</text></g></g><g id="hotSpots" style="fill-opacity:0.01;fill:#FFFFFF;"><a xlink:href="javascript:void(0);"><g onmousemove="TM.show(evt)" onmouseout="TM.remove()"><polygon points="4.0,4.0 168.66666666666666,4.0 168.66666666666666,35.0 4.0,35.0 "/><title>Most/Least Popular Offers</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onload="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="30.513333333333332,157.16666666666663 42.86666666666667,123.11111111111109 55.22,157.16666666666663 "/><title>1</title><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="59.58,157.16666666666663 71.93333333333334,123.11111111111109 84.28666666666666,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="88.64666666666668,157.16666666666663 101.00000000000001,123.11111111111109 113.35333333333334,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="117.71333333333334,157.16666666666663 130.06666666666666,123.11111111111109 142.42000000000002,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="146.78,157.16666666666663 159.13333333333333,123.11111111111109 171.48666666666668,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="175.8466666666667,157.16666666666663 188.20000000000002,123.11111111111109 200.55333333333337,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="204.91333333333336,157.16666666666663 217.26666666666668,123.11111111111109 229.62000000000003,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="233.98000000000002,157.16666666666663 246.33333333333334,123.11111111111109 258.68666666666667,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="263.0466666666667,157.16666666666663 275.40000000000003,123.11111111111109 287.75333333333333,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="292.11333333333334,157.16666666666663 304.4666666666667,123.11111111111109 316.82,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="321.18,157.16666666666663 333.53333333333336,123.11111111111109 345.88666666666666,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="350.24666666666667,157.16666666666663 362.6,123.11111111111109 374.9533333333333,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="379.31333333333333,157.16666666666663 391.6666666666667,123.11111111111109 404.02,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="408.38,157.16666666666663 420.73333333333335,123.11111111111109 433.08666666666664,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="437.44666666666666,157.16666666666663 449.8,123.11111111111109 462.1533333333333,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="466.5133333333333,157.16666666666663 478.8666666666667,123.11111111111109 491.21999999999997,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="495.58,157.16666666666663 507.93333333333334,123.11111111111109 520.2866666666666,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="524.6466666666666,157.16666666666663 537.0,123.11111111111109 549.3533333333334,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="553.7133333333334,157.16666666666663 566.0666666666667,89.05555555555554 578.4200000000001,157.16666666666663 "/><title>2</title><title>2</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="582.78,157.16666666666663 595.1333333333333,123.11111111111109 607.4866666666667,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="611.8466666666667,157.16666666666663 624.2,123.11111111111109 636.5533333333334,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="640.9133333333333,157.16666666666663 653.2666666666667,123.11111111111109 665.62,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="669.98,157.16666666666663 682.3333333333334,123.11111111111109 694.6866666666667,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="699.0466666666666,157.16666666666663 711.4,123.11111111111109 723.7533333333333,157.16666666666663 "/><title>1</title><title>1</title></g></a><a xlink:href="javascript:void(0);"><g onclick="TM.toggleToolTip(evt,'1179673931index0_2051166054')" onmousemove="TM.show(evt,'1179673931index0_2051166054')" onmouseout="TM.remove()"><polygon points="728.1133333333333,157.16666666666663 740.4666666666667,123.11111111111109 752.82,157.16666666666663 "/><title>1</title><title>1</title></g></a></g></svg>

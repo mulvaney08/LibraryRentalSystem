@@ -451,7 +451,7 @@ public class ReturnBook extends javax.swing.JFrame {
         String insertBook = "INSERT into Book (ISBN,Name,Edition,Publisher,Pages,Author) values(?,?,?,?,?,?)";
         try {
             pStatement = connection.prepareStatement(insertBook);
-            pStatement.setInt(1, book.getISBN());
+            pStatement.setInt(1, book.getISBNKeep(jTextFieldISBN.getText()));
             pStatement.setString(2, book.getName());
             pStatement.setString(3, book.getEdition());
             pStatement.setString(4, book.getPublisher());

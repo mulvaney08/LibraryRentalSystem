@@ -1,5 +1,9 @@
 package LibrarySystem;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+
 /*
  * To change this license header, choose License Headers in Project Properties.  
  * To change this template file, choose Tools | Templates
@@ -268,7 +272,14 @@ public class AccountManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemBookManagementActionPerformed
 
     private void jMenuItemReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportsActionPerformed
-        // TODO add your handling code here:
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\reports\\Rentals.pdf");
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                // no application registered for PDFs
+            }
+        }
     }//GEN-LAST:event_jMenuItemReportsActionPerformed
 
     private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed

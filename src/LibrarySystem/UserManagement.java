@@ -1,5 +1,9 @@
 package LibrarySystem;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -191,7 +195,7 @@ public class UserManagement extends javax.swing.JFrame {
 
         jMenuItemStats.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jMenuItemStats.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\Calc.png")); // NOI18N
-        jMenuItemStats.setText("Statistics");
+        jMenuItemStats.setText("Reports");
         jMenuItemStats.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemStatsActionPerformed(evt);
@@ -275,7 +279,14 @@ public class UserManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemBookManagementActionPerformed
 
     private void jMenuItemStatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemStatsActionPerformed
-        // TODO add your handling code here:
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\reports\\Rentals.pdf");
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                // no application registered for PDFs
+            }
+        }
     }//GEN-LAST:event_jMenuItemStatsActionPerformed
 
     private void jMenuItemAccManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAccManagementActionPerformed

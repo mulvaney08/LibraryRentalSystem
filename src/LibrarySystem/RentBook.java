@@ -646,10 +646,11 @@ public class RentBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSearchBookActionPerformed
 
     public void search() {
-        String query = "select * from Book Where ISBN = ?";
+        String query = "select Name,Edition,Publisher,Pages,Author from Book Where ISBN LIKE ?";
         try {
             pStatement = connection.prepareStatement(query);
             pStatement.setString(1, jTextFieldISBN.getText());
+            
             result = pStatement.executeQuery();
             if (result.next()) {
                 String s = result.getString("Name");
@@ -662,6 +663,7 @@ public class RentBook extends javax.swing.JFrame {
                 jTextFieldPages.setText(s3);
                 String s4 = result.getString("Author");
                 jTextFieldAuthor.setText(s4);
+
                 result.close();
                 pStatement.close();
             } else {

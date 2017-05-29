@@ -1,10 +1,16 @@
 package LibrarySystem;
 
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 
 /*
@@ -19,7 +25,7 @@ import javax.swing.JFrame;
 public class Home extends javax.swing.JFrame {
 
     Connection connection;
-    
+
     /**
      * Creates new form Home
      */
@@ -70,6 +76,11 @@ public class Home extends javax.swing.JFrame {
         jLabelSelection.setText("Please select from one of the following options:");
 
         jButtonReports.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\statsIcon.png")); // NOI18N
+        jButtonReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReportsActionPerformed(evt);
+            }
+        });
 
         jButtonAccountManagement.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\userIcon.png")); // NOI18N
         jButtonAccountManagement.addActionListener(new java.awt.event.ActionListener() {
@@ -302,6 +313,17 @@ public class Home extends javax.swing.JFrame {
             accM.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemAccManagementActionPerformed
+
+    private void jButtonReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReportsActionPerformed
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\reports\\Rentals.pdf");
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                // no application registered for PDFs
+            }
+        }
+    }//GEN-LAST:event_jButtonReportsActionPerformed
 
     /**
      * @param args the command line arguments

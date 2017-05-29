@@ -43,6 +43,12 @@ public class Book {
     public int getISBN() {
         return ISBN;
     }
+    
+    public int getISBNKeep(String ISBNKeep) {
+        int isbnk;
+        isbnk = Integer.parseInt(ISBNKeep);
+        return isbnk;
+    }
 
     public String getName() {
         return Name;
