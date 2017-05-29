@@ -64,6 +64,8 @@ public class ForgotPassword extends javax.swing.JFrame {
             if (result.next()) {
                 jTextFieldForgotPpassword.setText(result.getString(4));
             }
+            result.close();
+            pStatement.close();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
@@ -292,7 +294,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         setVisible(false);
         Login l = new Login();
         l.setVisible(true);
-
+        
     }//GEN-LAST:event_jButtonForgotPExitActionPerformed
 
     /**

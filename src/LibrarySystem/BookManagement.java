@@ -54,7 +54,6 @@ public class BookManagement extends javax.swing.JFrame {
         jMenuItemHome = new javax.swing.JMenuItem();
         jMenuItemReports = new javax.swing.JMenuItem();
         jMenuItemAccManagement = new javax.swing.JMenuItem();
-        jMenuItemAbout = new javax.swing.JMenuItem();
         jMenuItemLogout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -272,16 +271,6 @@ public class BookManagement extends javax.swing.JFrame {
         });
         jMenu.add(jMenuItemAccManagement);
 
-        jMenuItemAbout.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
-        jMenuItemAbout.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\info.png")); // NOI18N
-        jMenuItemAbout.setText("About");
-        jMenuItemAbout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemAboutActionPerformed(evt);
-            }
-        });
-        jMenu.add(jMenuItemAbout);
-
         jMenuItemLogout.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jMenuItemLogout.setIcon(new javax.swing.ImageIcon("C:\\Users\\aaronm\\Documents\\AaronYear3Project\\LibraryRentalSystem\\images\\exit.png")); // NOI18N
         jMenuItemLogout.setText("Logout");
@@ -345,10 +334,6 @@ public class BookManagement extends javax.swing.JFrame {
             accM.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemAccManagementActionPerformed
-
-    private void jMenuItemAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAboutActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItemAboutActionPerformed
 
     private void jMenuItemLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemLogoutActionPerformed
         setVisible(false);
@@ -450,7 +435,6 @@ public class BookManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabeldisplayUsername1;
     private javax.swing.JMenu jMenu;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItemAbout;
     private javax.swing.JMenuItem jMenuItemAccManagement;
     private javax.swing.JMenuItem jMenuItemHome;
     private javax.swing.JMenuItem jMenuItemLogout;

@@ -183,14 +183,12 @@ public class Login extends javax.swing.JFrame {
                 result.close();                                                         //or not in AccountManagement when signed in.
                 pStatement.close();
 
-                /*setVisible(false);
+                setVisible(false);
                 Loading l = new Loading();
                 l.Loading1();
-                l.setVisible(true);*/
+                l.setVisible(true);
                 
-                setVisible(false);
-                Home h = new Home();
-                h.setVisible(true);
+                
 
             } else {
                 JOptionPane.showMessageDialog(null, "Incorrect Username or Password");
