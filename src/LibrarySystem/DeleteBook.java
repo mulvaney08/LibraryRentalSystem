@@ -286,12 +286,74 @@ public class DeleteBook extends javax.swing.JFrame {
             pStatement.execute();
             JOptionPane.showMessageDialog(null, "Book Deleted");
 
-            this.clearForm();
+            
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex + ", please try again");
 
         }
+        
+        deleteS = "DELETE FROM BookAllTime where ISBN = ?";
+        try {
+
+            pStatement = connection.prepareStatement(deleteS);
+            pStatement.setString(1, jTextFieldISBN.getText());
+            pStatement.execute();
+            
+
+            
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
+        
+        deleteS = "DELETE FROM RentBook where ISBN = ?";
+        try {
+
+            pStatement = connection.prepareStatement(deleteS);
+            pStatement.setString(1, jTextFieldISBN.getText());
+            pStatement.execute();
+            
+
+            
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
+        
+        deleteS = "DELETE FROM RentBookAll where ISBN = ?";
+        try {
+
+            pStatement = connection.prepareStatement(deleteS);
+            pStatement.setString(1, jTextFieldISBN.getText());
+            pStatement.execute();
+            
+
+            
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
+        
+        deleteS = "DELETE FROM ReturnBook where ISBN = ?";
+        try {
+
+            pStatement = connection.prepareStatement(deleteS);
+            pStatement.setString(1, jTextFieldISBN.getText());
+            pStatement.execute();
+            
+
+            
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
+        
+        this.clearForm();
     }//GEN-LAST:event_jButtonDeleteBookActionPerformed
 
     public void search() {
