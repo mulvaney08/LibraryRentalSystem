@@ -258,7 +258,7 @@ public class DeleteAccount extends javax.swing.JFrame {
                     .addComponent(jButtonSearchBook)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDeleteUser)
                     .addComponent(jButtonCancelDeleteUser))
                 .addContainerGap(15, Short.MAX_VALUE))

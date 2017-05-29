@@ -8,6 +8,7 @@ package LibrarySystem;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -21,6 +22,9 @@ public class ReturnBook extends javax.swing.JFrame {
     Connection connection;
     ResultSet result;
     PreparedStatement pStatement;
+    Statement statement;
+
+    Book book;
 
     /**
      * Creates new form ReturnBook
@@ -364,7 +368,7 @@ public class ReturnBook extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSearchBookActionPerformed
 
     public void search() {
-        String query = "select * from RentBook rb, Book b, Account a Where rb.RentID = ? AND a.AccountNum = ? AND rb.AccountNum = a.AccountNum AND rb.ISBN = b.ISBN";
+        String query = "select * from RentBook rb, BookAllTime b, Account a Where rb.RentID = ? AND a.AccountNum = ? AND rb.AccountNum = a.AccountNum AND rb.ISBN = b.ISBN";
         try {
 
             pStatement = connection.prepareStatement(query);
@@ -438,7 +442,25 @@ public class ReturnBook extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Return Confirmed");
 
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex + ", please try again");
+            JOptionPane.showMessageDialog(null, ex + ",its insert ReturnBook please try again");
+
+        }
+
+        this.book = findBook(jTextFieldISBN.getText());
+
+        String insertBook = "INSERT into Book (ISBN,Name,Edition,Publisher,Pages,Author) values(?,?,?,?,?,?)";
+        try {
+            pStatement = connection.prepareStatement(insertBook);
+            pStatement.setInt(1, book.getISBN());
+            pStatement.setString(2, book.getName());
+            pStatement.setString(3, book.getEdition());
+            pStatement.setString(4, book.getPublisher());
+            pStatement.setString(5, book.getPages());
+            pStatement.setString(6, book.getAuthor());
+            pStatement.execute();
+            JOptionPane.showMessageDialog(null, " Book returned to Library");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + " please try again");
 
         }
 
@@ -457,7 +479,6 @@ public class ReturnBook extends javax.swing.JFrame {
         }
 
         this.clearFormBook();
-        this.clearFormCust();
     }//GEN-LAST:event_jButtonConfirm1ActionPerformed
 
     private void jButtonBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBack1ActionPerformed
@@ -479,6 +500,36 @@ public class ReturnBook extends javax.swing.JFrame {
     private void jTextFieldRentIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRentIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldRentIDActionPerformed
+
+    private Book findBook(String ISBN) {
+        int isbn = Integer.parseInt(ISBN);
+        
+        String query = "select ISBN,Name,Edition,Publisher,Pages,Author from BookAllTime where ISBN LIKE '%" + ISBN + "%'";
+        Book b = new Book();
+        //String name, edition, publisher, pages, author;
+        try {
+
+            statement = connection.createStatement();
+            result = statement.executeQuery(query);
+
+            while (result.next()) {
+
+                b = new Book(result.getInt("ISBN"),
+                        result.getString("Name"),
+                        result.getString("Edition"),
+                        result.getString("Publisher"),
+                        result.getString("Pages"),
+                        result.getString("Author"));
+
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ",its insert select from BookAllTime please try again");
+
+        }
+        return b;
+
+    }
 
     /**
      * @param args the command line arguments
@@ -552,17 +603,6 @@ public class ReturnBook extends javax.swing.JFrame {
         this.jTextFieldLastName.setText("");
         this.jTextFieldRentDate.setText("");
         this.jTextFieldUsername.setText("");
-    }
-
-    private void clearFormCust() {
-        /*this.jTextFieldAccID.setText("");
-        this.jTextFieldFName.setText("");
-        this.jTextFieldLName.setText("");
-        this.jTextFieldAddLine1.setText("");
-        this.jTextFieldAddLine2.setText("");
-        this.jTextFieldDOB.setText("");
-        this.jTextFieldIBAN.setText("");
-        this.jTextFieldBIC.setText("");*/
     }
 
 }

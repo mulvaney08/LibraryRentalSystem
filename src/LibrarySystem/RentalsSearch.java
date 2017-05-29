@@ -62,7 +62,7 @@ public class RentalsSearch extends javax.swing.JFrame {
 
         try {
 
-            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, BookAllTime b where r.ISBN = b.ISBN AND a.AccountNum = r.AccountNum";
 
             statement = connection.createStatement();
 
@@ -97,7 +97,7 @@ public class RentalsSearch extends javax.swing.JFrame {
 
         try {
 
-            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND b.Name LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, BookAllTime b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND b.Name LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
@@ -132,7 +132,7 @@ public class RentalsSearch extends javax.swing.JFrame {
 
         try {
 
-            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND r.Username LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, BookAllTime b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND r.Username LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
@@ -167,7 +167,7 @@ public class RentalsSearch extends javax.swing.JFrame {
 
         try {
 
-            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND a.FirstName LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, BookAllTime b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND a.FirstName LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
@@ -202,7 +202,7 @@ public class RentalsSearch extends javax.swing.JFrame {
 
         try {
 
-            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND a.LastName LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, BookAllTime b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND a.LastName LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 
@@ -237,7 +237,7 @@ public class RentalsSearch extends javax.swing.JFrame {
 
         try {
 
-            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, Book b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND r.RentDate LIKE '%" + searchValue + "%'";
+            String query = "select r.RentID, r.ISBN, b.Name, r.Username, a.AccountNum, a.FirstName, a.LastName, r.RentDate from RentBook r, Account a, BookAllTime b where r.ISBN = b.ISBN AND r.AccountNum = a.AccountNum AND r.RentDate LIKE '%" + searchValue + "%'";
 
             statement = connection.createStatement();
 

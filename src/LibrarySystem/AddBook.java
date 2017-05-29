@@ -266,11 +266,29 @@ public class AddBook extends javax.swing.JFrame {
             pStatement.setString(6, jTextFieldAuthor.getText());
             pStatement.execute();
             JOptionPane.showMessageDialog(null, "Book Added");
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex +", please try again");
+            
+        }
+        
+        String insertB = "INSERT into BookAllTime (ISBN,Name,Edition,Publisher,Pages,Author) values (?,?,?,?,?,?)";
+        try{
+            pStatement=connection.prepareStatement(insertB);
+            pStatement.setString(1, jTextFieldISBN.getText());
+            pStatement.setString(2, jTextFieldBookName.getText());
+            pStatement.setString(3, (String) jComboBoxEdition.getSelectedItem());
+            pStatement.setString(4, jTextFieldPublisher.getText());
+            pStatement.setString(5, jTextFieldPages.getText());
+            pStatement.setString(6, jTextFieldAuthor.getText());
+            pStatement.execute();
+            
             this.clearForm();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex +", please try again");
             
         }
+        
     }//GEN-LAST:event_jButtonAddBookActionPerformed
 
     private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed

@@ -14,6 +14,11 @@ public class Book {
     private int ISBN;
     private String ISBN2, Name, Edition, Publisher, Pages, Author;
 
+    public Book() {
+    }
+
+    
+    
     public Book(int ISBN, String Name, String Edition, String Publisher, String Pages, String Author) {
         this.ISBN = ISBN;
         this.Name = Name;
@@ -31,6 +36,7 @@ public class Book {
         this.Publisher = Publisher;
         this.Pages = Pages;
         this.Author = Author;
+        this.ISBN = Integer.parseInt(ISBN2);
 
     }
 
@@ -89,6 +95,12 @@ public class Book {
 
     public void setISBN2(String ISBN2) {
         this.ISBN2 = ISBN2;
+    }
+    
+     public int getISBNtoInt(){
+        int newISBN;
+        newISBN = Integer.parseInt(ISBN2);
+        return newISBN;
     }
 
 }

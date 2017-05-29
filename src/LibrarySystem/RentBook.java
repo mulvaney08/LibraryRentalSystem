@@ -754,6 +754,20 @@ public class RentBook extends javax.swing.JFrame {
 
         }
 
+        String delete = "DELETE FROM Book WHERE ISBN = ?";
+
+        try {
+
+            pStatement = connection.prepareStatement(delete);
+
+            pStatement.setString(1, jTextFieldISBN.getText());
+            pStatement.execute();
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex + ", please try again");
+
+        }
+
         this.clearFormBook();
         this.clearFormCust();
     }//GEN-LAST:event_jButtonConfirmActionPerformed
